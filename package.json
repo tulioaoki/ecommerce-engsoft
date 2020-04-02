@@ -1,0 +1,57 @@
+{
+  "name": "ecommerce",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@babel/runtime": "^7.6.0",
+    "@bosket/core": "^0.4.4",
+    "@bosket/react": "^0.4.4",
+    "@bosket/tools": "^0.4.4",
+    "@material-ui/core": "^4.4.1",
+    "@material-ui/icons": "^3.0.2",
+    "@material-ui/styles": "^4.4.1",
+    "@syncfusion/ej2-react-inputs": "^17.3.14",
+    "browser-image-compression": "^1.0.6",
+    "classnames": "latest",
+    "compression": "^1.7.4",
+    "image-compressor.js": "^1.1.4",
+    "material-ui-pickers": "^2.2.4",
+    "notistack": "^0.9.0",
+    "primereact": "^3.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-scripts": "3.4.0",
+    "react-img-zoom": "^0.1.0",
+    "react-redux": "^6.0.1",
+    "react-redux-loading": "^1.0.1",
+    "react-router-dom": "^5.0.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
