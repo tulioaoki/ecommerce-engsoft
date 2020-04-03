@@ -10,7 +10,7 @@ import bg from '../../../static/images/ecommerce.jpg';
 const styles = () => ({
   container: {
     height: '100%',
-    width:'100%',
+    width: '100%',
     minHeight: '100vh',
     display: 'flex',
     flex: 1,

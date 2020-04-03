@@ -57,9 +57,7 @@ class HomePageComponent extends PureComponent {
 
     return (
       <div className={classes.container}>
-        <div className={classes.colorizedBg} style={{ backgroundColor: color }}>
-          
-        </div>
+        <div className={classes.colorizedBg} style={{ backgroundColor: color }} />
       </div>
     );
   }
