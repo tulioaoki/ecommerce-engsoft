@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Logo from '../../TopBarComponents/Logo';
+import SearchBox from '../../TopBarComponents/SearchBox';
 import {
   withStyles, Typography,
 } from '@material-ui/core';
@@ -9,18 +11,13 @@ import {
 
 const styles = () => ({
   container: {
-    padding: 10,
-    top: 0,
-    position: 'absolute',
-    width: '98%',
-    maxHeight: '10vh',
+    maxWidth: '960px',
+    margin: '0 auto',
+    padding: '0.9375rem',
     display: 'flex',
-    flex: 1,
-    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
-    alignSelf: 'flex-start',
-    backgroundColor: 'transparent',
-    textShadow: '2px 2px 2px #8E8E8E',
+    alignItems: 'center',
   },
 });
 
@@ -33,6 +30,8 @@ class TopBar extends PureComponent {
 
     return (
       <div className={classes.container}>
+        <Logo></Logo>
+        <SearchBox></SearchBox>
         <Typography
           onClick={() => (history.push('/home'))}
           style={{
@@ -45,7 +44,6 @@ class TopBar extends PureComponent {
             cursor: 'pointer',
           }}
         >
-          Barra Superior, edite-me
         </Typography>
       </div>
     );

@@ -12,3 +12,7 @@ export const MARROM = '#896541';
 export const CINZA = '#d1d1d1';
 export const BEGE = '#e5ce98';
 export const BEGE_CLARO = '#e6deb2';
+
+// cores do mock
+export const AZUL_ESCURO = '#1F509C';
+export const AZUL_CLARO = '#9FA8DA';
