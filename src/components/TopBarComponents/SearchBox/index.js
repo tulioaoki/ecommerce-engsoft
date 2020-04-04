@@ -18,6 +18,7 @@ const styles = () => ({
     root: {
         padding: '2px 4px',
         display: 'flex',
+        margin: '30px',
         alignItems: 'center',
         width: 400,
       },

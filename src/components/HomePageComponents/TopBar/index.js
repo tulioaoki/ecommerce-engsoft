@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Logo from '../../TopBarComponents/Logo';
 import SearchBox from '../../TopBarComponents/SearchBox';
+import HeaderIcons from '../../TopBarComponents/HeaderIcons';
+import NavBar from '../../TopBarComponents/NavBar';
 import {
   withStyles, Typography,
 } from '@material-ui/core';
@@ -11,7 +13,8 @@ import {
 
 const styles = () => ({
   container: {
-    maxWidth: '960px',
+    maxWidth: '960px', /*para completar a tela toda */
+    width:'100%',
     margin: '0 auto',
     padding: '0.9375rem',
     display: 'flex',
@@ -30,8 +33,10 @@ class TopBar extends PureComponent {
 
     return (
       <div className={classes.container}>
-        <Logo></Logo>
-        <SearchBox></SearchBox>
+        <Logo/>
+        <SearchBox/>
+        <HeaderIcons/>
+        <NavBar/>
         <Typography
           onClick={() => (history.push('/home'))}
           style={{
@@ -42,6 +47,7 @@ class TopBar extends PureComponent {
             fontWeight: 'bolder',
             color: 'white',
             cursor: 'pointer',
+
           }}
         >
         </Typography>

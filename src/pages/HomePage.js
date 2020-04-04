@@ -13,6 +13,7 @@ const styles = () => ({
     maxHeight: '100%',
     width: '100%',
     minWidth: '100%',
+    margin: 0,
     //backgroundColor: '#e3e8eb',
     flexDirection: 'column',
   },

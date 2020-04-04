@@ -24,11 +24,10 @@ class Logo extends PureComponent {
       return (
         <div style={{display:'flex'}}>
           <img src={logoImage} className={classes.imgLogo}
-            
               onClick={() => (history.push('/home'))}
               style={{
                 display:'flex',
-                width: '100px',
+                width: '200px',
               }}
           />
 
