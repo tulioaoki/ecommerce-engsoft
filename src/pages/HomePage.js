@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import PresentationPage from '../components/HomePageComponents/PresentationPage';
 
+import Footer from '../components/HomePageComponents/Footer';
+
 const styles = () => ({
   root: {
     justifyContent: 'center',
@@ -21,10 +23,12 @@ const styles = () => ({
 class HomePage extends PureComponent {
   render() {
     const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <PresentationPage />
-      </div>
+    return (      
+        <div className={classes.root}>
+          <PresentationPage />
+          <Footer showSocialMedia={false}> </Footer> 
+          {/*Se o props passado for true, exiba as redes sociais*/ }
+        </div> 
     );
   }
 }
