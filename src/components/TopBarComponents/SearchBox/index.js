@@ -41,7 +41,7 @@ class SearchBox extends PureComponent {
                   inputProps={{ 'aria-label': 'O que você procura?' }}
               />
               <IconButton type="submit" aria-label="search">
-                  <SearchIcon />
+                  <SearchIcon/>
               </IconButton>
           </Paper>
       </div>

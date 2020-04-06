@@ -16,6 +16,9 @@ const styles = () => ({
         color: '#fafafa',
         borderRadius: 0,    
         paddingTop:'18px'
+    },
+    menuTab: {
+      fontSize: '16px'
     }
     
 });
@@ -30,16 +33,16 @@ class NavBar extends PureComponent {
       return (
         <div >
           <Paper className={classes.root}>
-            <Tabs style={{height:'58px',}} variant='fullWidth'
+            <Tabs style={{height:'58px'}} variant='fullWidth'
                 value={1}
                 centered
                 indicatorColor="primary"
             >
-                <Tab label="Página Inicial" />
-                <Tab label="Categorias" />
-                <Tab label="Ofertas" />
-                <Tab label="Sobre" />
-                <Tab label="Contato" />
+                <Tab className={classes.menuTab} label="Página Inicial" />
+                <Tab className={classes.menuTab} label="Categorias" />
+                <Tab className={classes.menuTab} label="Ofertas" />
+                <Tab className={classes.menuTab} label="Sobre" />
+                <Tab className={classes.menuTab} label="Contato" />
             </Tabs>
           </Paper>
         </div>
