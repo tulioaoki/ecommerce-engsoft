@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { withStyles, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import TopBar from '../TopBar';
+import NavBar from '../NavBar';
 import bg from '../../../static/images/ecommerce.jpg';
 
 const styles = () => ({
@@ -18,17 +19,8 @@ class PresentationPaper extends PureComponent {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <TopBar style={{ alignSelf: 'flex-start' }} />
-        <Typography style={{
-          color: 'white',
-          fontSize: 40,
-          fontWeight: 'bolder',
-          alignSelf: 'center',
-          textShadow: '2px 2px 2px #8E8E8E',
-        }}
-        >
-        </Typography>
-
+        <TopBar/>
+        <NavBar/>
       </div>
     );
   }

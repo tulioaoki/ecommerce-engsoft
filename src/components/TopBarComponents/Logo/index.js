@@ -4,14 +4,17 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import logoImage from '../../../static/images/logo.png';
 import {
-  withStyles, Typography,
+  withStyles
 } from '@material-ui/core';
 
 const styles = () => ({
     imgLogo: {
-        width: 'auto',
-        height: '70px',
+      height: '70px',  //definir tamanho da imagem
+      width: '200px',
     },
+    imgDiv: {
+      display:'flex',
+    }
 });
 
 class Logo extends PureComponent {
@@ -22,15 +25,10 @@ class Logo extends PureComponent {
       } = this.props;
   
       return (
-        <div style={{display:'flex'}}>
+        <div className={classes.styles}>
           <img src={logoImage} className={classes.imgLogo}
               onClick={() => (history.push('/home'))}
-              style={{
-                display:'flex',
-                width: '200px',
-              }}
           />
-
         </div>
       );
     }
