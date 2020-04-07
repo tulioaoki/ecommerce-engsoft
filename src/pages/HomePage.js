@@ -26,7 +26,7 @@ class HomePage extends PureComponent {
     return (      
         <div className={classes.root}>
           <PresentationPage />
-          <Footer showSocialMedia={false}> </Footer> 
+          <Footer showSocialMedia={true}> </Footer> 
           {/*Se o props passado for true, exiba as redes sociais*/ }
         </div> 
     );

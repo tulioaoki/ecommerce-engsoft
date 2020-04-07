@@ -21,7 +21,7 @@ const styles = () => ({
 
         flexGrow: 1,
         padding: '16px 0',
-        backgroundColor: '#9FA8DA',
+        backgroundColor: '#9ECEE8',
     },
 
     texto: {
@@ -51,12 +51,24 @@ const styles = () => ({
     social_midia_icon: {
         margin: '0 12px 0 12px ',
         background: '#FFFFFF',
-        borderRadius: '20px',
-        padding: '8px',
+        borderRadius: '50%',
+        paddingTop: '10px',
+        paddingBottom: '8px',
+        paddingRight: '10px',
+        paddingLeft: '10px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-    },
+        transition: 'opacity 0.2s',
+        '&:hover': {
+            
+            opacity: '0.8',
+            backgroundColor: '#BAF9FF',   
+            outline:'none',
+            borderColor:'red',
+            boxShadow:'0 0 10px red',             
+          },
+    }, 
 });
 
 export class SocialMedia extends PureComponent {
@@ -66,11 +78,9 @@ export class SocialMedia extends PureComponent {
 
         const {
             classes,
-            history,
         } = this.props;
 
         return (
-
 
             <div className={classes.container}>
                 <Grid container spacing={0}>
@@ -90,7 +100,7 @@ export class SocialMedia extends PureComponent {
                                     href='https://www.facebook.com/Against-105778624419451'
                                     target="_blank"
                                     rel="noopener"                     >
-                                    <FaFacebookF size={30} color="#3b5998" />
+                                    <FaFacebookF size={28} color="#3b5998" />
                                 </Link>
 
                             </div>
@@ -101,7 +111,7 @@ export class SocialMedia extends PureComponent {
                                     target="_blank"
                                     rel="noopener"
                                 >
-                                    <FaInstagram size={30} color='#C13584' />
+                                    <FaInstagram size={28} color='#C13584' />
                                 </Link>
                             </div>
 
@@ -111,7 +121,7 @@ export class SocialMedia extends PureComponent {
                                     target="_blank"
                                     rel="noopener"
                                 >
-                                    <FaTwitter size={30} color='#1DA1F2' />
+                                    <FaTwitter size={28} color='#1DA1F2' style={{paddingTop:'2px'}}/>
                                 </Link>
                             </div>
 
@@ -121,17 +131,17 @@ export class SocialMedia extends PureComponent {
                                     target="_blank"
                                     rel="noopener"
                                 >
-                                    <FaWhatsapp size={30} color='#4AC959' />
+                                    <FaWhatsapp size={28} color='#4AC959' />
                                 </Link>
                             </div>
 
-                            <div className={classes.social_midia_icon}>
+                            <div className={classes.social_midia_icon} >  
                                 <Link
                                     href="https://t.me/[@LucasNardi]"
                                     target="_blank"
                                     rel="noopener"
                                 >
-                                    <FaTelegramPlane size={30} color='#0088CC' />
+                                    <FaTelegramPlane size={28} color='#0088CC'  style={{paddingRight:'2px'}}/>
                                 </Link>
                             </div>
                         </div>
@@ -143,8 +153,7 @@ export class SocialMedia extends PureComponent {
 }
 
 SocialMedia.propTypes = {
-    classes: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,   
 };
 
 SocialMedia.defaultProps = {

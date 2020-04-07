@@ -27,6 +27,7 @@ const styles = () => ({
         flexDirection: 'column',
         textAlign: 'center',
         padding: '16px 0',
+        color: 'white',
     },
 
 });
