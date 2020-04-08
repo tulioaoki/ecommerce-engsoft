@@ -5,6 +5,9 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import PresentationPage from '../components/HomePageComponents/PresentationPage';
+import Footer from '../components/HomePageComponents/Footer';
+import Slider from '../components/HomePageComponents/Slider/';
+
 
 const styles = () => ({
   root: {
@@ -23,7 +26,10 @@ class HomePage extends PureComponent {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <PresentationPage />
+        <Slider/>
+       
+         
+        <Footer showSocialMedia={true}/>
       </div>
     );
   }
