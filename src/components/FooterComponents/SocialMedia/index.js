@@ -61,12 +61,9 @@ const styles = () => ({
         justifyContent: 'center',
         transition: 'opacity 0.2s',
         '&:hover': {
-            
-            opacity: '0.8',
-            backgroundColor: '#BAF9FF',   
-            outline:'none',
-            borderColor:'red',
-            boxShadow:'0 0 10px red',             
+                        
+            backgroundColor: '#BAF9FF',  
+                 
           },
     }, 
 });
