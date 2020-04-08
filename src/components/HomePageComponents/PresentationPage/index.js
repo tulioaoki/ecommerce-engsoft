@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { withStyles, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import TopBar from '../TopBar';
+import ProductCard from '../ProductCard';
 import bg from '../../../static/images/ecommerce.jpg';
 
 const styles = () => ({
