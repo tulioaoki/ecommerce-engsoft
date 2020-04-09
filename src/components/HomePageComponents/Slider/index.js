@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
-
 import Radio from '@material-ui/core/Radio';
-
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const styles = {
     root: {
-        color: 'black',
+        color: '#1F509C',
         '&$checked': {
             color: '#1F509C',
         },
@@ -21,8 +22,24 @@ const styles = {
         width: '100%',
         height: '35%',
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-end',
+        justifyContent: 'space-around',
+
+    },
+
+    buttonLeft: {
+
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: 'black',
+
+    },
+
+    buttonRight: {
+
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: 'black',
+
     },
 
     imagem: {
@@ -32,7 +49,11 @@ const styles = {
     },
 
     bolinhas: {
-
+        bottom: '10px',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
         paddingBottom: '40px',
     },
 };
@@ -42,38 +63,39 @@ const styles = {
 
 class Slider extends PureComponent {
 
-
-
-
     state = {
+
         selectedValue: 'https://http2.mlstatic.com/kit-emagrecedor-2-remedio-desodalina-colageno-vitamina-c-D_NQ_NP_646272-MLB31670921915_082019-F.jpg',
 
-        imagens:
+        slide:
             [
                 {
-                    view: 'https://http2.mlstatic.com/kit-emagrecedor-2-remedio-desodalina-colageno-vitamina-c-D_NQ_NP_646272-MLB31670921915_082019-F.jpg',
-                    link: '/'
+                    imagem: 'https://http2.mlstatic.com/kit-emagrecedor-2-remedio-desodalina-colageno-vitamina-c-D_NQ_NP_646272-MLB31670921915_082019-F.jpg',
+                    link: '/',
+                    id: 1,
                 },
 
                 {
-                    view: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuXj1qOjRamI&psig=AOvVaw2Q8bBYo_sxHEcXAkRagQYW&ust=1586383121508000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOicsMan1-gCFQAAAAAdAAAAABAD',
-                    link: '/social'
+                    imagem: 'https://img.freepik.com/fotos-gratis/gotas-de-oleo-na-imagem-abstrata-padrao-psicodelico-de-agua_23-2148290141.jpg?size=626&ext=jpg',
+                    link: '/social',
+                    id: 2,
                 },
 
                 {
-                    view: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.paiquere.com.br%2Fprocon-encontra-mais-de-150-produtos-vencidos-em-farmacia-na-zona-leste%2F&psig=AOvVaw2Q8bBYo_sxHEcXAkRagQYW&ust=1586383121508000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOicsMan1-gCFQAAAAAdAAAAABAz',
-                    link: '/login'
+                    imagem: 'https://bisturi.com.br/12262-large_default/coperalcool-alcool-gel-400g.jpg',
+                    link: '/login',
+                    id: 3,
                 }
             ],
 
         imagemAtual: 0,
-
+        arrowRight: false,
+        arrowLeft: false,    
     };
 
-
+    
 
     mudarImagem = (() => ({
-
 
 
     }))
@@ -82,19 +104,45 @@ class Slider extends PureComponent {
 
         this.setState({ selectedValue: event.target.value });
     };
-     
-    
-    queImagemEstou = (()=>(
 
-        this.setState((prevState) => ({
 
-            imagemAtual: prevState + 1
-        }))
-    ))
-    
-   
+    forwardImage = (() => {
 
-    
+        if(this.state.imagemAtual !== this.state.slide.length){
+
+            this.setState((prevState) => ({            
+
+                imagemAtual: prevState + 1
+            }))
+
+        }else{
+            this.setState({            
+
+                imagemAtual: 0,
+            })
+        }    
+    })
+
+
+    backImage = (() => {
+
+        if(this.state.imagemAtual !== 0){
+
+            this.setState((prevState) => ({            
+
+                imagemAtual: prevState - 1
+            }))
+
+        }else{
+
+            const tamMaximo = this.state.slide.length;
+
+            this.setState({            
+
+                imagemAtual: tamMaximo,
+            })
+        }    
+    })
 
 
     render() {
@@ -106,50 +154,63 @@ class Slider extends PureComponent {
 
                 <Link
                     className={classes.imagem}
-                    to={this.state.imagens[this.state.imagemAtual].link}
+                    to={this.state.slide[this.state.imagemAtual].link}
                 >
                     <img
                         className={classes.imagem}
-                        src={this.state.imagens[this.state.imagemAtual].view}
+                        src={this.state.selectedValue}
                     />
                 </Link>
 
+                <div className={classes.buttonLeft}>
+                    <IconButton
+                        color="primary"
+                        aria-label="Arraow Left"
+                        size='large'
+                        fullWidth='true'
+                    >
+
+                        <ArrowBackIosIcon />
+
+                    </IconButton>
+                </div>
+
+               
                 <div className={classes.bolinhas}>
 
-                        <Radio
-                            checked={this.state.selectedValue === this.state.imagens[0].view}
-                            onChange={this.handleChange}
-                            value={this.state.imagens[0].view}
-                            name={`imagem ${this.state.imagemAtual}`}
-                            classes={{
-                                root: classes.root,
-                                checked: classes.checked,
-                            }}
-                        />
-                        <Radio
-                            checked={this.state.selectedValue === this.state.imagens[1].view}
-                            onChange={this.handleChange}
-                            value={this.state.imagens[1].view}
-                            name={`imagem ${this.state.imagemAtual}`}
-                            classes={{
-                                root: classes.root,
-                                checked: classes.checked,
-                            }}
-                        />
-                        <Radio
-                            checked={this.state.selectedValue === this.state.imagens[2].view}
-                            onChange={this.handleChange}
-                            value={this.state.imagens[2].view}
-                            name={`imagem ${this.state.imagemAtual}`}
-                            classes={{
-                                root: classes.root,
-                                checked: classes.checked,
-                            }}
-                        />                             
+                    {
+                        this.state.slide.map((slide) => (
 
+                            <Radio
+                                checked={this.state.selectedValue === slide.imagem}
+                                onChange={this.handleChange}
+                                value={slide.imagem}
+                                name={slide.id}
+                                classes={{
+                                    root: classes.root,
+                                    checked: classes.checked,
+                                }}
+                            />
+                        ))
+                    }
 
+                        getElementByID REact
 
                 </div>
+
+                <div className={classes.buttonRight}  >
+                    <IconButton
+                        color="primary"
+                        aria-label="Arraow Right"
+                        iconSizeLarge='size="large'
+                        fullWidth='true'
+                        onClick
+                    >
+                        <ArrowForwardIosIcon />
+
+                    </IconButton>
+                </div>
+
             </div>
         );
     }
