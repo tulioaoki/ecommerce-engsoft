@@ -33,7 +33,7 @@ class HeaderIcons extends PureComponent {
       <div className={classes.icons} style={{display:'flex'}}>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge color="secondary">
-            <AccountCircleIcon fontSize='default' onClick={() => (history.push('/'))}/>
+            <AccountCircleIcon fontSize='default' onClick={() => (history.push('/login'))}/>
           </Badge>
         </IconButton>
         <IconButton aria-label="show 4 new mails" color="inherit">
