@@ -7,8 +7,11 @@ import Radio from '@material-ui/core/Radio';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const styles = {
+
     root: {
         color: '#1F509C',
         '&$checked': {
@@ -23,23 +26,40 @@ const styles = {
         height: '35%',
         display: 'flex',
         justifyContent: 'space-around',
-
     },
 
+    
     buttonLeft: {
-
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: 'black',
-
+        position: 'relative',
+        right: '70px',
+        bottom: '30px',        
     },
 
     buttonRight: {
-
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: 'black',
+        position: 'relative',
+        left: '70px',
+        bottom: '30px',
+    },
 
+    button:{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#2C719C',
+        transition: 'opacity 0.4s',
+        '&:hover': {                        
+            opacity: 0.8,
+            backgroundColor: '#2C719C',     
+        },
+        
+    },
+
+    icon: {
+        color: 'white',
     },
 
     imagem: {
@@ -59,13 +79,14 @@ const styles = {
 };
 
 
-
+let timer = null;
+let stopPlay = false; // Usar essa variavel para parar o auto play e voltar com o auto play
 
 class Slider extends PureComponent {
 
     state = {
 
-        selectedValue: 'https://http2.mlstatic.com/kit-emagrecedor-2-remedio-desodalina-colageno-vitamina-c-D_NQ_NP_646272-MLB31670921915_082019-F.jpg',
+        currentImageValue: 'https://http2.mlstatic.com/kit-emagrecedor-2-remedio-desodalina-colageno-vitamina-c-D_NQ_NP_646272-MLB31670921915_082019-F.jpg',
 
         slide:
             [
@@ -89,49 +110,59 @@ class Slider extends PureComponent {
             ],
 
         imagemAtual: 0,
-        arrowRight: false,
-        arrowLeft: false,    
     };
-
+ 
     
-
-    mudarImagem = (() => ({
-
-
-    }))
-
     handleChange = event => {
 
-        this.setState({ selectedValue: event.target.value });
+        const valor = event.target.value
+       
+        this.state.slide.map((slide,index) => {
+
+            if(valor === slide.imagem){
+
+                this.setState({ 
+                    
+                    currentImageValue: valor,
+                    imagemAtual: index,
+                });                
+            }            
+        })
     };
 
 
-    forwardImage = (() => {
+    forwardImage = (() => {        
+        
 
-        if(this.state.imagemAtual !== this.state.slide.length){
+        if(this.state.imagemAtual !== this.state.slide.length-1){
 
-            this.setState((prevState) => ({            
+            this.setState({            
 
-                imagemAtual: prevState + 1
-            }))
+                imagemAtual: this.state.imagemAtual + 1,
+                currentImageValue: this.state.slide[this.state.imagemAtual + 1].imagem 
+            });
 
         }else{
+
             this.setState({            
 
                 imagemAtual: 0,
-            })
-        }    
+                currentImageValue: this.state.slide[0].imagem 
+            });
+        }
+       
     })
 
-
     backImage = (() => {
+        
 
         if(this.state.imagemAtual !== 0){
 
-            this.setState((prevState) => ({            
+            this.setState({            
 
-                imagemAtual: prevState - 1
-            }))
+                imagemAtual: this.state.imagemAtual - 1,
+                currentImageValue: this.state.slide[this.state.imagemAtual - 1].imagem 
+            });
 
         }else{
 
@@ -139,38 +170,65 @@ class Slider extends PureComponent {
 
             this.setState({            
 
-                imagemAtual: tamMaximo,
-            })
-        }    
+                imagemAtual: tamMaximo-1,
+                currentImageValue: this.state.slide[tamMaximo-1].imagem 
+            });
+        }
     })
 
+    autoPlay = (() => { 
+            
+        if(timer === null){
+
+            console.log('Criando o loop da função autoPlay')
+
+            timer = setInterval(() => this.forwardImage(), 6000);
+        }
+    })
+
+
+    stopAutoPlay = (() => {  /* Ver quando parar o auto play */
+        
+        if(timer !== null){
+
+            clearInterval(timer);
+        }
+        timer = null;        
+    })
+  
 
     render() {
 
         const { classes } = this.props;
 
         return (
+
             <div className={classes.container}>
 
                 <Link
                     className={classes.imagem}
-                    to={this.state.slide[this.state.imagemAtual].link}
+                    to= {this.state.slide[this.state.imagemAtual].link}
                 >
                     <img
                         className={classes.imagem}
-                        src={this.state.selectedValue}
+                        src={this.state.currentImageValue}
                     />
                 </Link>
 
                 <div className={classes.buttonLeft}>
                     <IconButton
-                        color="primary"
-                        aria-label="Arraow Left"
-                        size='large'
-                        fullWidth='true'
+                        className= {classes.button}  
+                        aria-label="Arrow Left"
+                        size='medium'                       
+                        onClick = {() => (this.backImage(), this.stopAutoPlay())}
                     >
 
-                        <ArrowBackIosIcon />
+                        <ChevronLeftIcon
+                            className= {classes.icon}  
+                            fontSize= 'inherit'
+                            size = 'medium'
+                        />
+                        
 
                     </IconButton>
                 </div>
@@ -182,40 +240,46 @@ class Slider extends PureComponent {
                         this.state.slide.map((slide) => (
 
                             <Radio
-                                checked={this.state.selectedValue === slide.imagem}
+                                key = {slide.id}
+                                checked={this.state.currentImageValue === slide.imagem}
                                 onChange={this.handleChange}
                                 value={slide.imagem}
-                                name={slide.id}
+                                name={`${slide.id}`}
                                 classes={{
                                     root: classes.root,
                                     checked: classes.checked,
-                                }}
+                                }}              
                             />
                         ))
                     }
-
-                        getElementByID REact
 
                 </div>
 
                 <div className={classes.buttonRight}  >
                     <IconButton
-                        color="primary"
-                        aria-label="Arraow Right"
-                        iconSizeLarge='size="large'
-                        fullWidth='true'
-                        onClick
+                        className= {classes.button}
+                        aria-label="Arrow Right"
+                        size='medium'                       
+                        onClick = {() => (this.forwardImage(), this.stopAutoPlay() )}
                     >
-                        <ArrowForwardIosIcon />
+                        <ChevronRightIcon
+                            className= {classes.icon}   
+                            fontSize= 'inherit'
+                            size = 'medium'
+                        />                        
 
                     </IconButton>
                 </div>
+
+
+                {this.autoPlay() }
 
             </div>
         );
     }
 }
 Slider.propTypes = {
+
     classes: PropTypes.object.isRequired,
 };
 
