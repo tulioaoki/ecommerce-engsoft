@@ -28,13 +28,13 @@ const styles = {
         justifyContent: 'space-around',
     },
 
-    
+
     buttonLeft: {
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
         right: '70px',
-        bottom: '30px',        
+        bottom: '30px',
     },
 
     buttonRight: {
@@ -45,21 +45,23 @@ const styles = {
         bottom: '30px',
     },
 
-    button:{
+    button: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        padding: '0px',
         backgroundColor: '#2C719C',
         transition: 'opacity 0.4s',
-        '&:hover': {                        
+        '&:hover': {
             opacity: 0.8,
-            backgroundColor: '#2C719C',     
+            backgroundColor: '#2C719C',
         },
-        
+
     },
 
     icon: {
         color: 'white',
+        fontSize: 40,
     },
 
     imagem: {
@@ -111,91 +113,93 @@ class Slider extends PureComponent {
 
         imagemAtual: 0,
     };
- 
-    
-    handleChange = event => {
 
-        const valor = event.target.value
-       
-        this.state.slide.map((slide,index) => {
 
-            if(valor === slide.imagem){
+    stopAutoPlay = (event) => {
 
-                this.setState({ 
-                    
+
+        const valor = event.target.value   // Pegar a imagem que a bolinha selecionada possui
+
+        this.state.slide.map((slide, index) => { // Ver qual bolinha foi selecionada
+            
+            if (valor === slide.imagem) {
+
+                this.setState({             // Mudar a imagem 
+
                     currentImageValue: valor,
                     imagemAtual: index,
-                });                
-            }            
-        })
+                });
+            }
+        });
+
+        clearInterval(timer);                // Parar o autoPLay
+        timer = 2                           
     };
 
 
-    forwardImage = (() => {        
-        
+    forwardImage = (() => {
 
-        if(this.state.imagemAtual !== this.state.slide.length-1){
 
-            this.setState({            
+        if (this.state.imagemAtual !== this.state.slide.length - 1) {
+
+            this.setState({
 
                 imagemAtual: this.state.imagemAtual + 1,
-                currentImageValue: this.state.slide[this.state.imagemAtual + 1].imagem 
+                currentImageValue: this.state.slide[this.state.imagemAtual + 1].imagem
             });
 
-        }else{
+        } else {
 
-            this.setState({            
+            this.setState({
 
                 imagemAtual: 0,
-                currentImageValue: this.state.slide[0].imagem 
+                currentImageValue: this.state.slide[0].imagem
             });
         }
-       
+
     })
 
     backImage = (() => {
-        
 
-        if(this.state.imagemAtual !== 0){
 
-            this.setState({            
+        if (this.state.imagemAtual !== 0) {
+
+            this.setState({
 
                 imagemAtual: this.state.imagemAtual - 1,
-                currentImageValue: this.state.slide[this.state.imagemAtual - 1].imagem 
+                currentImageValue: this.state.slide[this.state.imagemAtual - 1].imagem
             });
 
-        }else{
+        } else {
 
             const tamMaximo = this.state.slide.length;
 
-            this.setState({            
+            this.setState({
 
-                imagemAtual: tamMaximo-1,
-                currentImageValue: this.state.slide[tamMaximo-1].imagem 
+                imagemAtual: tamMaximo - 1,
+                currentImageValue: this.state.slide[tamMaximo - 1].imagem
             });
         }
     })
 
-    autoPlay = (() => { 
-            
-        if(timer === null){
+    autoPlay = (() => {
 
-            console.log('Criando o loop da função autoPlay')
+        if (timer === null) {
 
             timer = setInterval(() => this.forwardImage(), 6000);
         }
     })
 
 
-    stopAutoPlay = (() => {  /* Ver quando parar o auto play */
-        
-        if(timer !== null){
+    reStartAutoPlay = (() => {  /* Ver quando parar o auto play */
+
+        if (timer !== null) {
 
             clearInterval(timer);
         }
-        timer = null;        
+        timer = null;
     })
-  
+
 
     render() {
 
@@ -207,7 +211,7 @@ class Slider extends PureComponent {
 
                 <Link
                     className={classes.imagem}
-                    to= {this.state.slide[this.state.imagemAtual].link}
+                    to={this.state.slide[this.state.imagemAtual].link}
                 >
                     <img
                         className={classes.imagem}
@@ -217,38 +221,37 @@ class Slider extends PureComponent {
 
                 <div className={classes.buttonLeft}>
                     <IconButton
-                        className= {classes.button}  
+                        className={classes.button}
                         aria-label="Arrow Left"
-                        size='medium'                       
-                        onClick = {() => (this.backImage(), this.stopAutoPlay())}
+                        size='medium'
+                        onClick={() => (this.backImage(), this.reStartAutoPlay())}                      
                     >
 
                         <ChevronLeftIcon
-                            className= {classes.icon}  
-                            fontSize= 'inherit'
-                            size = 'medium'
+                            className={classes.icon}
+                            fontSize='inherit'                           
                         />
-                        
+
 
                     </IconButton>
                 </div>
 
-               
+
                 <div className={classes.bolinhas}>
 
                     {
                         this.state.slide.map((slide) => (
 
                             <Radio
-                                key = {slide.id}
+                                key={slide.id}
                                 checked={this.state.currentImageValue === slide.imagem}
-                                onChange={this.handleChange}
+                                onChange={this.stopAutoPlay}
                                 value={slide.imagem}
                                 name={`${slide.id}`}
                                 classes={{
                                     root: classes.root,
                                     checked: classes.checked,
-                                }}              
+                                }}
                             />
                         ))
                     }
@@ -257,22 +260,22 @@ class Slider extends PureComponent {
 
                 <div className={classes.buttonRight}  >
                     <IconButton
-                        className= {classes.button}
+                        className={classes.button}
                         aria-label="Arrow Right"
-                        size='medium'                       
-                        onClick = {() => (this.forwardImage(), this.stopAutoPlay() )}
+                        size='medium'
+                        onClick={() => (this.forwardImage(), this.reStartAutoPlay())}
                     >
                         <ChevronRightIcon
-                            className= {classes.icon}   
-                            fontSize= 'inherit'
-                            size = 'medium'
-                        />                        
+                            className={classes.icon}
+                            fontSize='inherit'
+                            size='medium'
+                        />
 
                     </IconButton>
                 </div>
 
 
-                {this.autoPlay() }
+                {this.autoPlay()}
 
             </div>
         );
