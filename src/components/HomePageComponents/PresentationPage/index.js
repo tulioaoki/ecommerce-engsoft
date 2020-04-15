@@ -10,7 +10,7 @@ import bg from '../../../static/images/ecommerce.jpg';
 
 const styles = () => ({
   container: {
-    
+
   },
 });
 
@@ -19,8 +19,8 @@ class PresentationPaper extends PureComponent {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <TopBar/>
-        <NavBar/>
+        <TopBar />
+        <NavBar />
       </div>
     );
   }

@@ -10,6 +10,8 @@ import Slider from '../components/HomePageComponents/Slider/';
 
 import Footer from '../components/HomePageComponents/Footer';
 
+import Servicos from '../components/HomePageComponents/Servicos';
+
 const styles = () => ({
   root: {
     justifyContent: 'center',
@@ -18,7 +20,7 @@ const styles = () => ({
     width: '100%',
     minWidth: '100%',
     margin: 0,
-    //backgroundColor: '#e3e8eb',
+    // backgroundColor: '#e3e8eb',
     flexDirection: 'column',
   },
 });
@@ -26,12 +28,13 @@ const styles = () => ({
 class HomePage extends PureComponent {
   render() {
     const { classes } = this.props;
-    return (      
-        <div className={classes.root}>
-          <PresentationPage />
-          <Footer showSocialMedia={true}> </Footer> 
-          {/*Se o props passado for true, exiba as redes sociais*/ }
-        </div> 
+    return (
+      <div className={classes.root}>
+        <PresentationPage />
+        <Servicos />
+        <Footer showSocialMedia> </Footer>
+        {/* Se o props passado for true, exiba as redes sociais */ }
+      </div>
     );
   }
 }
