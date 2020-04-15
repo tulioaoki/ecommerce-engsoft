@@ -76,6 +76,8 @@ class LoginForm extends PureComponent {
           </div>
           <Button onClick={onClick} variant="contained" color="primary" fullWidth={1} type="submit">Entrar</Button>
         </div>
+
+         
       </>
 
     );

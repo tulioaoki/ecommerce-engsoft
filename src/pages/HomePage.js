@@ -8,6 +8,8 @@ import PresentationPage from '../components/HomePageComponents/PresentationPage'
 import Slider from '../components/HomePageComponents/Slider/';
 
 
+import Footer from '../components/HomePageComponents/Footer';
+
 const styles = () => ({
   root: {
     justifyContent: 'center',
@@ -15,7 +17,8 @@ const styles = () => ({
     maxHeight: '100%',
     width: '100%',
     minWidth: '100%',
-    backgroundColor: '#e3e8eb',
+    margin: 0,
+    //backgroundColor: '#e3e8eb',
     flexDirection: 'column',
   },
 });
@@ -23,10 +26,12 @@ const styles = () => ({
 class HomePage extends PureComponent {
   render() {
     const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <Slider/>         
-      </div>
+    return (      
+        <div className={classes.root}>
+          <PresentationPage />
+          <Footer showSocialMedia={true}> </Footer> 
+          {/*Se o props passado for true, exiba as redes sociais*/ }
+        </div> 
     );
   }
 }

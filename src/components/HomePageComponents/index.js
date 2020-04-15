@@ -21,7 +21,7 @@ const styles = () => ({
     margin: '0px',
     justifyContent: 'center',
     alignSelf: 'center',
-    backgroundColor: '#e3e8eb',
+    //backgroundColor: '#e3e8eb',
     'z-index': 1,
   },
   colorizedBg: {
@@ -35,7 +35,7 @@ const styles = () => ({
     alignSelf: 'flex-end',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    backgroundColor: '#ca99d7',
+    //backgroundColor: '#ca99d7',
     padding: 0,
     'z-index': 2,
     alignContent: 'flex-end',
@@ -58,7 +58,7 @@ class HomePageComponent extends PureComponent {
     return (
       <div className={classes.container}>
         <div className={classes.colorizedBg} style={{ backgroundColor: color }} />
-      </div>
+      </div>      
     );
   }
 }
