@@ -8,18 +8,18 @@ import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import {
-  withStyles
+  withStyles,
 } from '@material-ui/core';
 
 const styles = () => ({
   icons: {
-      margin: '0',
-      display: 'flex',
-      justifyContent: 'flex-end',
-      flexWrap: 'wrap',
-      width: '150px',
-      justifyContent: 'space-between'
-  }
+    margin: '0',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    flexWrap: 'wrap',
+    width: '150px',
+    justifyContent: 'space-between',
+  },
 });
 
 class HeaderIcons extends PureComponent {
@@ -30,20 +30,20 @@ class HeaderIcons extends PureComponent {
     } = this.props;
 
     return (
-      <div className={classes.icons} style={{display:'flex'}}>
+      <div className={classes.icons} style={{ display: 'flex' }}>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge color="secondary">
-            <AccountCircleIcon fontSize='default' onClick={() => (history.push('/'))}/>
+            <AccountCircleIcon fontSize="default" onClick={() => (history.push('/'))} />
           </Badge>
         </IconButton>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge color="secondary">
-            <FavoriteIcon fontSize='default'/>
+            <FavoriteIcon fontSize="default" />
           </Badge>
         </IconButton>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
-            <ShoppingCartRoundedIcon fontSize='default'/>
+            <ShoppingCartRoundedIcon fontSize="default" />
           </Badge>
         </IconButton>
       </div>

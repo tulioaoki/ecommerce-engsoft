@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
-  withStyles
+  withStyles,
 } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -11,19 +11,19 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
 const styles = () => ({
-  root:{
-    display:'flex'
+  root: {
+    display: 'flex',
   },
   rootPaper: {
-      display: 'flex',
-      width: 450,
-      background: '#c4c4c4'
+    display: 'flex',
+    width: 450,
+    background: '#c4c4c4',
   },
   input: {
     marginLeft: '10px',
     flex: 1,
-  }
-}); 
+  },
+});
 
 class SearchBox extends PureComponent {
   render() {
@@ -33,17 +33,17 @@ class SearchBox extends PureComponent {
     } = this.props;
 
     return (
-      <div className={classes.root}> 
-          <Paper component="form" className={classes.rootPaper}>
-              <InputBase
-                  className={classes.input}
-                  placeholder="O que você procura?"
-                  inputProps={{ 'aria-label': 'O que você procura?' }}
-              />
-              <IconButton type="submit" aria-label="search">
-                  <SearchIcon/>
-              </IconButton>
-          </Paper>
+      <div className={classes.root}>
+        <Paper component="form" className={classes.rootPaper}>
+          <InputBase
+            className={classes.input}
+            placeholder="O que você procura?"
+            inputProps={{ 'aria-label': 'O que você procura?' }}
+          />
+          <IconButton type="submit" aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Paper>
       </div>
     );
   }
