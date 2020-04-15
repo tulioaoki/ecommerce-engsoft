@@ -13,17 +13,17 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 const styles = {
 
     root: {
-        color: '#1F509C',
+        color: '#2c719c',
         '&$checked': {
-            color: '#1F509C',
+            color: '#2c719c',
         },
     },
     checked: {},
 
     container: {
-        position: 'absolute',
+        position: 'relative',
         width: '100%',
-        height: '35%',
+        height: '300px',
         display: 'flex',
         justifyContent: 'space-around',
     },
@@ -33,7 +33,7 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
-        right: '70px',
+        right: '100px',
         bottom: '30px',
     },
 
@@ -41,7 +41,7 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
-        left: '70px',
+        left: '100px',
         bottom: '30px',
     },
 
@@ -56,7 +56,6 @@ const styles = {
             opacity: 0.8,
             backgroundColor: '#2C719C',
         },
-
     },
 
     icon: {
