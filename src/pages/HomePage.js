@@ -8,6 +8,8 @@ import PresentationPage from '../components/HomePageComponents/PresentationPage'
 
 import Footer from '../components/HomePageComponents/Footer';
 
+import Servicos from '../components/HomePageComponents/Servicos';
+
 const styles = () => ({
   root: {
     justifyContent: 'center',
@@ -27,6 +29,7 @@ class HomePage extends PureComponent {
     return (      
         <div className={classes.root}>
           <PresentationPage />
+          <Servicos/>
           <Footer showSocialMedia={true}> </Footer> 
           {/*Se o props passado for true, exiba as redes sociais*/ }
         </div> 
