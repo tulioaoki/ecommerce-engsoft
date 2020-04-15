@@ -8,12 +8,11 @@ import HeaderIcons from '../../TopBarComponents/HeaderIcons';
 
 class TopBar extends PureComponent {
   render() {
-
     return (
-      <div style={{justifyContent: 'space-around',marginTop:'10px',marginBottom:'10px'}} className='container'>
-        <Logo/>
-        <SearchBox/>
-        <HeaderIcons/>
+      <div style={{ justifyContent: 'space-around', marginTop: '10px', marginBottom: '10px' }} className="container">
+        <Logo />
+        <SearchBox />
+        <HeaderIcons />
       </div>
     );
   }
