@@ -5,6 +5,12 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import PresentationPage from '../components/HomePageComponents/PresentationPage';
+import Slider from '../components/HomePageComponents/Slider/';
+
+
+import Footer from '../components/HomePageComponents/Footer';
+
+import Servicos from '../components/HomePageComponents/Servicos';
 
 const styles = () => ({
   root: {
@@ -13,7 +19,8 @@ const styles = () => ({
     maxHeight: '100%',
     width: '100%',
     minWidth: '100%',
-    backgroundColor: '#e3e8eb',
+    margin: 0,
+    // backgroundColor: '#e3e8eb',
     flexDirection: 'column',
   },
 });
@@ -24,6 +31,9 @@ class HomePage extends PureComponent {
     return (
       <div className={classes.root}>
         <PresentationPage />
+        <Servicos />
+        <Footer showSocialMedia> </Footer>
+        {/* Se o props passado for true, exiba as redes sociais */ }
       </div>
     );
   }
