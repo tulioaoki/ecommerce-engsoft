@@ -6,11 +6,10 @@ import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import PresentationPage from '../components/HomePageComponents/PresentationPage';
 import Slider from '../components/HomePageComponents/Slider/';
-
-
 import Footer from '../components/HomePageComponents/Footer';
-
 import Servicos from '../components/HomePageComponents/Servicos';
+import MaisVendidos from '../components/HomePageComponents/MaisVendidos';
+
 
 const styles = () => ({
   root: {
@@ -33,6 +32,7 @@ class HomePage extends PureComponent {
         <PresentationPage />
         <Slider/>
         <Servicos />
+        <MaisVendidos/>
         <Footer showSocialMedia> </Footer>
         {/* Se o props passado for true, exiba as redes sociais */ }
       </div>

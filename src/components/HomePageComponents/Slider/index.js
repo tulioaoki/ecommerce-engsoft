@@ -5,8 +5,6 @@ import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
@@ -46,9 +44,6 @@ const styles = {
     },
 
     button: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
         padding: '0px',
         backgroundColor: '#2C719C',
         transition: 'opacity 0.4s',
@@ -66,7 +61,7 @@ const styles = {
     imagem: {
         position: 'absolute',
         width: '100%',
-        height: '100%',
+        height: '300px',
     },
 
     bolinhas: {
@@ -81,7 +76,6 @@ const styles = {
 
 
 let timer = null;
-let stopPlay = false; // Usar essa variavel para parar o auto play e voltar com o auto play
 
 class Slider extends PureComponent {
 
@@ -221,8 +215,7 @@ class Slider extends PureComponent {
                 <div className={classes.buttonLeft}>
                     <IconButton
                         className={classes.button}
-                        aria-label="Arrow Left"
-                        size='medium'
+                        aria-label="Arrow Left"                        
                         onClick={() => (this.backImage(), this.reStartAutoPlay())}                      
                     >
 
@@ -260,14 +253,12 @@ class Slider extends PureComponent {
                 <div className={classes.buttonRight}  >
                     <IconButton
                         className={classes.button}
-                        aria-label="Arrow Right"
-                        size='medium'
+                        aria-label="Arrow Right"                       
                         onClick={() => (this.forwardImage(), this.reStartAutoPlay())}
                     >
                         <ChevronRightIcon
                             className={classes.icon}
-                            fontSize='inherit'
-                            size='medium'
+                            fontSize='inherit'                            
                         />
 
                     </IconButton>

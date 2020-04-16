@@ -79,7 +79,7 @@ export class SocialMedia extends PureComponent {
       <div className={classes.container}>
         <Grid container spacing={0}>
 
-          <Grid xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <div className={classes.texto}>
               <div className={classes.main_text}>Redes Sociais</div>
               <div>
@@ -91,7 +91,7 @@ export class SocialMedia extends PureComponent {
             </div>
           </Grid>
 
-          <Grid xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <div className={classes.social_midia_icons}>
 
               <div className={classes.social_midia_icon}>

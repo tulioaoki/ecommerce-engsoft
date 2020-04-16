@@ -11,19 +11,13 @@ import { AZUL_BEBE,AZUL_ESCURO } from '../../../utils/colors';
 
 const styles = () => ({
 
-    root:{
-        position: 'relative',
-        width: '100%',
-    },
-
-
-    container: {        
+    container: {     
+               
         backgroundColor: AZUL_ESCURO,
         display: 'flex',
         justifyContent: 'center',
         height: '78px',
-        alignItems: 'center',
-        paddingLeft: '10px',
+        alignItems: 'center',    
     },
 
     container_division: {
@@ -45,17 +39,16 @@ const styles = () => ({
         display: 'flex',
         justifyContent: 'center',
         color: 'black',
-        fontSize: 40,
+        fontSize: 44,
     },
 
     text: {
 
-        color: 'black',
+        color: 'white',
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontSize: '12px',
-        lineHeight: '16px',
-        textIndent: '0px',
+        lineHeight: '16px',      
         textTransform: 'uppercase',
     },
 
@@ -80,9 +73,9 @@ export class Servicos extends PureComponent {
 
         return (
 
-            <div className={classes.root}>
+            
 
-                <Grid className={classes.container} xs={12} spacing={0}>
+                <Grid className={classes.container} item xs={12} spacing={0}>
 
                     <Grid className={`${classes.container_division} ${classes.space}`} item xs={4}>
 
@@ -99,10 +92,7 @@ export class Servicos extends PureComponent {
                             >
                                 Veja as condições para cada categoria.
                             </Typography>
-
                         </div>
-
-
                     </Grid>
 
                     <div className={classes.linha} />
@@ -122,7 +112,6 @@ export class Servicos extends PureComponent {
                                 PARCELE EM ATÉ 10X NO NOSSO CARTÃO.
                             </Typography>
                         </div>
-
                     </Grid>
 
                     <div className={classes.linha} />
@@ -146,7 +135,7 @@ export class Servicos extends PureComponent {
                     </Grid>
                 </Grid>
 
-            </div>
+            
 
         );
     }
