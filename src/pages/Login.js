@@ -10,6 +10,9 @@ import Footer from '../components/HomePageComponents/Footer';
 import { AZUL_ESCURO } from '../utils/colors';
 
 
+import TopBar from '../components/HomePageComponents/TopBar';
+import NavBar from '../components/HomePageComponents/NavBar';
+
 const styles = () => ({
   root: {
     backgroundColor: AZUL_ESCURO,

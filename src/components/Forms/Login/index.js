@@ -35,6 +35,10 @@ const styles = () => ({
     paddingTop: 20,
     paddingBottom: 20,
   },
+  btnLogin: {
+    backgroundColor: AZUL_ESCURO,
+    color: '#fafafa',
+  }
 });
 
 class LoginForm extends PureComponent {
@@ -47,8 +51,9 @@ class LoginForm extends PureComponent {
   }
 
   render() {
-    const { classes, history } = this.props;
+    const { classes, history, cadastro } = this.props;
     const { pass, login } = this.state;
+
 
     const handleChangeLogin = (event) => {
       const { value } = event.target;
