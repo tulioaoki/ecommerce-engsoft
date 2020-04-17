@@ -38,7 +38,7 @@ const styles = () => ({
     textTransform: 'uppercase',
     fontSize: '36px',
     color: '#1F509C',
-    margin: '8px 0',
+    marginBottom: '8px',
   },
 
   social_midia_icons: {

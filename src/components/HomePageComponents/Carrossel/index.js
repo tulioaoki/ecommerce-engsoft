@@ -4,16 +4,14 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import {  AZUL_ESCURO } from '../../../utils/colors';
 
 const styles = {
 
     root: {
-        color: '#2c719c',
+        color: AZUL_ESCURO,
         '&$checked': {
-            color: '#2c719c',
+            color: AZUL_ESCURO,
         },
     },
     checked: {},
@@ -24,33 +22,6 @@ const styles = {
         height: '300px',
         display: 'flex',
         justifyContent: 'space-around',
-    },
-
-
-    buttonLeft: {
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        right: '100px',
-        bottom: '30px',
-    },
-
-    buttonRight: {
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        left: '100px',
-        bottom: '30px',
-    },
-
-    button: {
-        padding: '0px',
-        backgroundColor: '#2C719C',
-        transition: 'opacity 0.4s',
-        '&:hover': {
-            opacity: 0.8,
-            backgroundColor: '#2C719C',
-        },
     },
 
     icon: {
@@ -74,10 +45,9 @@ const styles = {
     },
 };
 
+let tempo = null;
 
-let timer = null;
-
-class Slider extends PureComponent {
+class Carrossel extends PureComponent {
 
     state = {
 
@@ -105,30 +75,8 @@ class Slider extends PureComponent {
             ],
 
         imagemAtual: 0,
+        timer: null,
     };
-
-
-    stopAutoPlay = (event) => {
-
-
-        const valor = event.target.value   // Pegar a imagem que a bolinha selecionada possui
-
-        this.state.slide.map((slide, index) => { // Ver qual bolinha foi selecionada
-            
-            if (valor === slide.imagem) {
-
-                this.setState({             // Mudar a imagem 
-
-                    currentImageValue: valor,
-                    imagemAtual: index,
-                });
-            }
-        });
-
-        clearInterval(timer);                // Parar o autoPLay
-        timer = 2                           
-    };
-
 
     forwardImage = (() => {
 
@@ -152,47 +100,54 @@ class Slider extends PureComponent {
 
     })
 
-    backImage = (() => {
+    stopAutoPlay = (event) => {
 
 
-        if (this.state.imagemAtual !== 0) {
+        const valor = event.target.value   // Pegar a imagem que a bolinha selecionada possui
 
-            this.setState({
+        this.state.slide.map((slide, index) => { // Ver qual bolinha foi selecionada
 
-                imagemAtual: this.state.imagemAtual - 1,
-                currentImageValue: this.state.slide[this.state.imagemAtual - 1].imagem
-            });
+            if (valor === slide.imagem) {
 
-        } else {
+                this.setState({             // Mudar a imagem 
 
-            const tamMaximo = this.state.slide.length;
+                    currentImageValue: valor,
+                    imagemAtual: index,
+                    timer: 2,
+                });
+            }
 
-            this.setState({
-
-                imagemAtual: tamMaximo - 1,
-                currentImageValue: this.state.slide[tamMaximo - 1].imagem
-            });
-        }
-    })
+        });
+   
+        clearInterval(tempo);                // Parar o autoPLay        
+        return tempo = null;
+    };
 
     autoPlay = (() => {
 
-        if (timer === null) {
+        if (this.state.timer === null) {
+                        
+            tempo = setInterval(() => this.forwardImage(), 6000);
+            this.setState({
 
-            timer = setInterval(() => this.forwardImage(), 6000);
+                timer: tempo
+            });
+        }else if (this.state.timer === 2){
+
+            setTimeout(() => this.reStartAutoPlay(), 4000)
         }
     })
-
 
     reStartAutoPlay = (() => {  /* Ver quando parar o auto play */
 
-        if (timer !== null) {
+        if (this.state.timer !== null) {     
 
-            clearInterval(timer);
-        }
-        timer = null;
+            this.setState({
+
+                timer: null,
+            });
+        }        
     })
-
 
     render() {
 
@@ -209,24 +164,9 @@ class Slider extends PureComponent {
                     <img
                         className={classes.imagem}
                         src={this.state.currentImageValue}
+                        alt="Imagem que roda no carrossel"
                     />
                 </Link>
-
-                <div className={classes.buttonLeft}>
-                    <IconButton
-                        className={classes.button}
-                        aria-label="Arrow Left"                        
-                        onClick={() => (this.backImage(), this.reStartAutoPlay())}                      
-                    >
-
-                        <ChevronLeftIcon
-                            className={classes.icon}
-                            fontSize='inherit'                           
-                        />
-
-
-                    </IconButton>
-                </div>
 
 
                 <div className={classes.bolinhas}>
@@ -250,20 +190,6 @@ class Slider extends PureComponent {
 
                 </div>
 
-                <div className={classes.buttonRight}  >
-                    <IconButton
-                        className={classes.button}
-                        aria-label="Arrow Right"                       
-                        onClick={() => (this.forwardImage(), this.reStartAutoPlay())}
-                    >
-                        <ChevronRightIcon
-                            className={classes.icon}
-                            fontSize='inherit'                            
-                        />
-
-                    </IconButton>
-                </div>
-
 
                 {this.autoPlay()}
 
@@ -271,9 +197,9 @@ class Slider extends PureComponent {
         );
     }
 }
-Slider.propTypes = {
+Carrossel.propTypes = {
 
     classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect()(withStyles(styles)(Slider)));
+export default withRouter(connect()(withStyles(styles)(Carrossel)));
