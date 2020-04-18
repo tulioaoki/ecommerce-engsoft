@@ -11,7 +11,6 @@ import SocialMedia from '../../FooterComponents/SocialMedia';
 const styles = () => ({
 
   root: {
-    position: 'absolute',
     width: '100%',
     bottom: 0,
     backgroundColor: 'white',
