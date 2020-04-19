@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { AZUL_ESCURO } from '../../../utils/colors';
+import { GoogleLogin } from 'react-google-login';
 
 const styles = () => ({
   btnStyle: {
@@ -14,6 +15,7 @@ const styles = () => ({
     color: '#fafafa',
     borderRadius: '5px',
     paddingTop: '18px',
+    marginBottom: '18px',
   },
   formBox: {
     paddingTop: '50px',
@@ -59,8 +61,22 @@ class LoginForm extends PureComponent {
       this.setState((prevState) => ({ ...prevState, newpass: value }));
     };
 
-    const onClick = () => {
-      history.push('/home/');
+    const onLogin = (event) => {
+      event.preventDefault();
+      //history.push('/home/');
+      console.log('login: ');
+      console.log(this.state.login);
+      console.log('senha: ');
+      console.log(this.state.pass);
+    };
+
+    const onRegister = (event) => {
+      event.preventDefault();
+      //history.push('/home/');
+      console.log('novo login: ');
+      console.log(this.state.newlogin);
+      console.log('nova senha: ');
+      console.log(this.state.newpass);
     };
 
     return (
@@ -68,7 +84,7 @@ class LoginForm extends PureComponent {
         <div className={classes.formBox}>
           <Typography component="h1" variant="h5">
             Já sou cliente
-              </Typography>
+          </Typography>
           <form className={classes.input} noValidate>
             <TextField
               variant="outlined"
@@ -80,7 +96,7 @@ class LoginForm extends PureComponent {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={handleChangeNewPass}
+              onChange={handleChangeLogin}
             />
             <TextField
               variant="outlined"
@@ -92,15 +108,23 @@ class LoginForm extends PureComponent {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChangePass}
             />
             <Button className={classes.btnStyle}
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
+              onClick={onLogin}
             >
               Entrar
             </Button>
+            <GoogleLogin
+              clientId="699271164668-449o9139ijnefrgevph7jf44j1f5bqcm.apps.googleusercontent.com"
+              buttonText="Entrar com sua conta do Google"
+              cookiePolicy={'single_host_origin'}
+              disabled={false}
+            />
           </form>
 
         </div>
@@ -120,6 +144,7 @@ class LoginForm extends PureComponent {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChangeNewLogin}
             />
             <TextField
               variant="outlined"
@@ -131,15 +156,23 @@ class LoginForm extends PureComponent {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChangeNewPass}
             />
             <Button className={classes.btnStyle}
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
+              onClick={onRegister}
             >
               Cadastrar
             </Button>
+            <GoogleLogin
+              clientId="699271164668-449o9139ijnefrgevph7jf44j1f5bqcm.apps.googleusercontent.com"
+              buttonText="Cadastrar-se com sua conta do Google"
+              cookiePolicy={'single_host_origin'}
+              style={{width:'300px'}}
+            />
           </form>
         </div>
       </div>
