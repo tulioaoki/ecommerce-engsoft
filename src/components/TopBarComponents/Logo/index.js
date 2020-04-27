@@ -29,7 +29,7 @@ class Logo extends PureComponent {
         <img
           src={logoImage}
           className={classes.imgLogo}
-          onClick={() => (history.push('/home'))}
+          onClick={() => (history.push('/'))}
         />
       </div>
     );
