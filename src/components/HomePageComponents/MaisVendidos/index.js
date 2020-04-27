@@ -380,7 +380,7 @@ export class Slider extends PureComponent {
         } = this.props;
 
         vetor = new Array(productAmount); // Criar um vetor de tamanho variado que terá a quantidade de produtos que serão exibidos
-        vetor.fill(1,...vetor); // Preencher todo o vetor com o valor 1, só para poder usar o maps depois
+        vetor.fill(1); // Preencher todo o vetor com o valor 1, só para poder usar o maps depois
         
         return (
 
