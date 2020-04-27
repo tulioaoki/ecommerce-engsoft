@@ -30,7 +30,9 @@ class HomePage extends PureComponent {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <PresentationPage />
+        <div className="mainContentHome">
+          <PresentationPage />
+        </div>
         <Footer showSocialMedia> </Footer>
         {/* Se o props passado for true, exiba as redes sociais */ }
       </div>
