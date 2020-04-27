@@ -5,8 +5,12 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import PresentationPage from '../components/HomePageComponents/PresentationPage';
+import Slider from '../components/HomePageComponents/Slider/';
+
 
 import Footer from '../components/HomePageComponents/Footer';
+
+import Servicos from '../components/HomePageComponents/Servicos';
 
 const styles = () => ({
   root: {
