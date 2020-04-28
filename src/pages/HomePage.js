@@ -36,7 +36,7 @@ class HomePage extends PureComponent {
            <MaisVendidos productAmount={4} />
         </div>
         <Footer showSocialMedia> </Footer>
-        {/* Se o props passado for true, exiba as redes sociais */ }
+        {/* Se o props passado for true, exiba as redes sociai */ }
       </div>
     );
   }
