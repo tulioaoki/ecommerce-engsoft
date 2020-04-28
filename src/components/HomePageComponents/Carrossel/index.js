@@ -6,6 +6,13 @@ import { withStyles } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import {  AZUL_ESCURO } from '../../../utils/colors';
 
+import  image1 from '../../../static/images/foto1.jpeg'  ;
+import  tylenol from '../../../static/images/tylenol.jpeg'  ;
+import  frauda from '../../../static/images/fraudas.jpeg'  ;
+import  creme from '../../../static/images/creme.jpeg'  ;
+import  comprimido from '../../../static/images/comprimido.jpeg'  ;
+
+
 const styles = {
 
     root: {
@@ -51,27 +58,40 @@ class Carrossel extends PureComponent {
 
     state = {
 
-        currentImageValue: 'https://http2.mlstatic.com/kit-emagrecedor-2-remedio-desodalina-colageno-vitamina-c-D_NQ_NP_646272-MLB31670921915_082019-F.jpg',
+        currentImageValue: image1,
 
         slide:
             [
                 {
-                    imagem: 'https://http2.mlstatic.com/kit-emagrecedor-2-remedio-desodalina-colageno-vitamina-c-D_NQ_NP_646272-MLB31670921915_082019-F.jpg',
+                    imagem: image1 ,
                     link: '/',
                     id: 1,
                 },
 
                 {
-                    imagem: 'https://img.freepik.com/fotos-gratis/gotas-de-oleo-na-imagem-abstrata-padrao-psicodelico-de-agua_23-2148290141.jpg?size=626&ext=jpg',
-                    link: '/social',
+                    imagem: comprimido,
+                    link: '/',
                     id: 2,
                 },
 
                 {
-                    imagem: 'https://bisturi.com.br/12262-large_default/coperalcool-alcool-gel-400g.jpg',
-                    link: '/login',
+                    imagem: tylenol,
+                    link: '/',
                     id: 3,
-                }
+                },
+
+                {
+                    imagem: frauda,
+                    link: '/',
+                    id: 4,
+                },
+
+                
+                {
+                    imagem: creme,
+                    link: '/',
+                    id: 5,
+                },
             ],
 
         imagemAtual: 0,
@@ -197,6 +217,7 @@ class Carrossel extends PureComponent {
         );
     }
 }
+
 Carrossel.propTypes = {
 
     classes: PropTypes.object.isRequired,
