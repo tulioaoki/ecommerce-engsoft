@@ -49,7 +49,7 @@ class ProductCardComponent extends PureComponent {
     } = this.props;
 
     return (
-      <Card style={{ maxWidth: variant === 'small' ? 280 : 320 }}>
+      <Card style={{ maxWidth: variant === 'small' ? 280 : 320, border: '1px solid #c4c4c4' }} variant="outlined" > 
         <CardHeader
           title={product.name}
           subheader={(

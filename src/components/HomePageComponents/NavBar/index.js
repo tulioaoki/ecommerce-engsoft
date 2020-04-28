@@ -24,11 +24,28 @@ const styles = () => ({
 });
 
 class NavBar extends PureComponent {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      pagenumber: 0
+    };
+  }
+  
   render() {
+
     const {
       history,
       classes,
     } = this.props;
+
+    switch(history.location.pathname){
+      case '/':
+        this.setState((prevState) => ({ ...prevState, pagenumber: 0 }));
+        break;
+      default:
+        this.setState((prevState) => ({ ...prevState, pagenumber: 2 }));
+    }
 
     return (
       <div>
@@ -36,11 +53,11 @@ class NavBar extends PureComponent {
           <Tabs
             style={{ height: '58px' }}
             variant="fullWidth"
-            value={1}
+            value={this.state.pagenumber}
             centered
             indicatorColor="primary"
           >
-            <Tab className={classes.menuTab} label="Página Inicial" />
+            <Tab className={classes.menuTab} label="Página Inicial" onClick={()=>{history.push('/')}}/>
             <Tab className={classes.menuTab} label="Categorias" />
             <Tab className={classes.menuTab} label="Ofertas" />
             <Tab className={classes.menuTab} label="Sobre" />
