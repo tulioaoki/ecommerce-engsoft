@@ -11,6 +11,7 @@ import SocialMedia from '../../FooterComponents/SocialMedia';
 const styles = () => ({
 
   root: {
+
     width: '100%',
     bottom: 0,
     backgroundColor: 'white',
@@ -35,7 +36,6 @@ export class Footer extends PureComponent {
   render() {
     const {
       classes,
-      history,
     } = this.props;
 
     return (
@@ -44,7 +44,9 @@ export class Footer extends PureComponent {
         {/* Se o props passado for true, exiba as redes sociais */ }
         {this.props.showSocialMedia
 
-                   && <SocialMedia />}
+            && (
+            <SocialMedia />
+            )}
         <div className={classes.footer}>
           <span>
             {' '}
