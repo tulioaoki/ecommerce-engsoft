@@ -50,9 +50,9 @@ export class Footer extends PureComponent {
         <div className={classes.footer}>
           <span>
             {' '}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pellentesque quam purus,
-            <br />
-            consequat fermentum ipsum suscipit ut. t
+             Empreendimentos Ecommerce S/A; CNPJ: 06.626.253/0001-51 | Rua Senador Pompeu, 1520, Centro, Fortaleza-Ce; CEP: 60.025-001 
+             <br/>
+             SAC FARMA 0800 275 1313 | Farmacêutica Responsável: Maria do Livramento Cavalcante Crisóstomo; CRF/CE 1388. | Registro Sanitário nº LS00023459 | AFE: 0280418
             {' '}
           </span>
         </div>

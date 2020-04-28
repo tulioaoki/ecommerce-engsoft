@@ -41,6 +41,12 @@ const styles = () => ({
     marginBottom: '8px',
   },
 
+  secundary_text: {
+
+    fontWeight: 600,
+
+  },
+
   social_midia_icons: {
     height: '100%',
     display: 'flex',
@@ -82,7 +88,7 @@ export class SocialMedia extends PureComponent {
           <Grid item xs={12} sm={6}>
             <div className={classes.texto}>
               <div className={classes.main_text}>Redes Sociais</div>
-              <div>
+              <div className={classes.secundary_text}>
                 {' '}
                 Visite todas as nossas redes
                 <br />
