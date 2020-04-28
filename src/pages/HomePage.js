@@ -5,12 +5,11 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import PresentationPage from '../components/HomePageComponents/PresentationPage';
-import Slider from '../components/HomePageComponents/Slider/';
-
-
+import Carrossel from '../components/HomePageComponents/Carrossel';
 import Footer from '../components/HomePageComponents/Footer';
-
 import Servicos from '../components/HomePageComponents/Servicos';
+import MaisVendidos from '../components/HomePageComponents/MaisVendidos';
+
 
 const styles = () => ({
   root: {
@@ -32,8 +31,9 @@ class HomePage extends PureComponent {
       <div className={classes.root}>
         <div className="mainContentHome">
           <PresentationPage />
-          <Slider/>
-          <Servicos/>
+           <Carrossel />
+           <Servicos />
+           <MaisVendidos productAmount={4} />
         </div>
         <Footer showSocialMedia> </Footer>
         {/* Se o props passado for true, exiba as redes sociais */ }

@@ -6,18 +6,17 @@ import { withStyles, Typography, Grid } from '@material-ui/core';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import PaymentIcon from '@material-ui/icons/Payment';
 import LoopIcon from '@material-ui/icons/Loop';
-import { FaFileExcel } from 'react-icons/fa';
 import { AZUL_BEBE } from '../../../utils/colors';
 
 const styles = () => ({
 
   container: {
+
     backgroundColor: AZUL_BEBE,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
     height: '78px',
-    paddingLeft: '10px',
+    alignItems: 'center',
   },
 
   container_division: {
@@ -39,17 +38,16 @@ const styles = () => ({
     display: 'flex',
     justifyContent: 'center',
     color: 'black',
-    fontSize: 40,
+    fontSize: 44,
   },
 
   text: {
 
-    color: 'black',
+    color: 'balck',
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontSize: '12px',
     lineHeight: '16px',
-    textIndent: '0px',
     textTransform: 'uppercase',
   },
 
@@ -62,7 +60,7 @@ const styles = () => ({
     height: '50px',
     marginTop: '6px',
     marginBottom: '6px',
-    backgroundColor: '#e9e9e9',
+    backgroundColor: '#4a4a4a',
   },
 });
 
@@ -74,8 +72,7 @@ export class Servicos extends PureComponent {
 
     return (
 
-
-      <Grid className={classes.container} xs={12} spacing={0}>
+      <Grid className={classes.container} item xs={12} spacing={0}>
 
         <Grid className={`${classes.container_division} ${classes.space}`} item xs={4}>
 
@@ -92,10 +89,7 @@ export class Servicos extends PureComponent {
             >
               Veja as condições para cada categoria.
             </Typography>
-
           </div>
-
-
         </Grid>
 
         <div className={classes.linha} />
@@ -115,7 +109,6 @@ export class Servicos extends PureComponent {
               PARCELE EM ATÉ 10X NO NOSSO CARTÃO.
             </Typography>
           </div>
-
         </Grid>
 
         <div className={classes.linha} />
@@ -135,7 +128,6 @@ export class Servicos extends PureComponent {
             >
               TROQUE SEUS ITENS EM ATÉ 30 DIAS.
             </Typography>
-
           </div>
         </Grid>
       </Grid>
