@@ -6,7 +6,6 @@ import { withStyles, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import TopBar from '../TopBar';
 import NavBar from '../NavBar';
-import bg from '../../../static/images/ecommerce.jpg';
 
 const styles = () => ({
   container: {

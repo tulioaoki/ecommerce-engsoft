@@ -12,11 +12,12 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const styles = () => ({
   root: {
-    display: 'flex',
+    maxWidth: 600,
+    minWidth: 200,
+    width: '100%'
   },
   rootPaper: {
     display: 'flex',
-    width: 450,
     background: '#c4c4c4',
   },
   input: {
