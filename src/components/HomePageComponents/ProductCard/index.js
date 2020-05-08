@@ -13,6 +13,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { AZUL_ESCURO } from '../../../utils/colors';
 
 const styles = () => ({
   media: {
@@ -21,6 +22,12 @@ const styles = () => ({
   },
   buyButton: {
     marginLeft: 'auto',
+    padding: '7px',
+    backgroundColor: AZUL_ESCURO,
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#1a237e',
+    },
   },
 
 });
@@ -49,7 +56,7 @@ class ProductCardComponent extends PureComponent {
     } = this.props;
 
     return (
-      <Card style={{ maxWidth: variant === 'small' ? 280 : 320, border: '1px solid #c4c4c4' }} variant="outlined" > 
+      <Card style={{ maxWidth: variant === 'small' ? 280 : 320}} variant="outlined" > 
         <CardHeader
           title={product.name}
           subheader={(
@@ -75,7 +82,7 @@ class ProductCardComponent extends PureComponent {
           <IconButton aria-label="Adicionar aos favoritos">
             <FavoriteIcon />
           </IconButton>
-          <Button size="small" color="primary" className={classes.buyButton}>
+          <Button size="small"  className={classes.buyButton}>
             Comprar
           </Button>
         </CardActions>

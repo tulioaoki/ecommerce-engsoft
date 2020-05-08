@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
-import {  AZUL_ESCURO } from '../../../utils/colors';
 
 import  image1 from '../../../static/images/foto1.jpeg'  ;
 import  tylenol from '../../../static/images/tylenol.jpeg'  ;
@@ -16,9 +15,9 @@ import  comprimido from '../../../static/images/comprimido.jpeg'  ;
 const styles = {
 
     root: {
-        color: AZUL_ESCURO,
+        color: '#e0e0e0',
         '&$checked': {
-            color: AZUL_ESCURO,
+            color: '#e0e0e0',
         },
     },
     checked: {},
