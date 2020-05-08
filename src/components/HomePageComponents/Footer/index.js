@@ -7,29 +7,23 @@ import {
 } from '@material-ui/core';
 import SocialMedia from '../../FooterComponents/SocialMedia';
 
-
 const styles = () => ({
-
   root: {
-
     width: '100%',
     bottom: 0,
     backgroundColor: 'white',
-
   },
-
   footer: {
     backgroundColor: '#1F509C',
-    paddingTop: '1px',
+    fontSize: '.85rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
     textAlign: 'center',
-    padding: '16px 0',
+    padding: '1px 0 16px 0',
     color: 'white',
   },
-
 });
 
 export class Footer extends PureComponent {
@@ -39,11 +33,9 @@ export class Footer extends PureComponent {
     } = this.props;
 
     return (
-
       <div className={classes.root}>
         {/* Se o props passado for true, exiba as redes sociais */ }
         {this.props.showSocialMedia
-
             && (
             <SocialMedia />
             )}
@@ -56,7 +48,6 @@ export class Footer extends PureComponent {
             {' '}
           </span>
         </div>
-
       </div>
     );
   }
