@@ -209,10 +209,7 @@ class Carrossel extends PureComponent {
 
                 </div>
 
-                {console.log('Timer ' + this.state.timer),
-                 console.log('Tempo ' + tempo)
-                 
-                }
+               
                 {this.autoPlay()}
 
             </div>
