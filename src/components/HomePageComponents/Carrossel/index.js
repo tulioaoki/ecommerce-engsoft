@@ -153,7 +153,7 @@ class Carrossel extends PureComponent {
             });
         }else if (this.state.timer === 2){
 
-            setTimeout(() => this.reStartAutoPlay(), 4000)
+            this.reStartAutoPlay()
         }
     })
 
@@ -209,7 +209,10 @@ class Carrossel extends PureComponent {
 
                 </div>
 
-
+                {console.log('Timer ' + this.state.timer),
+                 console.log('Tempo ' + tempo)
+                 
+                }
                 {this.autoPlay()}
 
             </div>
