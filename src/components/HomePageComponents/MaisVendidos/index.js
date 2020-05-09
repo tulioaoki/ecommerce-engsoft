@@ -88,237 +88,7 @@ let index;    // Pegar a posição do produto que esta no state listaDeProdutos 
 export class Slider extends PureComponent {
 
 
-    state = {
-
-        listaDeProdutos:
-
-            [
-
-                {
-                    id: 5,
-                    images: [
-                        {
-                            id: 1,
-                            image_url: 'https://cdn.awsli.com.br/600x450/492/492729/produto/32850267/26cba2d95e.jpg',
-                            created_at: "2020-04-05T16:26:05.962531-03:00",
-                            updated_at: "2020-04-05T16:26:05.962648-03:00"
-                        },
-                    ],
-                    name: 'DorFlex',
-                    price: 35,
-                    categories: [
-                        {
-                            id: 1,
-                            name: "XAROPE",
-                            created_at: "2020-04-03T01:01:54.306016-03:00",
-                            updated_at: "2020-04-03T01:01:54.306048-03:00"
-                        },
-                        {
-                            id: 2,
-                            name: "PASTILHA",
-                            created_at: "2020-04-03T01:02:11.701019-03:00",
-                            updated_at: "2020-04-03T01:02:11.701046-03:00"
-                        }
-                    ],
-                },
-
-                {
-                    id: 6,
-                    name: 'Tylenol',
-                    price: 35,
-                    images: [
-                        {
-                            id: 2,
-                            image_url: 'https://uploads.consultaremedios.com.br/product_variation_images/full/65fc6fd4367f4c1dd36b525bec13176a4402349e.jpg?1583942107',
-                            created_at: "2020-04-05T16:26:05.962531-03:00",
-                            updated_at: "2020-04-05T16:26:05.962648-03:00"
-                        }
-                    ],
-
-                    categories: [
-                        {
-                            id: 1,
-                            name: "XAROPE",
-                            created_at: "2020-04-03T01:01:54.306016-03:00",
-                            updated_at: "2020-04-03T01:01:54.306048-03:00"
-                        },
-                        {
-                            id: 2,
-                            name: "PASTILHA",
-                            created_at: "2020-04-03T01:02:11.701019-03:00",
-                            updated_at: "2020-04-03T01:02:11.701046-03:00"
-                        }
-                    ],
-                },
-
-                {
-                    id: 78,
-                    name: 'Dipirona',
-                    price: 35,
-                    images: [
-                        {
-                            id: 3,
-                            image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRhuRFnvcxWtzwSVfky4jraS5D9Fb9EYIXd3yG0xdKofAHFVymt&usqp=CAU.array.isRequired',
-                            created_at: "2020-04-05T16:26:05.962531-03:00",
-                            updated_at: "2020-04-05T16:26:05.962648-03:00"
-                        }
-                    ],
-                    categories: [
-                        {
-                            id: 1,
-                            name: "XAROPE",
-                            created_at: "2020-04-03T01:01:54.306016-03:00",
-                            updated_at: "2020-04-03T01:01:54.306048-03:00"
-                        },
-                        {
-                            id: 2,
-                            name: "PASTILHA",
-                            created_at: "2020-04-03T01:02:11.701019-03:00",
-                            updated_at: "2020-04-03T01:02:11.701046-03:00"
-                        }
-                    ],
-                },
-
-                {
-                    id: 99,
-                    name: 'Mascara',
-                    price: 35,
-                    images: [
-                        {
-                            id: 4,
-                            image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR3zYKBMsA4mKyfP9ZTbAswi-2TxP9efoNfj60yrOGQTK4Rgs1-&usqp=CAU',
-                            created_at: "2020-04-05T16:26:05.962531-03:00",
-                            updated_at: "2020-04-05T16:26:05.962648-03:00"
-                        }
-                    ],
-                    categories: [
-                        {
-                            id: 1,
-                            name: "XAROPE",
-                            created_at: "2020-04-03T01:01:54.306016-03:00",
-                            updated_at: "2020-04-03T01:01:54.306048-03:00"
-                        },
-                        {
-                            id: 2,
-                            name: "PASTILHA",
-                            created_at: "2020-04-03T01:02:11.701019-03:00",
-                            updated_at: "2020-04-03T01:02:11.701046-03:00"
-                        }
-                    ],
-                },
-
-                {
-                    id: 9,
-                    name: 'DorFlex',
-                    price: 35,
-                    images: [
-                        {
-                            id: 3,
-                            image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRhuRFnvcxWtzwSVfky4jraS5D9Fb9EYIXd3yG0xdKofAHFVymt&usqp=CAU.array.isRequired',
-                            created_at: "2020-04-05T16:26:05.962531-03:00",
-                            updated_at: "2020-04-05T16:26:05.962648-03:00"
-                        }
-                    ],
-                    categories: [
-                        {
-                            id: 1,
-                            name: "XAROPE",
-                            created_at: "2020-04-03T01:01:54.306016-03:00",
-                            updated_at: "2020-04-03T01:01:54.306048-03:00"
-                        },
-                        {
-                            id: 2,
-                            name: "PASTILHA",
-                            created_at: "2020-04-03T01:02:11.701019-03:00",
-                            updated_at: "2020-04-03T01:02:11.701046-03:00"
-                        }
-                    ],
-                },
-
-                {
-                    id: 14,
-                    name: 'Tylenol',
-                    price: 35,
-                    images: [
-                        {
-                            id: 3,
-                            image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRhuRFnvcxWtzwSVfky4jraS5D9Fb9EYIXd3yG0xdKofAHFVymt&usqp=CAU.array.isRequired',
-                            created_at: "2020-04-05T16:26:05.962531-03:00",
-                            updated_at: "2020-04-05T16:26:05.962648-03:00"
-                        }
-                    ],
-                    categories: [
-                        {
-                            id: 1,
-                            name: "XAROPE",
-                            created_at: "2020-04-03T01:01:54.306016-03:00",
-                            updated_at: "2020-04-03T01:01:54.306048-03:00"
-                        },
-                        {
-                            id: 2,
-                            name: "PASTILHA",
-                            created_at: "2020-04-03T01:02:11.701019-03:00",
-                            updated_at: "2020-04-03T01:02:11.701046-03:00"
-                        }
-                    ],
-                },
-
-                {
-                    id: 39,
-                    name: 'Dipirona',
-                    price: 35,
-                    images: [
-                        {
-                            id: 3,
-                            image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRhuRFnvcxWtzwSVfky4jraS5D9Fb9EYIXd3yG0xdKofAHFVymt&usqp=CAU.array.isRequired',
-                            created_at: "2020-04-05T16:26:05.962531-03:00",
-                            updated_at: "2020-04-05T16:26:05.962648-03:00"
-                        }
-                    ],
-                    categories: [
-                        {
-                            id: 1,
-                            name: "XAROPE",
-                            created_at: "2020-04-03T01:01:54.306016-03:00",
-                            updated_at: "2020-04-03T01:01:54.306048-03:00"
-                        },
-                        {
-                            id: 2,
-                            name: "PASTILHA",
-                            created_at: "2020-04-03T01:02:11.701019-03:00",
-                            updated_at: "2020-04-03T01:02:11.701046-03:00"
-                        }
-                    ],
-                },
-
-                {
-                    id: 72,
-                    name: 'Mascara',
-                    price: 35,
-                    images: [
-                        {
-                            id: 3,
-                            image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRhuRFnvcxWtzwSVfky4jraS5D9Fb9EYIXd3yG0xdKofAHFVymt&usqp=CAU.array.isRequired',
-                            created_at: "2020-04-05T16:26:05.962531-03:00",
-                            updated_at: "2020-04-05T16:26:05.962648-03:00"
-                        }
-                    ],
-                    categories: [
-                        {
-                            id: 1,
-                            name: "XAROPE",
-                            created_at: "2020-04-03T01:01:54.306016-03:00",
-                            updated_at: "2020-04-03T01:01:54.306048-03:00"
-                        },
-                        {
-                            id: 2,
-                            name: "PASTILHA",
-                            created_at: "2020-04-03T01:02:11.701019-03:00",
-                            updated_at: "2020-04-03T01:02:11.701046-03:00"
-                        }
-                    ],
-                },
-            ],
+    state = {        
 
         produtoExibidoInicial: 0,
         produtoExibidoFinal:  8,
@@ -328,7 +98,7 @@ export class Slider extends PureComponent {
 
     forwardImage = (() => {
 
-        if ((this.state.produtoExibidoInicial % this.state.listaDeProdutos.length) !== this.state.listaDeProdutos.length-1) { // Nao Cheguei nos 4 primeiros
+        if ((this.state.produtoExibidoInicial % this.props.images.length) !== this.props.images.length-1) { // Nao Cheguei nos 4 primeiros
 
             this.setState({                
                 produtoExibidoInicial: this.state.produtoExibidoInicial + 1,
@@ -342,7 +112,7 @@ export class Slider extends PureComponent {
             this.setState({    
 
                 produtoExibidoInicial: 0,
-                produtoExibidoFinal:  this.state.listaDeProdutos.length,
+                produtoExibidoFinal:  this.props.images.length,
                 forward: true,
             });
         }
@@ -351,7 +121,7 @@ export class Slider extends PureComponent {
 
     backImage = (() => {
 
-        if ((this.state.produtoExibidoFinal % this.state.listaDeProdutos.length) !== 1) { // Nao Cheguei nos 4 primeiros
+        if ((this.state.produtoExibidoFinal % this.props.images.length) !== 1) { // Nao Cheguei nos 4 primeiros
 
             this.setState({                
                 produtoExibidoInicial: this.state.produtoExibidoFinal -1,
@@ -365,7 +135,7 @@ export class Slider extends PureComponent {
             this.setState({    
                             
                 produtoExibidoInicial: 0,
-                produtoExibidoFinal:  this.state.listaDeProdutos.length,
+                produtoExibidoFinal:  this.props.images.length,
                 forward: false,
             });
         }
@@ -377,6 +147,7 @@ export class Slider extends PureComponent {
         const {
             classes,
             productAmount, // Informa quantos produtos serão exibidos por vez
+            images,        // Array De Images que serão exibidos
         } = this.props;
 
         vetor = new Array(productAmount); // Criar um vetor de tamanho variado que terá a quantidade de produtos que serão exibidos
@@ -421,18 +192,18 @@ export class Slider extends PureComponent {
                           
                                 if(this.state.forward){ // Useio o botao da direita
 
-                                    index =  ( (this.state.produtoExibidoInicial + i) % this.state.listaDeProdutos.length);                                
+                                    index =  ( (this.state.produtoExibidoInicial + i) % images.length);                                
                                 
                                 }else{  // Usei o botão da esquerda
 
-                                    index =  ( (this.state.produtoExibidoFinal + i) % this.state.listaDeProdutos.length);     
+                                    index =  ( (this.state.produtoExibidoFinal + i) % images.length);     
                                 }
 
                                 if(i === vetor.length-1){ // Limpar o valor de i para a o proximo produto
                                     i = -1;
                                 }
 
-                                produto = this.state.listaDeProdutos[index];
+                                produto = images[index];
                                 
                                 return <ProductCardComponent
                                             key={produto.id}
@@ -468,6 +239,7 @@ export class Slider extends PureComponent {
 Slider.propTypes = {
     classes: PropTypes.object.isRequired,
     productAmount: PropTypes.number.isRequired,
+    images: PropTypes.array.isRequired,
 };
 
 Slider.defaultProps = {
