@@ -3,7 +3,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-
+import { AZUL_CLARO } from '../../../utils/colors';
+import { AZUL_ESCURO } from '../../../utils/colors';
 import { FaWhatsapp,FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 import {
@@ -14,7 +15,7 @@ const styles = () => ({
   container: {
     flexGrow: 1,
     padding: '16px 0',
-    backgroundColor: '#9ECEE8',
+    backgroundColor:  AZUL_CLARO,
   },
   texto: {
     display: 'flex',
@@ -26,12 +27,12 @@ const styles = () => ({
   main_text: {
     fontWeight: 900,
     textTransform: 'uppercase',
-    fontSize: '28px',
-    color: '#1F509C',
+    fontSize: '25px',
+    color: AZUL_ESCURO,
     marginBottom: '8px',
   },
   secundary_text: {
-    fontWeight: 600,
+    fontWeight: 400,
   },
   social_midia_icons: {
     height: '100%',

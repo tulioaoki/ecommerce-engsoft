@@ -62,11 +62,11 @@ const styles = () => ({
     button: {
 
         padding: '0px',
-        backgroundColor: '#2C719C',
-        transition: 'opacity 0.4s',
+        backgroundColor: '#c4c4c4',
+        //transition: 'opacity 0.4s',
         '&:hover': {
-            opacity: 0.8,
-            backgroundColor: '#2C719C',
+            //opacity: 0.3,
+            backgroundColor: AZUL_ESCURO,
         },
     },
 
