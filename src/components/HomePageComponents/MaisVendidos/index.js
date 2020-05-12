@@ -33,9 +33,7 @@ const styles = () => ({
         alignItems: 'center',
         padding: '10px 0 10px 0',
     },
-
 });
-
 
 export class MaisVendidos extends PureComponent {
 
@@ -51,7 +49,7 @@ export class MaisVendidos extends PureComponent {
 
         return (
 
-            <div className='container'>
+            <div className='container'  style={{ marginBottom: '50px', marginTop: '50px' }}>
 
                 <div>
                     <Typography className={classes.text}>

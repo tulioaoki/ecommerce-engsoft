@@ -9,11 +9,8 @@ import {
 import Slider from '../../Slide';
 
 import { AZUL_ESCURO } from '../../../utils/colors';
-import { AZUL_CLARO } from '../../../utils/colors';
-
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Paper from '@material-ui/core/Paper';
 
 const styles = () => ({
 
@@ -33,38 +30,32 @@ const styles = () => ({
         width: '100%',
         position: 'relative',
         display: 'flex',
-        justifyContent: 'space-around',
+        //justifyContent: 'space-around',
         alignItems: 'center',
         padding: '0 0 10px 0',
     },
 
     categoria: {
-        color: 'white',
+        color: 'black',
         fontFamily: 'Arial',
         fontStyle: 'normal',
         fontSize: '24px',
-        backgroundColor: AZUL_ESCURO,
+        backgroundColor: '#eeeeee',
         transition: 'opacity 0.4s',
-        '&:hover': {
-            opacity: 0.9,
-
-        },
+        padding: '6px 0px 8px 0px',
         '&$selected': {
-            color: AZUL_ESCURO,
-            fontWeight: '900',
-            paddingTop: '6px',
-            backgroundColor: '#9ECEE8',
+            color: 'white',
+            //fontWeight: '900',
+            padding: '6px 6px 8px 6px',
+            backgroundColor: AZUL_ESCURO,
         },
-    },
-
-    selected: {
         
     },
 
-    separacao:{
-        padding: '20px 0 0 0',
-    }
+    selected: {
 
+    },
+    
 });
 
 const categoria1 = [
@@ -1151,7 +1142,7 @@ export class Novidade extends PureComponent {
 
         return (
 
-            <div className='container'>
+            <div className='container' style={{ marginBottom: '50px', marginTop: '50px' }}>
 
                 <div>
 
@@ -1168,47 +1159,55 @@ export class Novidade extends PureComponent {
                         showLabels
                         className={classes.root}
                     >
-                        <BottomNavigationAction label="Saúde" 
+
+                        <BottomNavigationAction label="Saúde"
+
                             classes={{
-                                root: classes.categoria, // nome da classe, p.ex. `root-x`
-                                selected: classes.selected, // nome da classe, p.ex. `disabled-x`
+                                root: classes.categoria,
+                                selected: classes.selected,
+                            }}
+                            style={{ borderRadius: '15px 0px 0px 15px' }}
+                        />
+                        <BottomNavigationAction label="Cuidados Pessoais"
+
+                            classes={{
+                                root: classes.categoria,
+                                selected: classes.selected,
                             }}
                         />
-                        <BottomNavigationAction label="Cuidados Pessoais" 
+                        <BottomNavigationAction label="Dermocosméticos"
                             classes={{
-                                root: classes.categoria, // nome da classe, p.ex. `root-x`
+                                root: classes.categoria,
                                 selected: classes.selected,
-                            }} 
+                            }}
                         />
-                        <BottomNavigationAction label="Dermocosméticos" 
+                        <BottomNavigationAction label="Mamães e Bebês"
                             classes={{
-                                root: classes.categoria, // nome da classe, p.ex. `root-x`
+                                root: classes.categoria,
                                 selected: classes.selected,
-                            }}  
+                            }}
                         />
-                        <BottomNavigationAction label="Mamães e Bebês" 
+                        <BottomNavigationAction label="Conveniência"
                             classes={{
-                                root: classes.categoria, // nome da classe, p.ex. `root-x`
+                                root: classes.categoria,
                                 selected: classes.selected,
-                            }}  
+                            }}
                         />
-                        <BottomNavigationAction label="Conveniência" 
+                        <BottomNavigationAction label="Fitness e Nutrição"
+
                             classes={{
-                                root: classes.categoria, // nome da classe, p.ex. `root-x`
+                                root: classes.categoria,
                                 selected: classes.selected,
-                            }}  
-                        />
-                        <BottomNavigationAction label="Fitness e Nutrição" 
-                            classes={{
-                                root: classes.categoria, // nome da classe, p.ex. `root-x`
-                                selected: classes.selected,
-                            }}  
+                            }}
+
+                            style={{ borderRadius: '0px 15px 15px 0px' }}
+
                         />
 
                     </BottomNavigation>
                 </div>
 
-                {this.slide(this.state.value)}               
+                {this.slide(this.state.value)}
 
             </div>
         );
