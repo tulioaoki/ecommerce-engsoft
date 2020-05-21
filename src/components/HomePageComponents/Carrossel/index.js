@@ -170,11 +170,12 @@ class Carrossel extends PureComponent {
 
     render() {
 
-        const { classes } = this.props;
+        const { classes ,history} = this.props;
+     
 
         return (
 
-            <div className={classes.container}>
+            <div className={classes.container} >
 
                 <Link
                     className={classes.imagem}
