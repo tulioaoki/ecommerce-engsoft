@@ -57,7 +57,7 @@ class NavBar extends PureComponent {
             centered
             indicatorColor="primary"
           >
-            <Tab className={classes.menuTab} label="Página Inicial" onClick={()=>{history.push('/')}}/>
+            <Tab className={classes.menuTab} label="Inicio" onClick={()=>{history.push('/')}}/>
             <Tab className={classes.menuTab} label="Categorias" />
             <Tab className={classes.menuTab} label="Ofertas" />
             <Tab className={classes.menuTab} label="Sobre" />

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import './App.css';
 import Login from './pages/Login';
 import HomePage from './pages/HomePage';
+import ProductDetailsPage from './pages/ProductDetailsPage';
 
 class App extends PureComponent {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends PureComponent {
         <>
           <Route path="/" exact component={HomePage} />
           <Route path="/login" exact component={Login} />
+          <Route path="/produto" component={ProductDetailsPage} />
         </>
       </div>
 
