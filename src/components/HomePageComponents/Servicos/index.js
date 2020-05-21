@@ -6,13 +6,13 @@ import { withStyles, Typography, Grid } from '@material-ui/core';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import PaymentIcon from '@material-ui/icons/Payment';
 import LoopIcon from '@material-ui/icons/Loop';
-import { AZUL_BEBE } from '../../../utils/colors';
+import { AZUL_CLARO } from '../../../utils/colors';
 
 const styles = () => ({
 
   container: {
 
-    backgroundColor: AZUL_BEBE,
+    backgroundColor:  AZUL_CLARO,
     display: 'flex',
     justifyContent: 'center',
     height: '78px',

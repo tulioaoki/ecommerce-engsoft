@@ -33,6 +33,42 @@ const styles = () => ({
         alignItems: 'center',
         padding: '10px 0 10px 0',
     },
+
+    produtos: {
+
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+
+    },
+
+    buttonLeft: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+
+    buttonRight: {
+
+        display: 'flex',
+        alignItems: 'center',
+    },
+
+    button: {
+
+        padding: '0px',
+        backgroundColor: '#c4c4c4',
+        //transition: 'opacity 0.4s',
+        '&:hover': {
+            //opacity: 0.3,
+            backgroundColor: AZUL_ESCURO,
+        },
+    },
+
+    icon: {
+        color: 'white',
+        fontSize: 40,
+    },
 });
 
 export class MaisVendidos extends PureComponent {
