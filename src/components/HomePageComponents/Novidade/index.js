@@ -30,7 +30,6 @@ const styles = () => ({
         width: '100%',
         position: 'relative',
         display: 'flex',
-        //justifyContent: 'space-around',
         alignItems: 'center',
         padding: '0 0 10px 0',
     },

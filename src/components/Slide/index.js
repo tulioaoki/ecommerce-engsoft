@@ -20,8 +20,6 @@ const styles = () => ({
         width: '100%',
         position: 'relative',
         display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
         padding: '10px 0 10px 0',
     },
 
@@ -29,8 +27,7 @@ const styles = () => ({
 
         display: 'flex',
         width: '100%',
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        justifyContent: 'space-around',        
 
     },
 
@@ -166,8 +163,7 @@ export class Slider extends PureComponent {
                     <div className={classes.produtos}>
                     
                         {
-                            console.log('Valor Inicial da ultima posição do vetor: ' + this.state.produtoExibidoFinal),
-
+                           
                             vetor.map(() => {
 
                                 i = i + 1;

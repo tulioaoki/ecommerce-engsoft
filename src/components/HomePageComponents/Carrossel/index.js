@@ -11,6 +11,7 @@ import  frauda from '../../../static/images/fraudas.jpeg'  ;
 import  creme from '../../../static/images/creme.jpeg'  ;
 import  comprimido from '../../../static/images/comprimido.jpeg'  ;
 
+import axios from 'axios';
 
 const styles = {
 
@@ -57,45 +58,31 @@ class Carrossel extends PureComponent {
 
     state = {
 
-        currentImageValue: image1,
-
-        slide:
-            [
-                {
-                    imagem: image1 ,
-                    link: '/',
-                    id: 1,
-                },
-
-                {
-                    imagem: comprimido,
-                    link: '/',
-                    id: 2,
-                },
-
-                {
-                    imagem: tylenol,
-                    link: '/',
-                    id: 3,
-                },
-
-                {
-                    imagem: frauda,
-                    link: '/',
-                    id: 4,
-                },
-
-                
-                {
-                    imagem: creme,
-                    link: '/',
-                    id: 5,
-                },
-            ],
-
+        currentImageValue: '',
+        slide: [],
         imagemAtual: 0,
         timer: null,
     };
+
+    async componentDidMount() {
+
+        console.log(this.props.history.location.pathname.replace('/produto/', ''))
+
+        let productId = this.props.history.location.pathname.replace('/', '')
+
+        let listaImagens = await axios.get(`https://ecommerce-engsoft.herokuapp.com/carrosel/11`)
+
+          .then((response) => {
+            console.log(response);
+            this.setState((prevState) => ({ ...prevState, slide: response.data.data.images, currentImageValue: response.data.data.images[0].url  }));
+          })
+          .catch((error) => {
+            console.log('error fetching product');
+            console.error(error)
+          })
+    
+      }
+
 
     forwardImage = (() => {
 
@@ -105,7 +92,7 @@ class Carrossel extends PureComponent {
             this.setState({
 
                 imagemAtual: this.state.imagemAtual + 1,
-                currentImageValue: this.state.slide[this.state.imagemAtual + 1].imagem
+                currentImageValue: this.state.slide[this.state.imagemAtual + 1].url
             });
 
         } else {
@@ -113,7 +100,7 @@ class Carrossel extends PureComponent {
             this.setState({
 
                 imagemAtual: 0,
-                currentImageValue: this.state.slide[0].imagem
+                currentImageValue: this.state.slide[0].url
             });
         }
 
@@ -126,7 +113,7 @@ class Carrossel extends PureComponent {
 
         this.state.slide.map((slide, index) => { // Ver qual bolinha foi selecionada
 
-            if (valor === slide.imagem) {
+            if (valor === slide.url) {
 
                 this.setState({             // Mudar a imagem 
 
@@ -179,8 +166,8 @@ class Carrossel extends PureComponent {
 
                 <Link
                     className={classes.imagem}
-                    to={this.state.slide[this.state.imagemAtual].link}
-                >
+                    to={ this.state.slide[this.state.imagemAtual] ? this.state.slide[this.state.imagemAtual].link : ''}  
+                >                                                                   
                     <img
                         className={classes.imagem}
                         src={this.state.currentImageValue}
@@ -191,14 +178,14 @@ class Carrossel extends PureComponent {
 
                 <div className={classes.bolinhas}>
 
-                    {
+                    { 
                         this.state.slide.map((slide) => (
 
                             <Radio
                                 key={slide.id}
-                                checked={this.state.currentImageValue === slide.imagem}
+                                checked={this.state.currentImageValue === slide.url}
                                 onChange={this.stopAutoPlay}
-                                value={slide.imagem}
+                                value={slide.url}
                                 name={`${slide.id}`}
                                 classes={{
                                     root: classes.root,
@@ -206,12 +193,13 @@ class Carrossel extends PureComponent {
                                 }}
                             />
                         ))
+                        
                     }
 
                 </div>
 
                
-                {this.autoPlay()}
+                { this.state.slide[this.state.imagemAtual] ? this.autoPlay() : console.log("BACK DESLIGADO")}
 
             </div>
         );
