@@ -12,7 +12,9 @@ class ProductDetailsPage extends PureComponent {
           <TopBar />
           <NavBar />
           {/* componente de product detail */}
-          <ProductDetails/>
+          <div className='container'>
+            <ProductDetails/>
+          </div>
         </div>
         <Footer />
       </>

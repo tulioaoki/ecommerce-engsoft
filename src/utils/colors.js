@@ -15,5 +15,6 @@ export const BEGE_CLARO = '#e6deb2';
 
 // cores do mock
 export const AZUL_ESCURO = '#1F509C';
-export const AZUL_CLARO = '#9FA8DA';
+export const AZUL_CLARO = '#9FA8DA'; 
 export const AZUL_BEBE = '#9ECEE8';
+export const TITLE = '#7288BE';
