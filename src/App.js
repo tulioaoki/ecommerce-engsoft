@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import HomePage from './pages/HomePage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import AboutPage from './pages/AboutPage';
+import CategoriesPage from './pages/CategoriesPage';
 
 class App extends PureComponent {
   constructor(props) {
@@ -23,8 +24,9 @@ class App extends PureComponent {
         <>
           <Route path="/" exact component={HomePage} />
           <Route path="/login" exact component={Login} />
-          <Route path="/produto" component={ProductDetailsPage} />
-          <Route path="/about" component={AboutPage} />
+          <Route path="/produto" exact component={ProductDetailsPage} />
+          <Route path="/about" exact component={AboutPage} />
+          <Route path="/categories" exact component={CategoriesPage} />
         </>
       </div>
 

@@ -43,12 +43,17 @@ class NavBar extends PureComponent {
       case '/':
         this.setState((prevState) => ({ ...prevState, pagenumber: 0 }));
         break;
+      case '/categories':
+        this.setState((prevState) => ({ ...prevState, pagenumber: 1 }));
+        break;
       case '/about':
+        this.setState((prevState) => ({ ...prevState, pagenumber: 2 }));
+        break;
+      case '/contact':
         this.setState((prevState) => ({ ...prevState, pagenumber: 3 }));
         break;
-
       default:
-        this.setState((prevState) => ({ ...prevState, pagenumber: 2 }));
+        this.setState((prevState) => ({ ...prevState, pagenumber: 4 }));
     }
 
     return (
@@ -62,8 +67,7 @@ class NavBar extends PureComponent {
             indicatorColor="primary"
           >
             <Tab className={classes.menuTab} label="Inicio" onClick={()=>{history.push('/')}}/>
-            <Tab className={classes.menuTab} label="Categorias" />
-            <Tab className={classes.menuTab} label="Ofertas" />
+            <Tab className={classes.menuTab} label="Categorias" onClick={()=>{history.push('/categories')}}/>
             <Tab className={classes.menuTab} label="Sobre" onClick={()=>{history.push('/about')}}/>
             <Tab className={classes.menuTab} label="Contato" />
           </Tabs>
