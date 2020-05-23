@@ -43,6 +43,10 @@ class NavBar extends PureComponent {
       case '/':
         this.setState((prevState) => ({ ...prevState, pagenumber: 0 }));
         break;
+      case '/about':
+        this.setState((prevState) => ({ ...prevState, pagenumber: 3 }));
+        break;
+
       default:
         this.setState((prevState) => ({ ...prevState, pagenumber: 2 }));
     }
@@ -60,7 +64,7 @@ class NavBar extends PureComponent {
             <Tab className={classes.menuTab} label="Inicio" onClick={()=>{history.push('/')}}/>
             <Tab className={classes.menuTab} label="Categorias" />
             <Tab className={classes.menuTab} label="Ofertas" />
-            <Tab className={classes.menuTab} label="Sobre" />
+            <Tab className={classes.menuTab} label="Sobre" onClick={()=>{history.push('/about')}}/>
             <Tab className={classes.menuTab} label="Contato" />
           </Tabs>
         </Paper>
