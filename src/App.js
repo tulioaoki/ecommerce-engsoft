@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { SnackbarProvider, withSnackbar } from 'notistack';
 import { connect } from 'react-redux';
@@ -6,13 +6,10 @@ import { connect } from 'react-redux';
 import './App.css';
 import Login from './pages/Login';
 import HomePage from './pages/HomePage';
-<<<<<<< HEAD
-import ListPage from "./pages/ListPage";
-=======
+import ListPage from './pages/ListPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import AboutPage from './pages/AboutPage';
 import CategoriesPage from './pages/CategoriesPage';
->>>>>>> master
 
 class App extends PureComponent {
   constructor(props) {
