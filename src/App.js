@@ -6,7 +6,13 @@ import { connect } from 'react-redux';
 import './App.css';
 import Login from './pages/Login';
 import HomePage from './pages/HomePage';
+<<<<<<< HEAD
 import ListPage from "./pages/ListPage";
+=======
+import ProductDetailsPage from './pages/ProductDetailsPage';
+import AboutPage from './pages/AboutPage';
+import CategoriesPage from './pages/CategoriesPage';
+>>>>>>> master
 
 class App extends PureComponent {
   constructor(props) {
@@ -23,6 +29,9 @@ class App extends PureComponent {
           <Route path="/" exact component={HomePage} />
           <Route path="/login" exact component={Login} />
           <Route path="/products" exact component={ListPage} />
+          <Route path="/produto" exact component={ProductDetailsPage} />
+          <Route path="/about" exact component={AboutPage} />
+          <Route path="/categories" exact component={CategoriesPage} />
         </>
       </div>
 

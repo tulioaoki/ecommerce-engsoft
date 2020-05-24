@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import LoginForm from '../components/Forms/Login';
 import TopBar from '../components/HomePageComponents/TopBar';
 import NavBar from '../components/HomePageComponents/NavBar';
 import Footer from '../components/HomePageComponents/Footer';
-import { withStyles } from '@material-ui/core';
-import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
+import ProductCardComponent from '../components/HomePageComponents/ProductCard';
 
 const styles = () => ({
   rootPadding: {
@@ -245,6 +246,16 @@ const listaDeProdutos = [
 
 class ListPage extends PureComponent {
   render() {
+    const getProducts = () => listaDeProdutos.map((eachProduct) => (
+      <Grid item xs={12} md={6} lg={4} xl={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <ProductCardComponent
+          key={eachProduct.id}
+          product={eachProduct}
+          variant="normal"
+        />
+      </Grid>
+    ));
+
     return (
       <>
         <div className="mainContent">
@@ -258,7 +269,9 @@ class ListPage extends PureComponent {
                 </Paper>
               </Grid>
               <Grid item xs={9}>
-                Conteudo
+                <Grid container spacing={3}>
+                  {getProducts()}
+                </Grid>
               </Grid>
             </Grid>
           </div>

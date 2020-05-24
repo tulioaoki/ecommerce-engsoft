@@ -9,7 +9,7 @@ import Carrossel from '../components/HomePageComponents/Carrossel';
 import Footer from '../components/HomePageComponents/Footer';
 import Servicos from '../components/HomePageComponents/Servicos';
 import MaisVendidos from '../components/HomePageComponents/MaisVendidos';
-
+import Novidades from '../components/HomePageComponents/Novidade';
 
 const styles = () => ({
   root: {
@@ -258,14 +258,15 @@ class HomePage extends PureComponent {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <div className='mainContentHome'>
+        <div className="mainContentHome">
           <PresentationPage />
           <Carrossel />
           <Servicos />
-          <MaisVendidos productAmount={4} images={listaDeProdutos} />
+          {<Novidades/>}
+          <MaisVendidos qtdProdutos={4} images={listaDeProdutos} />
         </div>
         <Footer showSocialMedia> </Footer>
-        {/* Se o props passado for true, exiba as redes sociais */}
+        {/* Se o props passado for true, exiba as redes sociai */ }
       </div>
     );
   }
