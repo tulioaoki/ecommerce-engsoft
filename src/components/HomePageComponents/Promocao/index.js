@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    withStyles, Typography, Grid, Paper
+    withStyles, Typography, Grid,
 } from '@material-ui/core';
 
 import { AZUL_ESCURO } from '../../../utils/colors';
@@ -23,28 +23,7 @@ const styles = () => ({
         textTransform: 'uppercase',
     },
 
-    root: {
-        
-        width: '100%',
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',       
-        padding: '10px 40px 10px 40px',
-    },
-
-    produtos: {
-
-        display: 'flex',
-        width: '100%',       
-        justifyContent: 'space-around',                
-    },
-
-
 });
-
-
-
-let i = 0;
 
 
 export class Promocao extends PureComponent {
@@ -251,17 +230,17 @@ export class Promocao extends PureComponent {
             },
 
             {
-                id: 59,
-                name: 'Bepantol Derma Creme',
-                price: 35,
+                id: 5,
                 images: [
                     {
-                        id: 8,
-                        image_url: 'https://paguemenos.vtexassets.com/arquivos/ids/262153-1200-auto?width=1200&height=auto&aspect=true',
+                        id: 1,
+                        image_url: 'https://paguemenos.vtexassets.com/arquivos/ids/207387-1200-auto?width=1200&height=auto&aspect=true',
                         created_at: "2020-04-05T16:26:05.962531-03:00",
                         updated_at: "2020-04-05T16:26:05.962648-03:00"
-                    }
+                    },
                 ],
+                name: 'Uno',
+                price: 35,
                 categories: [
                     {
                         id: 1,
@@ -278,8 +257,6 @@ export class Promocao extends PureComponent {
                 ],
             },
         ]
-
-
     };
 
     render() {
@@ -294,66 +271,43 @@ export class Promocao extends PureComponent {
 
             <div className='container' style={{ marginBottom: '50px', marginTop: '50px' }}>
 
-                <div>
-                    <Typography className={classes.text}>
-                        Promoção
-                    </Typography>
-                </div>
-
-                <div className={classes.root}>
 
 
-                    <div className={classes.produtos} style={{ marginBottom: '15px', marginTop: 'px' }}>
+                <Grid container spacing={5} >
 
-                        {
+                    <Grid item xs={12} sm={12} >
 
-                            this.state.produtos.map((produto) => {
+                        <div>
+                            <Typography className={classes.text}>
+                                Promoção
+                            </Typography>
+                        </div>
+                    </Grid>
 
-                                if (i != 4) {
 
-                                    i = i + 1;
+                    <Grid container spacing={5}  style={{ marginLeft: '40px', marginRight: '40px' }} >
 
-                                    return <ProductCard
+                    
+                        { 
+                            this.state.produtos.map((produto, index) => {
+
+                                return <Grid item xs={12} sm={3} >
+
+                                    <ProductCard
                                         key={produto.id}
                                         product={produto}
                                         variant='normal'
                                     />
-                                }
 
+                                </Grid>
 
 
                             })
                         }
-                    </div>
+                    </Grid>
 
-                    <div className={classes.produtos} style={{ marginBottom: '0px', marginTop: '15px' }}>
+                </Grid>
 
-                        {
-                            this.state.produtos.map((produto) => {
-
-                                console.log('VALOR DE i: ' + i)
-
-                                if (i != 8) {
-
-
-
-                                    i = i + 1;
-                                    return <ProductCard
-                                        key={produto.id}
-                                        product={produto}
-                                        variant='normal'
-                                    />
-                                }
-
-
-
-                            })
-
-
-                        }
-                    </div>
-
-                </div>
             </div>
         );
     }

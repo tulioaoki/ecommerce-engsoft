@@ -10,32 +10,30 @@ import { AZUL_CLARO } from '../../../utils/colors';
 
 const styles = () => ({
 
-  container: {
+  containerServico: {
 
-    backgroundColor:  AZUL_CLARO,
+    backgroundColor: AZUL_CLARO,
+    height: "78px",
     display: 'flex',
-    justifyContent: 'center',
-    height: '78px',
     alignItems: 'center',
+    width: '100%',
   },
 
-  container_division: {
+  containerIconText:{
 
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
   },
 
   container_text: {
 
-    display: 'flex',
-    justifyContent: 'center',
+    
     flexDirection: 'column',
     paddingLeft: '10px',
   },
 
   icon: {
-    display: 'flex',
+    
     justifyContent: 'center',
     color: 'black',
     fontSize: 44,
@@ -60,76 +58,95 @@ const styles = () => ({
     height: '50px',
     marginTop: '6px',
     marginBottom: '6px',
+    marginRight: '75px',
     backgroundColor: '#4a4a4a',
   },
 });
 
 export class Servicos extends PureComponent {
   render() {
+
     const {
       classes,
     } = this.props;
 
     return (
 
-      <Grid className={classes.container} item xs={12} spacing={0}>
+      <Grid container spacing={0} >
 
-        <Grid className={`${classes.container_division} ${classes.space}`} item xs={4}>
+        <Grid item xs={12} sm={4} className={classes.containerServico} style={{ justifyContent: 'center' }}>
 
-          <LocalShippingIcon className={classes.icon} />
-          <div className={classes.container_text}>
+          <LocalShippingIcon className={`${classes.icon}`} />
+
+          <div className={`${classes.container_text}`}>
 
             <Typography className={`${classes.text} ${classes.main_text}`}>
               FRETE GRÁTIS EM TODO O SITE
-            </Typography>
+          </Typography>
 
             <Typography
               className={`${classes.text}`}
               variant="subtitle1"
             >
               Veja as condições para cada categoria.
-            </Typography>
+          </Typography>
           </div>
+
         </Grid>
 
-        <div className={classes.linha} />
+        <Grid item xs={12} sm={4} className={classes.containerServico} style={{ justifyContent: 'flex-start' }}>
 
-        <Grid className={`${classes.container_division} ${classes.space}`} item xs={4}>
+          <div className={classes.linha}/>
 
-          <PaymentIcon className={classes.icon} />
+          <div className={classes.containerIconText} style={{ justifyContent: 'center' }}>
 
-          <div className={classes.container_text}>
-            <Typography className={`${classes.text} ${classes.main_text}`}>
-              PARCELE EM ATÉ 10X*
-            </Typography>
-            <Typography
-              className={classes.text}
-              variant="subtitle1"
-            >
-              PARCELE EM ATÉ 10X NO NOSSO CARTÃO.
-            </Typography>
+            <PaymentIcon className={classes.icon} />
+
+            <div className={`${classes.container_text}`}>
+
+              <Typography className={`${classes.text} ${classes.main_text}`}>
+                PARCELE EM ATÉ 10X*
+              </Typography>
+
+              <Typography
+                className={classes.text}
+                variant="subtitle1"
+              >
+                PARCELE EM ATÉ 10X NO NOSSO CARTÃO.
+              </Typography>
+
+            </div>
           </div>
+       
+
         </Grid>
 
-        <div className={classes.linha} />
+        <Grid item xs={12} sm={4} className={classes.containerServico} style={{ justifyContent: 'flex-start' }}>
 
-        <Grid className={`${classes.container_division}`} item xs={4}>
+          <div className={classes.linha} />
 
-          <LoopIcon className={classes.icon} />
+          <div className={classes.containerIconText} style={{ justifyContent: 'center' }}>
 
-          <div className={classes.container_text}>
+            <LoopIcon className={classes.icon} />
 
-            <Typography className={`${classes.text} ${classes.main_text}`}>
-              troca fácil
-            </Typography>
-            <Typography
-              className={`${classes.text} ${classes.secundary_text}`}
-              variant="subtitle1"
-            >
-              TROQUE SEUS ITENS EM ATÉ 30 DIAS.
-            </Typography>
+            <div className={`${classes.container_text}`}>
+
+              <Typography className={`${classes.text} ${classes.main_text}`}>
+                TROCA FÁCIL
+              </Typography>
+
+              <Typography
+                className={`${classes.text}`}
+                variant="subtitle1"
+              >
+                Seus itens em até 30 dias
+              </Typography>
+            </div>
+
           </div>
+
         </Grid>
+        
       </Grid>
     );
   }
@@ -142,6 +159,6 @@ Servicos.propTypes = {
 };
 
 Servicos.defaultProps = {
-};
+}
 
 export default withRouter(connect()(withStyles(styles)(Servicos)));

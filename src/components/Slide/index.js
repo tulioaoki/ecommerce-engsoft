@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    withStyles,
+    withStyles, Grid
 } from '@material-ui/core';
 
 import ProductCard from '../HomePageComponents/ProductCard';
@@ -16,7 +16,7 @@ const styles = () => ({
 
 
     root: {
-        
+
         width: '100%',
         position: 'relative',
         display: 'flex',
@@ -27,19 +27,15 @@ const styles = () => ({
 
         display: 'flex',
         width: '100%',
-        justifyContent: 'space-around',        
+        justifyContent: 'space-around',
 
     },
 
-    buttonLeft: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-
-    buttonRight: {
+    buttonPos: {
 
         display: 'flex',
         alignItems: 'center',
+        width: '40px',
     },
 
     button: {
@@ -74,7 +70,7 @@ export class Slider extends PureComponent {
     state = {
 
         produtoExibidoInicial: 0,
-        produtoExibidoFinal: this.props.images.length-1,
+        produtoExibidoFinal: this.props.images.length - 1,
         forward: true
 
     };
@@ -142,14 +138,16 @@ export class Slider extends PureComponent {
 
             <div className='container'>
 
+                <Grid container spacing={6} >
 
-                <div className={classes.root}>
 
-                    <div className={classes.buttonLeft}>
+                    <Grid item xs={12} sm={2} className={`${classes.buttonPos} `} style={{justifyContent: 'flex-start', paddingTop: '0px', paddingBottom: '0px'}}>
+
                         <IconButton
                             className={classes.button}
                             aria-label="Arrow Left"
                             onClick={() => this.backImage()}
+                            style={{ marginRight: '10px' }}
                         >
 
                             <ChevronLeftIcon
@@ -158,56 +156,62 @@ export class Slider extends PureComponent {
                             />
 
                         </IconButton>
-                    </div>
 
-                    <div className={classes.produtos}>
-                    
-                        {
-                           
-                            vetor.map(() => {
+                    </Grid>
 
-                                i = i + 1;
+                    {
 
-                                if (this.state.forward) { // Useio o botao da direita
+                        vetor.map(() => {
 
-                                    index = ((this.state.produtoExibidoInicial + i) % images.length);
+                            i = i + 1;
 
-                                } else {  // Usei o botão da esquerda
+                            if (this.state.forward) { // Useio o botao da direita
 
-                                    index = ((this.state.produtoExibidoFinal + i) % images.length);
-                                }
+                                index = ((this.state.produtoExibidoInicial + i) % images.length);
 
-                                if (i === vetor.length - 1) { // Limpar o valor de i para a o proximo produto
+                            } else {  // Usei o botão da esquerda
+
+                                index = ((this.state.produtoExibidoFinal + i) % images.length);
+                            }
+
+
+                            produto = images[index];
+
+
+                                if(i === vetor.length -1){
+
                                     i = -1;
                                 }
 
-                                produto = images[index];
+                                return <Grid item xs={12} sm={2} style={{    paddingTop: '0px', paddingBottom: '0px'}}>
 
-                                return <ProductCard
-                                    key={produto.id}
-                                    product={produto}
-                                    variant='normal'
-                                />
+                                            <ProductCard
+                                                key={produto.id}
+                                                product={produto}
+                                                variant='normal'
+                                            />
+                                        </Grid>
+                        })
+                    }
 
-                            })
-                        }
-                    </div>
+                    <Grid item xs={12} sm={2} className={classes.buttonPos} style={{justifyContent: 'flex-start', paddingTop: '0px', paddingBottom: '0px'}}>
 
-                    <div className={classes.buttonRight}  >
                         <IconButton
                             className={classes.button}
                             aria-label="Arrow Right"
                             onClick={() => this.forwardImage()}
+                            style={{ marginLeft: '10px' }}
                         >
                             <ChevronRightIcon
                                 className={classes.icon}
                                 fontSize='inherit'
                                 size='medium'
                             />
-
                         </IconButton>
-                    </div>
-                </div>
+
+                    </Grid>
+
+                </Grid>
             </div>
         );
     }
