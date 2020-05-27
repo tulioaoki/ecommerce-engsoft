@@ -19,7 +19,7 @@ const styles = () => ({
     width: '100%',
   },
 
-  containerIconText:{
+  containerIconText: {
 
     display: 'flex',
     alignItems: 'center',
@@ -27,13 +27,12 @@ const styles = () => ({
 
   container_text: {
 
-    
     flexDirection: 'column',
     paddingLeft: '10px',
   },
 
   icon: {
-    
+
     justifyContent: 'center',
     color: 'black',
     fontSize: 44,
@@ -54,13 +53,16 @@ const styles = () => ({
   },
 
   linha: {
+
     width: '2px',
     height: '50px',
     marginTop: '6px',
     marginBottom: '6px',
-    marginRight: '75px',
+    marginRight: '80px',
     backgroundColor: '#4a4a4a',
+    
   },
+
 });
 
 export class Servicos extends PureComponent {
@@ -96,7 +98,8 @@ export class Servicos extends PureComponent {
 
         <Grid item xs={12} sm={4} className={classes.containerServico} style={{ justifyContent: 'flex-start' }}>
 
-          <div className={classes.linha}/>
+
+          <div className={classes.linha} />
 
           <div className={classes.containerIconText} style={{ justifyContent: 'center' }}>
 
@@ -117,7 +120,7 @@ export class Servicos extends PureComponent {
 
             </div>
           </div>
-       
+
 
         </Grid>
 
@@ -146,7 +149,7 @@ export class Servicos extends PureComponent {
           </div>
 
         </Grid>
-        
+
       </Grid>
     );
   }

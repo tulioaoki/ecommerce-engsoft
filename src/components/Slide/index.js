@@ -47,8 +47,9 @@ const styles = () => ({
             opacity: 0.8,
             backgroundColor: '#2C719C',
         },
+        
     },
-
+    
     icon: {
         color: 'white',
         fontSize: 40,
@@ -138,16 +139,14 @@ export class Slider extends PureComponent {
 
             <div className='container'>
 
-                <Grid container spacing={6} >
+                <Grid container spacing={6}  >
 
-
-                    <Grid item xs={12} sm={2} className={`${classes.buttonPos} `} style={{justifyContent: 'flex-start', paddingTop: '0px', paddingBottom: '0px'}}>
+                    <Grid item xs={12} sm={2} className={classes.buttonPos} style={{justifyContent: 'flex-end',padding: '0px 0px 0px 0px'}}>
 
                         <IconButton
                             className={classes.button}
                             aria-label="Arrow Left"
-                            onClick={() => this.backImage()}
-                            style={{ marginRight: '10px' }}
+                            onClick={() => this.backImage()}                           
                         >
 
                             <ChevronLeftIcon
@@ -183,7 +182,7 @@ export class Slider extends PureComponent {
                                     i = -1;
                                 }
 
-                                return <Grid item xs={12} sm={2} style={{    paddingTop: '0px', paddingBottom: '0px'}}>
+                                return <Grid item xs={12} sm={2} style={{padding: '20px 15px 0px 15px'}}>
 
                                             <ProductCard
                                                 key={produto.id}
@@ -194,13 +193,12 @@ export class Slider extends PureComponent {
                         })
                     }
 
-                    <Grid item xs={12} sm={2} className={classes.buttonPos} style={{justifyContent: 'flex-start', paddingTop: '0px', paddingBottom: '0px'}}>
+                    <Grid item xs={12} sm={2} className={classes.buttonPos} style={{justifyContent: 'flex-start',padding: '0px 0px 0px 0px'}}>
 
                         <IconButton
                             className={classes.button}
                             aria-label="Arrow Right"
-                            onClick={() => this.forwardImage()}
-                            style={{ marginLeft: '10px' }}
+                            onClick={() => this.forwardImage()}                            
                         >
                             <ChevronRightIcon
                                 className={classes.icon}

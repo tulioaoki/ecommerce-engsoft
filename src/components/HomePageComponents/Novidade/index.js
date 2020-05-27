@@ -1109,9 +1109,7 @@ export class Novidade extends PureComponent {
 
     slide = (categoria) => {
 
-        console.log("PEGANDO O SLIDE")
-        console.log("Que Slide deve Aparecer: " + categoria)
-
+     
         switch (categoria) {
             case 0:
                 return <Slider productAmount={4} images={categoria1} />
