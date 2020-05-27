@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import axios from 'axios';
 import TopBar from '../components/HomePageComponents/TopBar';
 import NavBar from '../components/HomePageComponents/NavBar';
 import Footer from '../components/HomePageComponents/Footer';
 import ProductCardComponent from '../components/HomePageComponents/ProductCard';
-import axios from "axios";
 
 const styles = () => ({
   rootPadding: {
@@ -25,6 +25,8 @@ class ListPage extends PureComponent {
     this.state = {
       products: [],
       categories: [],
+      filterCategories: [],
+      loading: true
     };
   }
 
@@ -34,16 +36,53 @@ class ListPage extends PureComponent {
         this.setState((prevState) => ({ ...prevState, categories: response.data.data }));
       })
       .catch((error) => {
-        console.log('error fetching product');
+        console.log('error fetching categories');
         console.error(error);
+      });
+
+    this.fetchProducts();
+  }
+
+  async filterCategories(category) {
+    const { filterCategories } = this.state;
+    const newFilterCategories = Array.from(filterCategories);
+    if (filterCategories.includes(category.id)) {
+      newFilterCategories.splice(newFilterCategories.indexOf(category.id), 1);
+    } else {
+      newFilterCategories.push(category.id);
+    }
+    await this.setState({ filterCategories: newFilterCategories });
+    this.fetchProducts();
+  }
+
+  async fetchProducts() {
+    const { filterCategories } = this.state;
+
+    await this.setState({ loading: true });
+
+    let endpoint = 'https://ecommerce-engsoft.herokuapp.com/products';
+    if (filterCategories.length > 0) {
+      endpoint += `?categories=${JSON.stringify(filterCategories)}`;
+    }
+    await axios.get(endpoint)
+      .then(async (response) => {
+        await this.setState({ products: [] });
+        await this.setState({ products: response.data.data, loading: false });
+      })
+      .catch(async (error) => {
+        if (error.response.status === 404) {
+          await this.setState({ products: [], loading: false });
+        }
       });
   }
 
   render() {
-    const { categories, products } = this.state;
+    const {
+      categories, products, filterCategories, loading,
+    } = this.state;
 
     const getProducts = () => products.map((eachProduct) => (
-      <Grid item xs={12} md={6} lg={4} xl={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Grid key={eachProduct.id} item xs={12} md={6} lg={4} xl={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ProductCardComponent
           key={eachProduct.id}
           product={eachProduct}
@@ -53,7 +92,13 @@ class ListPage extends PureComponent {
     ));
 
     const getCategories = () => categories.map((eachCategory) => (
-      <ListItem button onclick={this.setState((prevState) => ({ ...prevState, filteredCategory: eachCategory.name }))}>
+      <ListItem
+        selected={filterCategories.includes(eachCategory.id)}
+        button
+        disabled={loading}
+        onClick={() => this.filterCategories(eachCategory)}
+        key={eachCategory.id}
+      >
         <ListItemText primary={eachCategory.name} />
       </ListItem>
     ));
@@ -63,6 +108,7 @@ class ListPage extends PureComponent {
         <div className="mainContent">
           <TopBar />
           <NavBar />
+          {JSON.stringify(this.state.filterCategories)}
           <div className="container">
             <Grid container spacing={4} style={styles().rootPadding}>
               <Grid item xs={3}>
@@ -73,6 +119,13 @@ class ListPage extends PureComponent {
                 </Paper>
               </Grid>
               <Grid item xs={9}>
+                {
+                  products.length < 1 && (
+                    <span>
+                      Não encontramos nenhum produto para sua busca!
+                    </span>
+                  )
+                }
                 <Grid container spacing={3}>
                   {getProducts()}
                 </Grid>
