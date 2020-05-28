@@ -25,7 +25,7 @@ class App extends PureComponent {
         <>
           <Route path="/" exact component={HomePage} />
           <Route path="/login" exact component={Login} />
-          <Route path="/produto" exact component={ProductDetailsPage} />
+          <Route path="/produto"  component={ProductDetailsPage} />
           <Route path="/about" exact component={AboutPage} />
           <Route path="/categories" exact component={CategoriesPage} />
           <Route path="/my-cart" exact component={CartPage} />
