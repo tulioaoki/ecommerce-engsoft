@@ -10,6 +10,7 @@ import Footer from '../components/HomePageComponents/Footer';
 import Servicos from '../components/HomePageComponents/Servicos';
 import MaisVendidos from '../components/HomePageComponents/MaisVendidos';
 import Novidades from '../components/HomePageComponents/Novidade';
+import Promocao from '../components/HomePageComponents/Promocao';
 
 const styles = () => ({
   root: {
@@ -262,7 +263,8 @@ class HomePage extends PureComponent {
           <PresentationPage />
           <Carrossel />
           <Servicos />
-          {<Novidades/>}
+          <Novidades/>
+          <Promocao/>
           <MaisVendidos qtdProdutos={4} images={listaDeProdutos} />
         </div>
         <Footer showSocialMedia> </Footer>
