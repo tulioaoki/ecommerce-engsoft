@@ -107,8 +107,8 @@ class AboutComponents extends PureComponent {
                                     Onde tudo isso começou 
                                 </Typography>
                                 <Typography style={{textAlign: 'justify'}} variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                    Foi aberta a primeira Farmácia em Recife, capital de Pernambuco. Com muito trabalho, 
+                                    profissionalismo, em pouco tempo, conquistou o mercado pernambucano.
                                 </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -128,8 +128,8 @@ class AboutComponents extends PureComponent {
                                     Marco histórico: mais de 1000 lojas
                                 </Typography>
                                 <Typography style={{textAlign: 'justify'}} variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                Já são mais de 1.000 lojas inauguradas em todo o Brasil em mais de 350 municípios brasileiros. 
+                                A Farmácia atinge o faturamento de 6,3 bilhões de reais.
                                 </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -149,8 +149,8 @@ class AboutComponents extends PureComponent {
                                     Primeira loja fora do estado
                                 </Typography>
                                 <Typography style={{textAlign: 'justify'}} variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                    Já são mais de 60 lojas inauguradas em todo o estado de PE. Devido a isso a Farmácia inaugura a sua
+                                    primeira loja fora do estado de PE. Abrindo uma unidade em São Paulo.
                                 </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -170,8 +170,8 @@ class AboutComponents extends PureComponent {
                                     Lançamento do nosso sistema de delivery
                                 </Typography>
                                 <Typography style={{textAlign: 'justify'}} variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                    Seguindo as tendências do mercado e tentando se adequar a um futuro cada vez mais tecnológico. 
+                                    Decidimos iniciar nosso sistemas de entrega online.
                                 </Typography>
                                 </CardContent>
                             </CardActionArea>

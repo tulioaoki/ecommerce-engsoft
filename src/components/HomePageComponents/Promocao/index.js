@@ -6,7 +6,7 @@ import {
     withStyles, Typography, Grid,
 } from '@material-ui/core';
 
-import { AZUL_ESCURO } from '../../../utils/colors';
+import { AZUL_ESCURO, TITLE } from '../../../utils/colors';
 
 import ProductCard from '../ProductCard';
 
@@ -14,7 +14,7 @@ const styles = () => ({
 
     text: {
 
-        color: AZUL_ESCURO,
+        color: TITLE,
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '900',
@@ -269,7 +269,7 @@ export class Promocao extends PureComponent {
 
         return (
 
-            <div className='container' style={{ marginBottom: '50px', marginTop: '50px' }}>
+            <div style={{ marginBottom: '50px', marginTop: '50px' }}>
 
 
 
@@ -279,7 +279,7 @@ export class Promocao extends PureComponent {
 
                         <div>
                             <Typography className={classes.text}>
-                                Promoção
+                                Ofertas
                             </Typography>
                         </div>
                     </Grid>
