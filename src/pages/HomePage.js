@@ -259,7 +259,7 @@ class HomePage extends PureComponent {
 
   componentDidMount(){
     const { dispatch} = this.props
-    dispatch(handleGetCart(''))
+    dispatch(handleGetCart())
   }
 
   render() {

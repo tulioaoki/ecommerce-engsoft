@@ -10,9 +10,9 @@ function getCart(payload) {
 }
 
 
-export function handleGetCart(payload){
-  return (dispatch) => getCartRequest(payload)
+export function handleGetCart(){
+  return (dispatch) => getCartRequest()
     .then(({ data }) => {
-      dispatch(getCart({ payload: data }));
+      dispatch(getCart({ 'payload': data }));
     });
 }
