@@ -275,7 +275,7 @@ class CartComponents extends PureComponent {
                 <Grid container spacing={6}>
                     <Grid item xs={12} sm={6} xl={6}>
                         <Paper variant="outlined" style={{ paddingBottom:'40px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', textAlign: 'left' }}>
-                            <Typography component="p" variant="p" className={classes.title_CEP}>
+                            <Typography component="p"  className={classes.title_CEP}>
                                 calcular frete e prazo
                             </Typography>
 
@@ -309,19 +309,19 @@ class CartComponents extends PureComponent {
 
                     <Grid item xs={12} sm={6} xl={6}>
                         <Paper variant="outlined" style={{ paddingBottom:'25px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', textAlign: 'left' }}>
-                            <Typography component="p" variant="p" style={{color: '#424242', fontSize: '12px'}}>
+                            <Typography component="p"  style={{color: '#424242', fontSize: '12px'}}>
                                 Economize R$ 11,00
                             </Typography>
-                            <Typography component="p" variant="p" style={{ fontSize: '13px'}}>
+                            <Typography component="p"  style={{ fontSize: '13px'}}>
                                 <strong>Total</strong>
                             </Typography>
-                            <Typography component="p" variant="p" style={{ fontSize: '20px'}}>
+                            <Typography component="p"  style={{ fontSize: '20px'}}>
                                 <strong style={{fontSize: '14px'}}>R$</strong> 
                                 <strong style={{fontSize: '24px'}}>
                                     {this.state.cart.reduce((totalValue, product) => totalValue += (product.valor_unitario * product.quantidade),0).toFixed(2)}
                                 </strong>
                             </Typography>
-                            <Typography component="p" variant="p" className={classes.title_CEP}>
+                            <Typography component="p"  className={classes.title_CEP}>
                                 10x s/ juros de R$ {(this.state.cart.reduce((totalValue, product) => totalValue += (product.valor_unitario * product.quantidade),0).toFixed(2)/10).toFixed(2)}
                             </Typography>
                         </Paper>

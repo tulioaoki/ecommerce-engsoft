@@ -11,6 +11,7 @@ import Servicos from '../components/HomePageComponents/Servicos';
 import MaisVendidos from '../components/HomePageComponents/MaisVendidos';
 import Novidades from '../components/HomePageComponents/Novidade';
 import Promocao from '../components/HomePageComponents/Promocao';
+import { handleGetCart } from '../actions/cart';
 
 const styles = () => ({
   root: {
@@ -255,8 +256,16 @@ let listaDeProdutos = [
 ]
 
 class HomePage extends PureComponent {
+
+  componentDidMount(){
+    const { dispatch} = this.props
+    dispatch(handleGetCart(''))
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, cart } = this.props;
+    console.log("O carrinho está assim :",cart)
+
     return (
       <div className={classes.root}>
         <div className="mainContentHome">
@@ -274,8 +283,9 @@ class HomePage extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ info }) => ({
+const mapStateToProps = ({ info,REDUCER_CART }, props) => ({
   info,
+  cart:REDUCER_CART.cart_products,
 });
 
 HomePage.propTypes = {
