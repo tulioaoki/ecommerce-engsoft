@@ -8,14 +8,25 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 import TopBar from '../components/HomePageComponents/TopBar';
 import NavBar from '../components/HomePageComponents/NavBar';
 import Footer from '../components/HomePageComponents/Footer';
 import ProductCardComponent from '../components/HomePageComponents/ProductCard';
+import { AZUL_ESCURO } from '../utils/colors';
 
 const styles = () => ({
   rootPadding: {
     margin: '16px 0 15px 0',
+  },
+  button: {
+    marginLeft: 'auto',
+    padding: '7px',
+    backgroundColor: AZUL_ESCURO,
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#1a237e',
+    },
   },
 });
 
@@ -26,7 +37,9 @@ class ListPage extends PureComponent {
       products: [],
       categories: [],
       filterCategories: [],
-      loading: true
+      loading: true,
+      itemCount: 0,
+      pageCount: 1,
     };
   }
 
@@ -51,35 +64,58 @@ class ListPage extends PureComponent {
     } else {
       newFilterCategories.push(category.id);
     }
-    await this.setState({ filterCategories: newFilterCategories });
-    this.fetchProducts();
+    await this.setState({ pageCount: 1, filterCategories: newFilterCategories });
+    this.fetchProducts(true);
   }
 
-  async fetchProducts() {
-    const { filterCategories } = this.state;
+  async fetchProducts(clear = true) {
+    const { filterCategories, products, pageCount } = this.state;
+    const { location } = this.props;
 
     await this.setState({ loading: true });
 
-    let endpoint = 'https://ecommerce-engsoft.herokuapp.com/products';
+    let endpoint = `https://ecommerce-engsoft.herokuapp.com/products?page_size=10&page=${pageCount}`;
     if (filterCategories.length > 0) {
-      endpoint += `?categories=${JSON.stringify(filterCategories)}`;
+      endpoint += `&categories=${JSON.stringify(filterCategories)}`;
+    }
+    const searchQuery = location.search.replace('?search=', '');
+    if (searchQuery) {
+      endpoint += `&search=${searchQuery}`;
     }
     await axios.get(endpoint)
       .then(async (response) => {
-        await this.setState({ products: [] });
-        await this.setState({ products: response.data.data, loading: false });
+        if (clear) {
+          await this.setState({
+            products: [...response.data.data],
+            loading: false,
+            itemCount: response.data.item_count,
+          });
+        } else {
+          await this.setState({
+            products: [...products, ...response.data.data],
+            loading: false,
+            itemCount: response.data.item_count,
+          });
+        }
       })
       .catch(async (error) => {
+        console.log(error);
         if (error.response.status === 404) {
           await this.setState({ products: [], loading: false });
         }
       });
   }
 
+
   render() {
     const {
-      categories, products, filterCategories, loading,
+      categories, products, filterCategories, loading, itemCount,
     } = this.state;
+
+    const nextPage = () => {
+      this.setState((prevState) => ({ ...prevState, pageCount: prevState.pageCount + 1 }));
+      this.fetchProducts(false);
+    };
 
     const getProducts = () => products.map((eachProduct) => (
       <Grid key={eachProduct.id} item xs={12} md={6} lg={4} xl={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -108,7 +144,6 @@ class ListPage extends PureComponent {
         <div className="mainContent">
           <TopBar />
           <NavBar />
-          {JSON.stringify(this.state.filterCategories)}
           <div className="container">
             <Grid container spacing={4} style={styles().rootPadding}>
               <Grid item xs={3}>
@@ -129,6 +164,15 @@ class ListPage extends PureComponent {
                 <Grid container spacing={3}>
                   {getProducts()}
                 </Grid>
+                <div style={{ textAlign: 'center', marginTop: '18px' }}>
+                  {console.log(itemCount, products.length)}
+                  {itemCount > products.length && (
+                  <Button style={styles().button} onClick={nextPage}>
+                    carregar mais
+                  </Button>
+                  )}
+
+                </div>
               </Grid>
             </Grid>
           </div>
