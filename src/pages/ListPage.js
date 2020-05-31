@@ -55,6 +55,12 @@ class ListPage extends PureComponent {
 
     this.fetchProducts();
   }
+  componentDidUpdate(prevProps) {
+    const {location} = this.props;
+    if (prevProps.location.search.replace('?search=', '') !== location.search.replace('?search=', '')) {
+      this.fetchProducts();
+    }
+  }
 
   async filterCategories(category) {
     const { filterCategories } = this.state;
