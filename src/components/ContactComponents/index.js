@@ -18,6 +18,7 @@ import { AZUL_ESCURO } from '../../utils/colors';
 import { AZUL_BEBE } from '../../utils/colors';
 
 const styles = () => ({
+  
   root: {
     flexGrow: 1,
     marginTop: '50px',
@@ -26,7 +27,7 @@ const styles = () => ({
   },
 
   text: {
-    color: TITLE,
+    color: AZUL_ESCURO,
     fontWeight: '600',
     fontSize: '20px',
     marginTop: '30px',
@@ -41,6 +42,7 @@ const styles = () => ({
     fontSize: '24px',
     lineHeight: '86px',
     textTransform: 'uppercase',
+    
   },
 
   input: {
@@ -79,27 +81,24 @@ const styles = () => ({
     borderColor: '#c4c4c4',
     borderWidth: 'thin',
     borderStyle: 'solid',
-    borderRadius: '3px 3px 3px 3px',    
+    borderRadius: '3px 3px 3px 3px',
+    backgroundColor: 'transparent',    
     '&:hover': {
 
-      borderColor: 'rgb(59, 59, 59)',
-      backgroundColor: 'transparent',
+      borderColor: 'rgb(59, 59, 59)',      
     },
 
   },
 
-  textoMenu: {
-    color: '#f4f4f4',
-    lineHeight: '0px',
-  },
 
 });
 const options = [
-  'Motivo do contato',
+  'Motivo do contato*',
   'Criticas Positivas',
   'Produto veio com defeito',
   'Produto não chegou',
   'Erro no login',
+  'Outros',
 ];
 
 class ContactComponents extends PureComponent {
@@ -147,7 +146,6 @@ class ContactComponents extends PureComponent {
 
     };
 
-
     const handleClickListItem = (event) => { // Abre o menu de opções quando o usuário seleciona uma das opções
 
 
@@ -186,9 +184,9 @@ class ContactComponents extends PureComponent {
 
     return (
       <div className={classes.root}>
-        <Grid container spacing={6} justify='space-between'>
+        <Grid container spacing={10} justify="center">
 
-          <Grid item xs={12} sm={6} lg={6} style={{ backgroundColor: 'pink', border: '2px solid black' }}>
+          <Grid item xs={12} sm={6} lg={6} /*style={{backgroundColor: 'pink'}}*/ >
 
             <Typography component="h2" variant="h3" className={classes.title}>
               Funcionamento
@@ -220,10 +218,10 @@ class ContactComponents extends PureComponent {
           </Grid>
 
 
-          <Grid item xs={12} sm={6} lg={6} style={{ backgroundColor: 'white', border: '2px solid black' }}>
+          <Grid item xs={12} sm={6}  lg={6} style={{  display: 'flex' , alignItems: 'center',  flexDirection: 'column'}}>
 
-            <Typography component="h2" variant="h3" className={classes.title}>
-              Intereja Conosco
+            <Typography component="h2" variant="h3" className={classes.title} style = {{ paddingRight: '30px'}}>
+              Interaja Conosco
              </Typography>
 
             <form onSubmit={sendEmail} className={classes.input}>
@@ -258,11 +256,12 @@ class ContactComponents extends PureComponent {
                   anchorEl={this.state.anchorEl}
                   keepMounted
                   open={Boolean(this.state.anchorEl)}
-                  onClose={handleClose}
+                  onClose={handleClose}                  
                 >
                   {options.map((option, index) => (
                     <MenuItem
                       className={classes.menuOpcaoes}
+                      style={{width: '259px', height: '35px'}}
                       key={option}
                       disabled={index === 0}                              // Para voltar a mensagem incial basta colocar selectedIndex = 0
                       selected={index === this.state.selectedIndex}
@@ -276,7 +275,6 @@ class ContactComponents extends PureComponent {
               </div>
 
 
-
               <TextField
                 className={classes.input}
                 variant="outlined"
@@ -286,8 +284,7 @@ class ContactComponents extends PureComponent {
                 label="E-mail"
                 name="email"
                 type="email"
-                autoComplete="email"
-                autoFocus
+                autoComplete="email"                
                 onChange={handleChangeEmail}
               />
 
@@ -312,7 +309,7 @@ class ContactComponents extends PureComponent {
                 color="primary"
 
               >
-                Entrar
+                Enviar
               </Button>
 
             </form>
