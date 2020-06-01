@@ -63,13 +63,13 @@ class AboutComponents extends PureComponent {
             <div className={classes.root}>
                 <Typography component="h1" variant="h5" className={classes.title}>
                     Sobre
-            </Typography>
+                </Typography>
 
                 <img src={image} alt="quem somos?" style={{ width: '100%', marginTop: '20px', opacity: '0.6' }} />
 
                 <Typography component="h3" variant="h6" className={classes.title}>
                     Espaço / Conceito
-            </Typography>
+                </Typography>
 
                 <Typography className={classes.description}>
                     <p>
@@ -78,7 +78,7 @@ class AboutComponents extends PureComponent {
                         dois pequenos grupos de farmácias familiares do Estado de Pernambuco: a Drogaria Pernambuco e a
                         Drogaria Brasil. Dois anos depois, em 1937, adotou o conceito de rede ao se juntar a outras
                         drogarias.
-                </p>
+                    </p>
                     <p style={{ marginTop: '10px' }}>
                         Sempre focada no bom atendimento, criando uma relação de confiança com o cliente, pouco a pouco
                         a rede ampliou sua presença no interior pernambucano, chegando também a outros Estados. Em 1952, a
@@ -86,7 +86,7 @@ class AboutComponents extends PureComponent {
                         De olho no futuro e crescendo cada vez mais, a empresa iniciou maior investimento em tecnologia e,
                         em 1967, foi pioneira ao criar seu departamento de TI, para auxiliar nos processos e acompanhar as
                         novidades que foram surgindo.
-                </p>
+                    </p>
                 </Typography>
 
                 <Typography component="h3" variant="h6" className={classes.title}>

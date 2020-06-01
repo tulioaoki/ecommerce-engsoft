@@ -16,6 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { TITLE } from '../../utils/colors';
 import { AZUL_ESCURO } from '../../utils/colors';
 import { AZUL_BEBE } from '../../utils/colors';
+import { withSnackbar } from 'notistack';
 
 const styles = () => ({
   
@@ -144,6 +145,11 @@ class ContactComponents extends PureComponent {
       console.log(`Email: ${this.state.descricao}`)
       console.log(`Mensagem: ${this.state.mensagem}`)
 
+      this.props.enqueueSnackbar('Processo salvo com sucesso!', 
+        { variant:'success', autoHideDuration: 3000,}
+      )
+
+
     };
 
     const handleClickListItem = (event) => { // Abre o menu de opções quando o usuário seleciona uma das opções
@@ -190,7 +196,7 @@ class ContactComponents extends PureComponent {
 
             <Typography component="h2" variant="h3" className={classes.title}>
               Funcionamento
-              </Typography>
+            </Typography>
 
             <Typography component="h2" variant="h3" className={classes.text}>
               DIAS: Segunda à sexta
@@ -274,7 +280,6 @@ class ContactComponents extends PureComponent {
 
               </div>
 
-
               <TextField
                 className={classes.input}
                 variant="outlined"
@@ -317,6 +322,47 @@ class ContactComponents extends PureComponent {
           </Grid>
 
         </Grid>
+
+        <Grid container spacing={10} >
+
+          <Grid container spacing={10} >
+
+            <Typography component="h2" variant="h3" className={classes.title}>
+              Funcionamento
+            </Typography>
+          </Grid>
+
+          
+          
+          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'yellow'}}>
+
+            
+          </Grid>
+
+          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'red'}}>
+
+            
+          </Grid>
+
+          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'blue'}}>
+
+            
+          </Grid>
+          
+          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'pink'}}>
+
+            
+          </Grid>
+
+          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'gray'}}>
+
+            
+          </Grid>
+          
+          
+          
+        </Grid>  
+
       </div>
     );
   }
@@ -325,7 +371,13 @@ class ContactComponents extends PureComponent {
 ContactComponents.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  enqueueSnackbar: PropTypes.func.isRequired,
 };
 
+const ContactComponentsWithSnack = withSnackbar(ContactComponents);
 
-export default withRouter(connect()(withStyles(styles)(ContactComponents)));
+const mapStateToProps = ({ }, props) => ({
+})
+
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(ContactComponentsWithSnack)));
