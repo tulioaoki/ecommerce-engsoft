@@ -10,6 +10,7 @@ import ListPage from './pages/ListPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import AboutPage from './pages/AboutPage';
 import CategoriesPage from './pages/CategoriesPage';
+import ProfilePage from './pages/ProfilePage';
 
 class App extends PureComponent {
   constructor(props) {
@@ -29,6 +30,7 @@ class App extends PureComponent {
           <Route path="/produto" exact component={ProductDetailsPage} />
           <Route path="/about" exact component={AboutPage} />
           <Route path="/categories" exact component={CategoriesPage} />
+          <Route path="/my-profile" exact component={ProfilePage} />
         </>
       </div>
 
