@@ -13,13 +13,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { TITLE } from '../../utils/colors';
 import { AZUL_ESCURO } from '../../utils/colors';
 import { AZUL_BEBE } from '../../utils/colors';
 import { withSnackbar } from 'notistack';
+import PerfilDev from './PerfilDev';
 
 const styles = () => ({
-  
+
   root: {
     flexGrow: 1,
     marginTop: '50px',
@@ -43,7 +43,7 @@ const styles = () => ({
     fontSize: '24px',
     lineHeight: '86px',
     textTransform: 'uppercase',
-    
+
   },
 
   input: {
@@ -59,7 +59,7 @@ const styles = () => ({
   menuOpcaoes: {
 
     backgroundColor: 'white',
-    
+
     '&:hover': {
 
       backgroundColor: AZUL_BEBE, // Cor que mostra ao selecionar um item do menu de Opções
@@ -71,10 +71,10 @@ const styles = () => ({
 
     width: '259px',
     height: '54px',
-    padding: '0px 0px 0px 0px',   
+    padding: '0px 0px 0px 0px',
     marginBottom: '8px',
     marginTop: '16px',
-    
+
   },
 
   borda: {
@@ -83,10 +83,10 @@ const styles = () => ({
     borderWidth: 'thin',
     borderStyle: 'solid',
     borderRadius: '3px 3px 3px 3px',
-    backgroundColor: 'transparent',    
+    backgroundColor: 'transparent',
     '&:hover': {
 
-      borderColor: 'rgb(59, 59, 59)',      
+      borderColor: 'rgb(59, 59, 59)',
     },
 
   },
@@ -102,6 +102,54 @@ const options = [
   'Outros',
 ];
 
+const devs = [
+
+  {
+    name: 'Lucas Nardi',
+    image: 'https://scontent.frec5-1.fna.fbcdn.net/v/t1.0-1/s200x200/13645207_958079694324458_35205302251165214_n.jpg?_nc_cat=110&_nc_sid=7206a8&_nc_eui2=AeFa5gsPO-POlGIyuBRhka8N2gFjihmso4naAWOKGayjid1jqKI3nuAVRtRWyx0KqNYoCbIsF2KWkLUUibF8KHJX&_nc_ohc=GtmhuXIgcR4AX_qUPCQ&_nc_ht=scontent.frec5-1.fna&_nc_tp=7&oh=2bd236d546181f7a4055353661b6c9c3&oe=5EFE1CD1',
+    gitHub: 'https://github.com/Lucas-Nardi',
+    facebook: 'https://www.facebook.com/lucas.baroni.56',
+    whatsapp: '(81)998382336',
+
+  },
+
+  {
+    name: 'Túlio Aoki',
+    image: 'https://avatars3.githubusercontent.com/u/31329810?s=460&v=4',
+    gitHub: 'https://github.com/tulioaoki',
+    facebook: 'https://www.facebook.com/tulioaoki',
+    whatsapp: '(81)94892726',
+
+  },
+
+  {
+    name: 'Jose Arthur',
+    image: 'https://avatars3.githubusercontent.com/u/3154604?s=460&u=b0ae334c3464c06cf83303e4ab1f231dab11845c&v=4',
+    gitHub: 'https://github.com/zearthur99',
+    facebook: 'https://www.facebook.com/zearthur99',
+    whatsapp: '(81)996099275',
+
+  },
+
+  {
+    name: 'Deborah Camila',
+    image: 'https://avatars2.githubusercontent.com/u/38708826?s=460&u=28e6b36c87afba6564196f5bbd1c3f67fa73cb89&v=4',
+    gitHub: 'https://github.com/debcamila',
+    facebook: 'https://www.facebook.com/camiladeborah',
+    whatsapp: '(81)99580534',
+
+  }, 
+
+  {
+    name: 'Arthur Aragão',
+    image: 'https://instagram.frec5-1.fna.fbcdn.net/v/t51.2885-19/s320x320/42003595_490475731459272_15717767827161088_n.jpg?_nc_ht=instagram.frec5-1.fna.fbcdn.net&_nc_ohc=iqipsvT9o4oAX984SX1&oh=9eeac5e4c41d5aa5143cb35f60daf2d7&oe=5F027972',
+    gitHub: 'https://github.com/arthur12320',
+    facebook: 'https://www.facebook.com/arthurraragao',
+    whatsapp: '(81)99373711',
+
+  },
+]
+
 class ContactComponents extends PureComponent {
   constructor(props) {
     super(props);
@@ -113,6 +161,8 @@ class ContactComponents extends PureComponent {
       anchorEl: null,
       selectedIndex: 0,
     };
+
+    console.log(this.state.nome)
   }
 
 
@@ -139,16 +189,30 @@ class ContactComponents extends PureComponent {
 
     const sendEmail = (event) => {
 
+      event.preventDefault();
+
       console.log('Enviando email com esse dados:')
       console.log(`Nome do usuário: ${this.state.nome}`)
       console.log(`Email: ${this.state.email}`)
       console.log(`Email: ${this.state.descricao}`)
       console.log(`Mensagem: ${this.state.mensagem}`)
 
-      this.props.enqueueSnackbar('Processo salvo com sucesso!', 
-        { variant:'success', autoHideDuration: 3000,}
+
+
+
+      this.props.enqueueSnackbar('Email enviado!',
+        { variant: 'success', autoHideDuration: 2000, }
       )
 
+
+      this.setState({  // Limpar o formulário
+
+        email: '',
+        mensagem: '',
+        nome: '',
+        anchorEl: null,
+        selectedIndex: 0,
+      });
 
     };
 
@@ -192,7 +256,7 @@ class ContactComponents extends PureComponent {
       <div className={classes.root}>
         <Grid container spacing={10} justify="center">
 
-          <Grid item xs={12} sm={6} lg={6} /*style={{backgroundColor: 'pink'}}*/ >
+          <Grid item xs={12} sm={6} lg={6} >
 
             <Typography component="h2" variant="h3" className={classes.title}>
               Funcionamento
@@ -224,9 +288,9 @@ class ContactComponents extends PureComponent {
           </Grid>
 
 
-          <Grid item xs={12} sm={6}  lg={6} style={{  display: 'flex' , alignItems: 'center',  flexDirection: 'column'}}>
+          <Grid item xs={12} sm={6} lg={6} style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
 
-            <Typography component="h2" variant="h3" className={classes.title} style = {{ paddingRight: '30px'}}>
+            <Typography component="h2" variant="h3" className={classes.title} style={{ paddingRight: '30px' }}>
               Interaja Conosco
              </Typography>
 
@@ -235,25 +299,26 @@ class ContactComponents extends PureComponent {
                 className={classes.input}
                 variant="outlined"
                 margin="normal"
-                required
-                name="Nome"
                 label="Nome"
+                required                              
                 type="text"
-                id="Nome"
-                onChange={handleChangeName}
+                id="nome"
+                name="nome"
+                value= {this.state.nome}
+                onChange={handleChangeName}   
               />
               <div className={`${classes.descricao} ${classes.borda}`}>
 
-                <List component="nav" aria-label="Device settings"  style={{paddingTop:'3px', paddingBottom: '0px'}}>
+                <List component="nav" aria-label="Device settings" style={{ paddingTop: '3px', paddingBottom: '0px' }}>
                   <ListItem
                     button
                     aria-haspopup="true"
                     aria-controls="opicoes"
                     aria-label="Testes"
                     onClick={handleClickListItem}
-                    style={{ backgroundColor: 'transparent', paddingLeft:'13px', paddingTop:'7px'}}
+                    style={{ backgroundColor: 'transparent', paddingLeft: '13px', paddingTop: '7px' }}
                   >
-                    <ListItemText primary={options[this.state.selectedIndex]} style={{color:'#757575', lineHeight:'0px', width:'195px',}}/>
+                    <ListItemText primary={options[this.state.selectedIndex]} style={{ color: '#757575', lineHeight: '0px', width: '195px', }} />
                   </ListItem>
                 </List>
 
@@ -262,12 +327,12 @@ class ContactComponents extends PureComponent {
                   anchorEl={this.state.anchorEl}
                   keepMounted
                   open={Boolean(this.state.anchorEl)}
-                  onClose={handleClose}                  
+                  onClose={handleClose}
                 >
                   {options.map((option, index) => (
                     <MenuItem
                       className={classes.menuOpcaoes}
-                      style={{width: '259px', height: '35px'}}
+                      style={{ width: '259px', height: '35px' }}
                       key={option}
                       disabled={index === 0}                              // Para voltar a mensagem incial basta colocar selectedIndex = 0
                       selected={index === this.state.selectedIndex}
@@ -289,8 +354,10 @@ class ContactComponents extends PureComponent {
                 label="E-mail"
                 name="email"
                 type="email"
-                autoComplete="email"                
+                autoComplete="email"
+                value= {this.state.email}
                 onChange={handleChangeEmail}
+                
               />
 
               <TextField
@@ -301,11 +368,12 @@ class ContactComponents extends PureComponent {
                 multiline
                 rows={4}
                 rowsMax={6}
-                name="Mensagem"
+                name="mensagem"
                 label="Mensagem"
                 type="text"
-                id="Mensagem"
-                onChange={handleChangeMensagem}
+                id="mensagem"
+                value= {this.state.mensagem}
+                onChange={handleChangeMensagem}                
               />
 
               <Button className={classes.btnStyle}
@@ -323,45 +391,45 @@ class ContactComponents extends PureComponent {
 
         </Grid>
 
-        <Grid container spacing={10} >
+        <Grid container spacing={1} >
 
-          <Grid container spacing={10} >
+          <Grid item xs={12} sm={12} >
 
             <Typography component="h2" variant="h3" className={classes.title}>
-              Funcionamento
+              Time de desenvolvedores
             </Typography>
           </Grid>
 
-          
-          
-          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'yellow'}}>
 
-            
+          <Grid item xs={12} sm={2} style={{ marginLeft: '50px' }}>
+
+            <PerfilDev developer={devs[1]}/>
+
           </Grid>
 
-          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'red'}}>
+          <Grid item xs={12} sm={2} style={{ }}>
 
-            
+            <PerfilDev developer={devs[0]}/>
+
           </Grid>
 
-          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'blue'}}>
+          <Grid item xs={12} sm={2} style={{ }}>
 
-            
-          </Grid>
-          
-          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'pink'}}>
-
-            
+            <PerfilDev developer={devs[3]} cor={'pink'}/>
           </Grid>
 
-          <Grid item xs={12} sm={2}  style={{ backgroundColor: 'gray'}}>
+          <Grid item xs={12} sm={2} style={{ }}>
 
-            
+            <PerfilDev developer={devs[4]}/>
           </Grid>
-          
-          
-          
-        </Grid>  
+
+          <Grid item xs={12} sm={2} style={{ }} >
+
+            <PerfilDev developer={devs[2]}/>
+          </Grid>
+
+
+        </Grid>
 
       </div>
     );
