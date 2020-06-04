@@ -8,6 +8,7 @@ import {
 import { TITLE } from '../../utils/colors';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -22,6 +23,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import profile from '../../static/images/profile.png';
+import medicine from '../../static/images/remedio.png';
 
 const styles = () => ({
     root: {
@@ -36,6 +38,17 @@ const styles = () => ({
         marginTop: '30px',
         marginBottom: '10px',
     },
+    btn_profile_selected: {
+        backgroundColor: '#f2f2f2',
+    },
+    btn_profile:{
+        backgroundColor: '#1F509C',
+        color: '#fff',
+    '&:hover': {
+        backgroundColor: '#1f509c',
+        color: '#fff',
+      },
+    },
 });
 
 class ProfileComponents extends PureComponent {
@@ -43,9 +56,11 @@ class ProfileComponents extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            onView: 'empty'
         };
     }
 
+    
     render() {
 
         const {
@@ -53,6 +68,7 @@ class ProfileComponents extends PureComponent {
             classes,
         } = this.props;
         const image = profile;
+        const image_produto = medicine;
 
         return (
             <div className={classes.root}>
@@ -62,27 +78,29 @@ class ProfileComponents extends PureComponent {
 
 
                 <Grid container spacing={0}>
-                    <Grid item xs={12} sm={6} style={{border: '2px solid red'}}>
-
-                        <Typography>
-                            <AccountCircleIcon />
+                    <Grid item xs={12} sm={6} style={{backgroundColor: '#f2f2f2'}} >
+                        <Button className={this.state.onView == 'meusdados' ? classes.btn_profile : classes.btn_profile_selected} onClick={()=>{this.setState({onView: 'meusdados'})}} style={{display:'block', marginTop:'10px'}}>
+                            <AccountCircleIcon style={{fontSize: '30px'}}/>
                             Meus dados
-                        </Typography>
-
-
-                        <Typography>
-                            <FavoriteIcon />
+                        </Button>
+                        <Button className={this.state.onView == 'minhalistadedesejos' ? classes.btn_profile : classes.btn_profile_selected} onClick={()=>{this.setState({onView: 'minhalistadedesejos'})}} style={{display:'block', marginTop:'10px'}}>
+                            <FavoriteIcon style={{fontSize: '30px'}}/>
                             Minha lista de desejos
-                        </Typography>
-
-                        <Typography>
-                            <ShoppingCartIcon />
+                        </Button>
+                        <Button className={this.state.onView == 'meuspedidos' ? classes.btn_profile : classes.btn_profile_selected} onClick={()=>{this.setState({onView: 'meuspedidos'})}} style={{display:'block', marginTop:'10px'}}>
+                            <ShoppingCartIcon style={{fontSize: '30px'}}/>
                             Meus pedidos
-                        </Typography>
+                        </Button>
                     </Grid>
-
-                    <Grid item xs={12} sm={6} style={{border: '2px solid black'}}>
-                        <Typography>
+                    {/*{this.changeView(this.state.onView)}*/}
+                    
+                    {(()=>{console.log(this.state.onView);
+                        switch(this.state.onView){
+                        
+                        case 'meusdados':
+                            return (
+                                <Grid item xs={12} sm={6}>
+                        <Typography style={{marginTop: '15px'}}>
                             <AccountCircleIcon />
                             <strong>Meus dados</strong>
                         </Typography>
@@ -123,12 +141,11 @@ class ProfileComponents extends PureComponent {
                             </Grid>
                         </Grid>
                     </Grid>
-
-                </Grid>
-
-                <Grid container spacing={0}>
-                    <Grid item xs={12} sm={6} style={{border: '2px solid blue', overflowX: 'auto'}}>
-                        <Typography>
+                            ); 
+                        case 'minhalistadedesejos':
+                            return(
+                                <Grid item xs={12} sm={6} style={{overflowX: 'auto'}}>
+                        <Typography style={{marginTop: '15px'}}>
                             <FavoriteIcon />
                             <strong>Minha lista de desejos</strong>
                         </Typography>
@@ -145,51 +162,7 @@ class ProfileComponents extends PureComponent {
                                 <TableBody>
                                     <TableRow>
                                         <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>Produto dipirona</Typography>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>R$ 19.90</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>Produto dipirona</Typography>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>R$ 19.90</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>Produto dipirona</Typography>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>R$ 19.90</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>Produto dipirona</Typography>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>R$ 19.90</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
+                                            <img src={image_produto} alt="produto" style={{height: '100px'}}/>
                                         </TableCell>
                                         <TableCell component="th" scope="row">
                                             <Typography>Produto dipirona</Typography>
@@ -202,9 +175,11 @@ class ProfileComponents extends PureComponent {
                             </Table>
                         </TableContainer>
                     </Grid>
-
-                    <Grid item xs={12} sm={6} style={{border: '2px solid yellow', overflowX: 'auto'}}>
-                        <Typography>
+                            );
+                        case 'meuspedidos':
+                            return (
+                                <Grid item xs={12} sm={6} style={{ overflowX: 'auto'}}>
+                        <Typography style={{marginTop: '15px'}}>
                             <ShoppingCartIcon />
                             <strong>Meus pedidos</strong>
                         </Typography>
@@ -220,71 +195,7 @@ class ProfileComponents extends PureComponent {
                                 <TableBody>
                                     <TableRow>
                                         <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>Produto dipirona</Typography>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>R$ 19.90</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <Typography style={{color: TITLE}}>Entregue em: 20/09/2020</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>Produto dipirona</Typography>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>R$ 19.90</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <Typography style={{color: TITLE}}>Entregue em: 20/09/2020</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>Produto dipirona</Typography>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>R$ 19.90</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <Typography style={{color: TITLE}}>Entregue em: 20/09/2020</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>Produto dipirona</Typography>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Typography>R$ 19.90</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <Typography style={{color: TITLE}}>Entregue em: 20/09/2020</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            <img src={image} alt="produto" style={{height: '100px'}}/>
+                                            <img src={image_produto} alt="produto" style={{height: '100px'}}/>
                                         </TableCell>
                                         <TableCell component="th" scope="row">
                                             <Typography>Produto dipirona</Typography>
@@ -302,6 +213,17 @@ class ProfileComponents extends PureComponent {
                             </Table>
                         </TableContainer>
                     </Grid>
+                            );
+                        case 'empty':
+                        return(
+                            <Paper variant="outlined" style={{marginTop: '10px'}}>
+                                <Typography style={{backgroundColor: '#FFF3CD', color: 'red', padding: '10px'}}>
+                                    Selecione uma das opções acima para visualizar dados cadastrados no seu perfil. 
+                                </Typography>
+                            </Paper>
+                        );
+                        default:
+                    }})()}
                 </Grid>
 
             </div>
