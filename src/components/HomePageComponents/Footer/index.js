@@ -3,9 +3,11 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  withStyles,
+  withStyles, Grid
 } from '@material-ui/core';
 import SocialMedia from '../../FooterComponents/SocialMedia';
+
+import CopyrightIcon from '@material-ui/icons/Copyright';
 
 const styles = () => ({
   root: {
@@ -21,7 +23,7 @@ const styles = () => ({
     justifyContent: 'center',
     flexDirection: 'column',
     textAlign: 'center',
-    padding: '1px 0 16px 0',
+    padding: '10px 0 10px 0',
     color: 'white',
   },
 });
@@ -34,19 +36,20 @@ export class Footer extends PureComponent {
 
     return (
       <div className={classes.root}>
-        {/* Se o props passado for true, exiba as redes sociais */ }
+        
+        {/* Se o props passado for true, exiba as redes sociais */}
         {this.props.showSocialMedia
-            && (
+          && (
             <SocialMedia />
-            )}
+          )}
         <div className={classes.footer}>
-          <span>
-            {' '}
-             Empreendimentos Ecommerce S/A; CNPJ: 06.626.253/0001-51 | Rua Senador Pompeu, 1520, Centro, Fortaleza-Ce; CEP: 60.025-001 
-             <br/>
-             SAC FARMA 0800 275 1313 | Farmacêutica Responsável: Maria do Livramento Cavalcante Crisóstomo; CRF/CE 1388. | Registro Sanitário nº LS00023459 | AFE: 0280418
-            {' '}
-          </span>
+
+          <Grid container >
+            <Grid item xs={12} >
+              <CopyrightIcon style={{ fontSize: '15px', paddingRight: '5px', paddingTop: '2px' }} /> Copyright 2020 Farmácia - All Rights Reserved.
+              </Grid>
+          </Grid>
+
         </div>
       </div>
     );
