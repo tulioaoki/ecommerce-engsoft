@@ -12,7 +12,7 @@ class ProfilePage extends PureComponent {
           <TopBar />
           <NavBar />
           <div className='container'>
-            <ProfileComponents/>
+            <ProfileComponents />
           </div>
         </div>
         <Footer />
