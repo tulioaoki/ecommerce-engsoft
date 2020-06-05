@@ -44,7 +44,6 @@ const styles = () => ({
         padding: '6px 0px 8px 0px',
         '&$selected': {
             color: 'white',
-            //fontWeight: '900',
             padding: '6px 6px 8px 6px',
             backgroundColor: AZUL_ESCURO,
         },
