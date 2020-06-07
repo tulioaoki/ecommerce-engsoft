@@ -55,8 +55,9 @@ class ListPage extends PureComponent {
 
     this.fetchProducts();
   }
+
   componentDidUpdate(prevProps) {
-    const {location} = this.props;
+    const { location } = this.props;
     if (prevProps.location.search.replace('?search=', '') !== location.search.replace('?search=', '')) {
       this.fetchProducts();
     }
@@ -107,7 +108,9 @@ class ListPage extends PureComponent {
       .catch(async (error) => {
         console.log(error);
         if (error.response.status === 404) {
-          await this.setState({ products: [], loading: false });
+          await this.setState({
+            products: [], loading: false, itemCount: 0, pageCount: 0,
+          });
         }
       });
   }
