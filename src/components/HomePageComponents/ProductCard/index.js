@@ -56,7 +56,7 @@ class ProductCardComponent extends PureComponent {
     } = this.props;
 
     return (
-      <Card style={{ maxWidth: variant === 'small' ? 280 : 320}} variant="outlined" > 
+      <Card style={{ maxWidth: variant === 'small' ? 280 : 320 }} variant="outlined">
         <CardHeader
           title={product.name}
           subheader={(
@@ -73,16 +73,21 @@ class ProductCardComponent extends PureComponent {
             </>
           )}
         />
-        <CardMedia
-          className={classes.media}
-          image={product.images[0].image_url}
-          title="Imagem do produto"
-        />
+        {
+          product.images && product.images.length > 0
+          && (
+            <CardMedia
+              className={classes.media}
+              image={product.images[0].image_url}
+              title="Imagem do produto"
+            />
+          )
+        }
         <CardActions disableSpacing style={{ justifyContent: 'center' }}>
           <IconButton aria-label="Adicionar aos favoritos">
             <FavoriteIcon />
           </IconButton>
-          <Button size="small"  className={classes.buyButton}>
+          <Button size="small" className={classes.buyButton}>
             Comprar
           </Button>
         </CardActions>
