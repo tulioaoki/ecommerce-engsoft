@@ -40,8 +40,7 @@ class App extends PureComponent {
 }
 
 
-const mapStateToProps = ({ PROCESS_DATA }) => ({
-  process_data: PROCESS_DATA,
+const mapStateToProps = ({ }) => ({
 });
 
 App.propTypes = {
