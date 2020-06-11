@@ -27,6 +27,7 @@ class Logo extends PureComponent {
     return (
       <div className={classes.styles}>
         <img
+          alt="Logo"
           src={logoImage}
           className={classes.imgLogo}
           onClick={() => (history.push('/'))}

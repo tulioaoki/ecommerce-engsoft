@@ -1,16 +1,13 @@
-import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {
-    withStyles, Typography
-} from '@material-ui/core';
-
-import Slider from '../../Slide';
-
-import { AZUL_ESCURO } from '../../../utils/colors';
+import { Typography, withStyles } from '@material-ui/core';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { AZUL_ESCURO } from '../../../utils/colors';
+import Slider from '../../Slide';
+
+
 
 const styles = () => ({
 

@@ -23,8 +23,11 @@ import { AZUL_ESCURO } from '../../utils/colors';
 
 const styles = (theme) => ({
   media: {
+    display: 'flex',
+    flex: 1,
     height: 0,
     paddingTop: '56.25%', // 16:9
+    'align-self':'flex-end'
   },
   buyButton: {
     marginLeft: 'auto',
@@ -38,10 +41,10 @@ const styles = (theme) => ({
   dialogPaper: {
     minHeight: '60vh',
     maxHeight: '60vh',
-    minWidth: '50vw',
-    maxWidth: '50vw',
-},
-formControl: {
+    minWidth: '60vw',
+    maxWidth: '60vw',
+  },
+  formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
     maxWidth: 300,
@@ -55,6 +58,11 @@ formControl: {
   },
   noLabel: {
     marginTop: theme.spacing(3),
+  },
+  card:{
+    minHeight: '40vh',
+    maxHeight: '40vh',
+    minWidth: '16vw',
   },
 
 });
@@ -79,6 +87,7 @@ class AdminProductCard extends PureComponent {
             id: null,
             nome: '',
             descricao:'',
+            price:9999999,
             categorias:['Selecione a Categoria'],
             categorie:'',
             todasCategorias:[],
@@ -103,7 +112,13 @@ class AdminProductCard extends PureComponent {
     const {
         product,
       } = this.props;
-    this.setState(prevState => ({ ...prevState,nome:product.name, descricao:product.description, categorias:product.categories}))
+    this.setState(prevState => ({ 
+      ...prevState,
+      nome:product.name,
+      descricao:product.description,
+      categorias:product.categories,
+      price: product.price,
+    }))
   }
 
   render() {
@@ -137,22 +152,10 @@ class AdminProductCard extends PureComponent {
     const changeSelect = name => event => {
         this.setState({ [name]: Number(event.target.value) });
     }
-
-    const handleChangeMultiple = (event) => {
-        const { options } = event.target;
-        const value = [];
-        for (let i = 0, l = options.length; i < l; i += 1) {
-          if (options[i].selected) {
-            value.push(options[i].value);
-          }
-        }
-        this.setState(prevState => ({ ...prevState,categorie:value}))
-
-      };
-
+    
     return (
         <>
-      <Card style={{ maxWidth: variant === 'small' ? 280 : 320 }} variant="outlined" onClick={handleClickOpen}>
+      <Card className={classes.card} style={{maxWidth: variant === 'small' ? 280 : 320,}} variant="outlined" onClick={handleClickOpen}>
         <CardHeader
           title={product.name}
           subheader={(
@@ -212,6 +215,19 @@ class AdminProductCard extends PureComponent {
                     onChange={handleChange}
                     value={this.state.descricao}
                     />
+                    <TextField
+                    autoFocus
+                    margin="dense"
+                    id="price"
+                    label="Preço"
+                    type="number"
+                    name="price"
+                    fullWidth
+                    placeholder='Preço do Produto'
+                    className='formField'
+                    onChange={handleChange}
+                    value={this.state.price}
+                    />
                     <FormControl className={clsx(classes.formControl, classes.noLabel)}>
                         <Select
                         multiple
@@ -243,8 +259,7 @@ class AdminProductCard extends PureComponent {
                         ))}
                         </Select>
                     </FormControl>
-                </DialogContent>
-                
+                </DialogContent>                
                 <DialogActions>
                     <Button onClick={handleClose} color="secondary">
                     Cancelar

@@ -8,7 +8,7 @@ export default function getCartRequest() {
         'Accept': 'application/json',
         'Authorization': `Token ${localStorage.getItem('token')}`, //deve ser passa
     }    
-    return axios.get(BASE_URL+'cart' , {headers})
+    return axios.get(`${BASE_URL}cart`, {headers})
         .then( response => response)
-        .catch((error) => {console.log("alallla", error)})
+        .catch((error) => {console.log(error)})
 }

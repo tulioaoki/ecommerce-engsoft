@@ -15,7 +15,7 @@ const styles = () => ({
   icons: {
     margin: '0',
     display: 'flex',
-    justifyContent: 'flex-end',
+    //justifyContent: 'flex-end',
     flexWrap: 'wrap',
     width: '150px',
     justifyContent: 'space-between',

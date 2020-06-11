@@ -1,26 +1,22 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import {
-    withStyles,
-} from '@material-ui/core';
-import { TITLE } from '../../utils/colors';
-import { AZUL_ESCURO } from '../../utils/colors';
-import { Typography } from '@material-ui/core';
-
-import Grid from '@material-ui/core/Grid';
-
+import { Typography, withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-
-import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
-import InvertColorsIcon from '@material-ui/icons/InvertColors';
-import FaceIcon from '@material-ui/icons/Face';
+import Grid from '@material-ui/core/Grid';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
+import FaceIcon from '@material-ui/icons/Face';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import InvertColorsIcon from '@material-ui/icons/InvertColors';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { TITLE } from '../../utils/colors';
+
+
+
 
 const styles = () => ({
     root: {

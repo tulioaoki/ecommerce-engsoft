@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import HeaderIcons from '../../TopBarComponents/HeaderIcons';
 import Logo from '../../TopBarComponents/Logo';
 import SearchBox from '../../TopBarComponents/SearchBox';
-import HeaderIcons from '../../TopBarComponents/HeaderIcons';
 
 class TopBar extends PureComponent {
   render() {

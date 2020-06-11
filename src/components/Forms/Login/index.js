@@ -35,8 +35,8 @@ class LoginForm extends PureComponent {
   }
 
   render() {
-    const { classes, history, cadastro } = this.props;
-    const { pass, login,newLogin,newPass } = this.state;
+    const { classes, /** history, cadastro**/ } = this.props;
+    /**const { pass, login,newLogin,newPass } = this.state;
 
 
     const handleChangeLogin = (event) => {
@@ -54,15 +54,16 @@ class LoginForm extends PureComponent {
       this.setState((prevState) => ({ ...prevState, newlogin: value }));
     };
 
+    const onClick = () => {
+      history.push('/home/');
+    }; **/
+
     const handleChangeNewPass = (event) => {
       const { value } = event.target;
       this.setState((prevState) => ({ ...prevState, newpass: value }));
     };
 
-    const onClick = () => {
-      history.push('/home/');
-    };
-
+    
     return (
       <div className='container'>
         <div className={classes.formBox}>

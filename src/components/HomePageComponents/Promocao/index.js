@@ -1,14 +1,11 @@
+import { Grid, Typography, withStyles } from '@material-ui/core';
 import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-    withStyles, Typography, Grid,
-} from '@material-ui/core';
-
+import { withRouter } from 'react-router-dom';
 import { AZUL_ESCURO } from '../../../utils/colors';
-
 import ProductCard from '../ProductCard';
+
+
 
 const styles = () => ({
 
@@ -270,44 +267,28 @@ export class Promocao extends PureComponent {
         return (
 
             <div className='container' style={{ marginBottom: '50px', marginTop: '50px' }}>
-
-
-
                 <Grid container spacing={5} >
-
                     <Grid item xs={12} sm={12} >
-
                         <div>
                             <Typography className={classes.text}>
                                 Promoção
                             </Typography>
                         </div>
                     </Grid>
-
-
                     <Grid container spacing={5}  style={{ marginLeft: '40px', marginRight: '40px' }} >
-
-                    
                         { 
                             this.state.produtos.map((produto, index) => {
-
                                 return <Grid item xs={12} sm={3} >
-
                                     <ProductCard
                                         key={produto.id}
                                         product={produto}
                                         variant='normal'
                                     />
-
                                 </Grid>
-
-
                             })
                         }
                     </Grid>
-
                 </Grid>
-
             </div>
         );
     }

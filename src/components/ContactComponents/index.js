@@ -1,21 +1,18 @@
-import axios from 'axios';
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { withStyles } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import { Typography, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { AZUL_ESCURO } from '../../utils/colors';
-import { AZUL_BEBE } from '../../utils/colors';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 import { withSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { AZUL_BEBE, AZUL_ESCURO } from '../../utils/colors';
 import PerfilDev from './PerfilDev';
 
 const styles = () => ({
@@ -118,7 +115,7 @@ const devs = [
     image: 'https://avatars3.githubusercontent.com/u/31329810?s=460&v=4',
     gitHub: 'https://github.com/tulioaoki',
     facebook: 'https://www.facebook.com/tulioaoki',
-    whatsapp: '(81)94892726',
+    whatsapp: '(81)994892726',
 
   },
 
@@ -230,10 +227,8 @@ class ContactComponents extends PureComponent {
     };
 
     const handleMenuItemClick = (event, index) => { // Pega a opção que o usuário escolheu
-      const value = event.currentTarget;
-
-      console.log('Quem mensagem deve aparecer: ' + index)
-
+      //const value = event.currentTarget;
+      //console.log('Quem mensagem deve aparecer: ' + index)
       this.setState({
 
         anchorEl: null,
@@ -444,7 +439,8 @@ ContactComponents.propTypes = {
 
 const ContactComponentsWithSnack = withSnackbar(ContactComponents);
 
-const mapStateToProps = ({ }, props) => ({
+const mapStateToProps = ({ otherProps}, props) => ({
+  otherProps,
 })
 
 

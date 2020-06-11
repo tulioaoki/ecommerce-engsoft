@@ -1,11 +1,11 @@
+/* eslint-disable react/prefer-stateless-function */
+import { withStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-/* eslint-disable react/prefer-stateless-function */
-import { withStyles, Typography } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import TopBar from '../TopBar';
 import NavBar from '../NavBar';
+import TopBar from '../TopBar';
 
 const styles = () => ({
   container: {
