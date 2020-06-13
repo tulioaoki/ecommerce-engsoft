@@ -10,7 +10,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { handleAdminProducts, handleAddProduct } from '../../../actions/admin';
+import { withSnackbar } from 'notistack';
+import { handleAdminProducts, handleAddProduct, handleGetAllCategories } from '../../../actions/admin';
 import { AZUL_ESCURO } from '../../../utils/colors';
 import AdminProductCard from '../../AdminProductCard';
 import SearchBox from '../../TopBarComponents/SearchBox';
@@ -64,6 +65,7 @@ export class ItemGridDisplay extends PureComponent {
             dispatch,
         } = this.props;
         dispatch(handleAdminProducts())
+        dispatch(handleGetAllCategories())
     }
 
     render() {
@@ -71,7 +73,8 @@ export class ItemGridDisplay extends PureComponent {
             classes,
             displayName,
             items,
-            dispatch
+            dispatch,
+            categories,
         } = this.props;
         const state = this.state;
 
@@ -90,15 +93,19 @@ export class ItemGridDisplay extends PureComponent {
         const handleClickOpen = () => {
             this.setState({open:true})
         }
+
+        const handleClose = () => {
+            this.setState({ open:false })    
+        }
     
         const handleSubmit = (e) => {
-            //e.preventDefault();
+            e.preventDefault();
             const { dispatch } = this.props;
-            const {name, description, images, categories, price, quantity} = this.state;
+            const {name, description, images, categorias, price, quantity} = this.state;
             let body = {
                 name,
                 description,
-                categories,
+                categories:categorias,
                 price,
                 quantity,
                 images:[],
@@ -106,11 +113,16 @@ export class ItemGridDisplay extends PureComponent {
             for(let x of Object.entries(images)){
                 body.images.push({image_url:x[1]})
             }
-            dispatch(handleAddProduct(body))
-        }
-    
-        const handleClose = () => {
-            this.setState({ open:false })    
+            dispatch(handleAddProduct(body)).then((r) =>
+                {
+                    if(typeof r !== 'undefined'){
+                        this.props.enqueueSnackbar('Produto criado com sucesso!',
+                        { variant: 'success', autoHideDuration: 3000, }
+                      )
+                    }
+                }
+            )
+            handleClose();
         }
     
         const handleChange = e => {
@@ -156,7 +168,6 @@ export class ItemGridDisplay extends PureComponent {
                 />
             );
         }
-
         return (
             <div className='container' style={{ marginBottom: '50px', marginTop: '50px', backgroundColor:'#f1f1f1', padding:'2rem'}}>
                 <SearchBox placeholder='Digite o nome do produto' action={searchHandler}/>
@@ -258,8 +269,8 @@ export class ItemGridDisplay extends PureComponent {
                                 return <em>Inserir Categorias</em>;
                             }
                             let list = [];
-                            for(let c in selected){
-                                list.push(this.state.categorias[c].name)
+                            for (let [key, value] of Object.entries(selected)) {
+                                list.push(categories.find(x => x.id === value).name)
                             }
                             return list.join(', ');
                         }}
@@ -269,7 +280,7 @@ export class ItemGridDisplay extends PureComponent {
                         <MenuItem disabled value="">
                             <em>Sem categorias</em>
                         </MenuItem>
-                        {this.state.categorias.map((categorie) => (
+                        {categories.map((categorie) => (
                             <MenuItem key={categorie.id} value={categorie.id}>
                             {categorie.name}
                             </MenuItem>
@@ -295,18 +306,20 @@ export class ItemGridDisplay extends PureComponent {
     }
 }
 
-const mapStateToProps = ({ REDUCER_ADMIN_PRODUCTS }, props) => ({
+const mapStateToProps = ({ REDUCER_ADMIN_PRODUCTS, REDUCER_CATEGORIES }, props) => ({
     items:REDUCER_ADMIN_PRODUCTS.admin_products,
+    categories:REDUCER_CATEGORIES.categories,
 })
 
 ItemGridDisplay.propTypes = {
     displayName: PropTypes.string.isRequired,
     items: PropTypes.array.isRequired,
+    enqueueSnackbar: PropTypes.func.isRequired,
 };
 
 ItemGridDisplay.defaultProps = {
     displayName: 'Produtos Cadastrados',
     items:[],
 };
-
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(ItemGridDisplay)));
+const ItemGridComponentsWithSnack = withSnackbar(ItemGridDisplay);
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(ItemGridComponentsWithSnack)));

@@ -8,7 +8,7 @@ export default function getAdminProductsRequest(page=1, page_size=10, search=nul
         'Accept': 'application/json',
         'Authorization': `Token ${localStorage.getItem('token')}`, //deve ser passa
     }
-    let url = BASE_URL+`products?page_size=${300}&page=${page}`;
+    let url = BASE_URL+`products?page_size=${page_size}&page=${page}`;
     if(search){
         url = url+`&search=${search}`;
     }
@@ -17,6 +17,20 @@ export default function getAdminProductsRequest(page=1, page_size=10, search=nul
         .catch((error) =>  (error))
 }
 
+export function getCategoriesRequest() {
+    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
+    let headers = {
+        'content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Token ${localStorage.getItem('token')}`, //deve ser passa
+    }
+    let url = BASE_URL+`categories`;
+    return axios.get(url ,{headers})
+        .then(response => response)
+        .catch((error) =>  (error))
+}
+
+
 export function addProductRequest(payload) {
     localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
     let headers = {
@@ -24,8 +38,8 @@ export function addProductRequest(payload) {
         'Accept': 'application/json',
         'Authorization': `Token ${localStorage.getItem('token')}`, //deve ser passa
     }
-    let url = BASE_URL+`products`;
+    let url = 'http://localhost:8000/'+`products`;
     return axios.post(url,payload ,{headers})
         .then(response => response)
-        .catch((error) =>  (error))
+        .catch((error) =>  error)
 }
