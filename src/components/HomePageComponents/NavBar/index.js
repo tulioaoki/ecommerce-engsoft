@@ -69,7 +69,7 @@ class NavBar extends PureComponent {
             <Tab className={classes.menuTab} label="Inicio" onClick={()=>{history.push('/')}}/>
             <Tab className={classes.menuTab} label="Categorias" onClick={()=>{history.push('/categories')}}/>
             <Tab className={classes.menuTab} label="Sobre" onClick={()=>{history.push('/about')}}/>
-            <Tab className={classes.menuTab} label="Contato" />
+            <Tab className={classes.menuTab} label="Contato" onClick={()=>{history.push('/contact')}}/>
           </Tabs>
         </Paper>
       </div>

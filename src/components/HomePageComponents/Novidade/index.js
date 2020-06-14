@@ -8,15 +8,18 @@ import {
 
 import Slider from '../../Slide';
 
-import { AZUL_ESCURO } from '../../../utils/colors';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Grid from '@material-ui/core/Grid';
+
+import { AZUL_ESCURO, TITLE } from '../../../utils/colors';
+
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 const styles = () => ({
 
     text: {
 
-        color: AZUL_ESCURO,
+        color: TITLE,
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '900',
@@ -30,32 +33,19 @@ const styles = () => ({
         width: '100%',
         position: 'relative',
         display: 'flex',
-        //justifyContent: 'space-around',
         alignItems: 'center',
         padding: '0 0 10px 0',
     },
 
-    categoria: {
-        color: 'black',
-        fontFamily: 'Arial',
-        fontStyle: 'normal',
-        fontSize: '24px',
-        backgroundColor: '#eeeeee',
-        transition: 'opacity 0.4s',
-        padding: '6px 0px 8px 0px',
-        '&$selected': {
-            color: 'white',
-            //fontWeight: '900',
-            padding: '6px 6px 8px 6px',
-            backgroundColor: AZUL_ESCURO,
-        },
-        
+    novidades_categoria: {
+        color: '#424242',
+        fontSize: '12px',
     },
 
     selected: {
 
     },
-    
+
 });
 
 const categoria1 = [
@@ -1090,11 +1080,18 @@ const categoria6 = [
     },
 ]
 
+const TabsStyle = withStyles({
+    root:{
+        '&selected':{
+            textColor: AZUL_ESCURO,
+        },
+    },
+})(Tabs);
+
 export class Novidade extends PureComponent {
 
-
     state = {
-
+        novidadesTab: 0,
         value: 0,
     };
 
@@ -1103,15 +1100,13 @@ export class Novidade extends PureComponent {
         console.log("Categoria que vou: " + newValue)
 
         this.setState({             // Mudar a imagem 
-
-            value: newValue
+            value: newValue,
+            novidadesTab: newValue,
         });
     })
 
     slide = (categoria) => {
 
-        console.log("PEGANDO O SLIDE")
-        console.log("Que Slide deve Aparecer: " + categoria)
 
         switch (categoria) {
             case 0:
@@ -1142,74 +1137,33 @@ export class Novidade extends PureComponent {
 
         return (
 
-            <div className='container' style={{ marginBottom: '50px', marginTop: '50px' }}>
-
-                <div>
-
+            <Grid container style={{ marginBottom: '50px', marginTop: '50px' }}>
+                <Grid xs={12} sm={12}>
                     <Typography className={classes.text}>
                         Novidades
                     </Typography>
+                </Grid>
 
+                <div className={classes.root}>
+                        <TabsStyle centered 
+                            style={{paddingLeft: '10px'}}
+                            value={this.state.novidadesTab}
+                            onChange={this.categories}
+                            indicatorColor="white"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                        >
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 0 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Medicamentos e Saúde" />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 1 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Cuidados Pessoais e Beleza"  />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 2 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Dermocosméticos"  />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 3 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Mamães e bebês"  />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 4 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Conveniência"  />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 5 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Fitness e Nutrição"  />
+                        </TabsStyle>
                 </div>
-
-                <div className={`${classes.root} `}>
-                    <BottomNavigation
-                        value={this.state.value}
-                        onChange={this.categories}
-                        showLabels
-                        className={classes.root}
-                    >
-
-                        <BottomNavigationAction label="Saúde"
-
-                            classes={{
-                                root: classes.categoria,
-                                selected: classes.selected,
-                            }}
-                            style={{ borderRadius: '15px 0px 0px 15px' }}
-                        />
-                        <BottomNavigationAction label="Cuidados Pessoais"
-
-                            classes={{
-                                root: classes.categoria,
-                                selected: classes.selected,
-                            }}
-                        />
-                        <BottomNavigationAction label="Dermocosméticos"
-                            classes={{
-                                root: classes.categoria,
-                                selected: classes.selected,
-                            }}
-                        />
-                        <BottomNavigationAction label="Mamães e Bebês"
-                            classes={{
-                                root: classes.categoria,
-                                selected: classes.selected,
-                            }}
-                        />
-                        <BottomNavigationAction label="Conveniência"
-                            classes={{
-                                root: classes.categoria,
-                                selected: classes.selected,
-                            }}
-                        />
-                        <BottomNavigationAction label="Fitness e Nutrição"
-
-                            classes={{
-                                root: classes.categoria,
-                                selected: classes.selected,
-                            }}
-
-                            style={{ borderRadius: '0px 15px 15px 0px' }}
-
-                        />
-
-                    </BottomNavigation>
-                </div>
-
                 {this.slide(this.state.value)}
 
-            </div>
+            </Grid>
         );
     }
 }

@@ -56,34 +56,31 @@ class ProductCardComponent extends PureComponent {
     } = this.props;
 
     return (
-      <Card style={{ maxWidth: variant === 'small' ? 280 : 320 }} variant="outlined">
-        <CardHeader
+      <Card style={{ maxWidth: variant === 'small' ? 280 : 320}} variant="outlined" style={{height: '100%'}}> 
+        <div style={{minHeight: '100%'}}>
+        <CardHeader 
           title={product.name}
           subheader={(
             <>
               <Typography color="primary" className={classes.price} display="inline">
                 {product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </Typography>
-              {variant === 'normal'
+              {/*{variant === 'normal'
                 && (
                 <Typography display="inline" style={{ marginLeft: 8 }}>
                   { this.getCategoriesString() }
                 </Typography>
-                )}
+                )}*/}
             </>
           )}
+
+        <CardMedia 
+          className={classes.media}
+          image={product.images[0].image_url}
+          title="Imagem do produto"
         />
-        {
-          product.images && product.images.length > 0
-          && (
-            <CardMedia
-              className={classes.media}
-              image={product.images[0].image_url}
-              title="Imagem do produto"
-            />
-          )
-        }
-        <CardActions disableSpacing style={{ justifyContent: 'center' }}>
+        </div>
+        <CardActions disableSpacing style={{ justifyContent: 'center' }} style={{marginTop: '-55px', paddingBottom: '55px'}}>
           <IconButton aria-label="Adicionar aos favoritos">
             <FavoriteIcon />
           </IconButton>

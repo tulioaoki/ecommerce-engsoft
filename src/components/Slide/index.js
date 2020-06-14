@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    withStyles,
+    withStyles, Grid
 } from '@material-ui/core';
 
 import ProductCard from '../HomePageComponents/ProductCard';
@@ -16,12 +16,10 @@ const styles = () => ({
 
 
     root: {
-        
+
         width: '100%',
         position: 'relative',
         display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
         padding: '10px 0 10px 0',
     },
 
@@ -30,32 +28,27 @@ const styles = () => ({
         display: 'flex',
         width: '100%',
         justifyContent: 'space-around',
-        alignItems: 'center',
 
     },
 
-    buttonLeft: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-
-    buttonRight: {
+    buttonPos: {
 
         display: 'flex',
         alignItems: 'center',
+        width: '40px',
     },
 
     button: {
 
         padding: '0px',
-        backgroundColor: '#2C719C',
+        backgroundColor: '#1F509C',
         transition: 'opacity 0.4s',
         '&:hover': {
-            opacity: 0.8,
-            backgroundColor: '#2C719C',
+            //opacity: 0.8,
+            backgroundColor: '#1a237e',
         },
     },
-
+    
     icon: {
         color: 'white',
         fontSize: 40,
@@ -77,7 +70,7 @@ export class Slider extends PureComponent {
     state = {
 
         produtoExibidoInicial: 0,
-        produtoExibidoFinal: this.props.images.length-1,
+        produtoExibidoFinal: this.props.images.length - 1,
         forward: true
 
     };
@@ -145,14 +138,14 @@ export class Slider extends PureComponent {
 
             <div className='container'>
 
+                <Grid container spacing={6}  >
 
-                <div className={classes.root}>
+                    <Grid item xs={12} sm={2} className={classes.buttonPos} style={{justifyContent: 'flex-end',padding: '0px 0px 0px 0px'}}>
 
-                    <div className={classes.buttonLeft}>
                         <IconButton
                             className={classes.button}
                             aria-label="Arrow Left"
-                            onClick={() => this.backImage()}
+                            onClick={() => this.backImage()}                           
                         >
 
                             <ChevronLeftIcon
@@ -161,57 +154,61 @@ export class Slider extends PureComponent {
                             />
 
                         </IconButton>
-                    </div>
 
-                    <div className={classes.produtos}>
-                    
-                        {
-                            console.log('Valor Inicial da ultima posição do vetor: ' + this.state.produtoExibidoFinal),
+                    </Grid>
 
-                            vetor.map(() => {
+                    {
 
-                                i = i + 1;
+                        vetor.map(() => {
 
-                                if (this.state.forward) { // Useio o botao da direita
+                            i = i + 1;
 
-                                    index = ((this.state.produtoExibidoInicial + i) % images.length);
+                            if (this.state.forward) { // Useio o botao da direita
 
-                                } else {  // Usei o botão da esquerda
+                                index = ((this.state.produtoExibidoInicial + i) % images.length);
 
-                                    index = ((this.state.produtoExibidoFinal + i) % images.length);
-                                }
+                            } else {  // Usei o botão da esquerda
 
-                                if (i === vetor.length - 1) { // Limpar o valor de i para a o proximo produto
+                                index = ((this.state.produtoExibidoFinal + i) % images.length);
+                            }
+
+
+                            produto = images[index];
+
+
+                                if(i === vetor.length -1){
+
                                     i = -1;
                                 }
 
-                                produto = images[index];
+                                return <Grid item xs={12} sm={2} style={{padding: '20px 15px 0px 15px'}}>
 
-                                return <ProductCard
-                                    key={produto.id}
-                                    product={produto}
-                                    variant='normal'
-                                />
+                                            <ProductCard
+                                                key={produto.id}
+                                                product={produto}
+                                                variant='normal'
+                                            />
+                                        </Grid>
+                        })
+                    }
 
-                            })
-                        }
-                    </div>
+                    <Grid item xs={12} sm={2} className={classes.buttonPos} style={{justifyContent: 'flex-start',padding: '0px 0px 0px 0px'}}>
 
-                    <div className={classes.buttonRight}  >
                         <IconButton
                             className={classes.button}
                             aria-label="Arrow Right"
-                            onClick={() => this.forwardImage()}
+                            onClick={() => this.forwardImage()}                            
                         >
                             <ChevronRightIcon
                                 className={classes.icon}
                                 fontSize='inherit'
                                 size='medium'
                             />
-
                         </IconButton>
-                    </div>
-                </div>
+
+                    </Grid>
+
+                </Grid>
             </div>
         );
     }

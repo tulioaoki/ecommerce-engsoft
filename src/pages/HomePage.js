@@ -10,6 +10,7 @@ import Footer from '../components/HomePageComponents/Footer';
 import Servicos from '../components/HomePageComponents/Servicos';
 import MaisVendidos from '../components/HomePageComponents/MaisVendidos';
 import Novidades from '../components/HomePageComponents/Novidade';
+import Promocao from '../components/HomePageComponents/Promocao';
 
 const styles = () => ({
   root: {
@@ -22,6 +23,7 @@ const styles = () => ({
     // backgroundColor: '#e3e8eb',
     flexDirection: 'column',
   },
+  
 });
 
 
@@ -257,17 +259,19 @@ class HomePage extends PureComponent {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <>
         <div className="mainContentHome">
           <PresentationPage />
           <Carrossel />
           <Servicos />
-          {<Novidades/>}
-          <MaisVendidos qtdProdutos={4} images={listaDeProdutos} />
+          <div className='container'>
+            <Novidades/>
+            <Promocao/>
+            <MaisVendidos qtdProdutos={4} images={listaDeProdutos} />
+          </div>
         </div>
-        <Footer showSocialMedia> </Footer>
-        {/* Se o props passado for true, exiba as redes sociai */ }
-      </div>
+          <Footer showSocialMedia> </Footer>
+        </>
     );
   }
 }
