@@ -10,5 +10,5 @@ export default function getCartRequest() {
     }    
     return axios.get(BASE_URL+'cart' , {headers})
         .then( response => response)
-        .catch((error) => {console.log("alallla", error)})
+        .catch((error) => (error))
 }
