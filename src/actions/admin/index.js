@@ -1,6 +1,7 @@
-import getAdminProductsRequest, { addProductRequest, getCategoriesRequest } from './requests';
+import getAdminProductsRequest, { addProductRequest, getCategoriesRequest, editProductRequest } from './requests';
 export const GET_ADMIN_PRODUCTS = 'GET_ADMIN_PRODUCTS';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 
 
@@ -52,5 +53,23 @@ export function handleAdminProducts(payload={}){
   return (dispatch) => getAdminProductsRequest(payload.page, payload.page_size, payload.search)
     .then(({ data }) => {
       dispatch(getAdminProducts({ 'payload': data }));
+    });
+}
+
+function editProduct(payload) {
+  return {
+    type: EDIT_PRODUCT,
+    payload,
+  };
+}
+
+
+export function handleEditProduct(payload){
+  return (dispatch) => editProductRequest(payload)
+    .then(({ data }) => {
+      dispatch(editProduct({ 'payload': data }));
+      if(typeof data !== 'undefined' && data.success){
+        return data.data
+      }
     });
 }

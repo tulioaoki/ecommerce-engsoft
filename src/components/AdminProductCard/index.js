@@ -22,6 +22,7 @@ import { withRouter } from 'react-router-dom';
 import { AZUL_ESCURO } from '../../utils/colors';
 import { withSnackbar } from 'notistack';
 import generateUID from '../../utils/extra';
+import { handleEditProduct } from '../../actions/admin';
 
 
 
@@ -120,11 +121,16 @@ class AdminProductCard extends PureComponent {
     const {
         product,
       } = this.props;
+    let ids = []
+    for(let x of product.categories){
+      ids.push(x.id)
+    }
     this.setState(prevState => ({ 
       ...prevState,
+      id:product.id,
       nome:product.name,
       descricao:product.description,
-      categorias:product.categories,
+      categorias:ids,
       price: product.price,
       offer:product.offer,
       offer_price:product.offer_price,
@@ -147,9 +153,34 @@ class AdminProductCard extends PureComponent {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        const { dispatch } = this.props;
-    }
+      e.preventDefault();
+      const { dispatch } = this.props;
+      const {id,nome, descricao, images, categorias, price, quantity, offer, offer_price} = this.state;
+      let body = {
+          id,
+          name:nome,
+          description:descricao,
+          categories:categorias,
+          price,
+          quantity,
+          images:[],
+          offer,
+          offer_price,
+      }
+      for(let x of Object.entries(images)){
+          body.images.push(x[1])
+      }
+      dispatch(handleEditProduct(body)).then((r) =>
+          {
+              if(typeof r !== 'undefined'){
+                  this.props.enqueueSnackbar('Produto criado com sucesso!',
+                  { variant: 'success', autoHideDuration: 3000, }
+                )
+              }
+          }
+      )
+      handleClose();
+  }
 
     const handleClose = () => {
         this.setState({ open:false })    
@@ -334,6 +365,7 @@ class AdminProductCard extends PureComponent {
                     </Typography>
                     <FormControl style={{minWidth: '90%'}} className={clsx(classes.formControl, classes.noLabel)}>
                         <Select
+                        style={{marginTop:20, width:'90%'}}
                         multiple
                         displayEmpty
                         value={this.state.categorias}
@@ -342,11 +374,11 @@ class AdminProductCard extends PureComponent {
                         input={<Input />}
                         renderValue={(selected) => {
                             if (selected.length === 0) {
-                                return <em>Sem categorias</em>;
+                                return <em>Inserir Categorias</em>;
                             }
                             let list = [];
-                            for(let c in selected){
-                                list.push(this.state.categorias[c].name)
+                            for (let [key, value] of Object.entries(selected)) {
+                                list.push(categories.find(x => x.id === value).name)
                             }
                             return list.join(', ');
                         }}
@@ -354,11 +386,11 @@ class AdminProductCard extends PureComponent {
                         inputProps={{ 'aria-label': 'Without label' }}
                         >
                         <MenuItem disabled value="">
-                            <em> - </em>
+                            <em>Sem categorias</em>
                         </MenuItem>
                         {categories.map((categorie) => (
                             <MenuItem key={categorie.id} value={categorie.id}>
-                            {categorie.name}
+                              {categorie.name}
                             </MenuItem>
                         ))}
                         </Select>

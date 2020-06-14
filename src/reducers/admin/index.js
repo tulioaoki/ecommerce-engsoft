@@ -1,4 +1,4 @@
-import { GET_ADMIN_PRODUCTS, ADD_PRODUCT } from '../../actions/admin';
+import { GET_ADMIN_PRODUCTS, ADD_PRODUCT, EDIT_PRODUCT } from '../../actions/admin';
 
 export default function REDUCER_ADMIN_PRODUCTS(state = {admin_products:[]}, action) {
   const { payload } = action;
@@ -21,6 +21,18 @@ export default function REDUCER_ADMIN_PRODUCTS(state = {admin_products:[]}, acti
       }
       products.unshift(payload.payload.data)
       products = products.slice(0,10)
+      copy.admin_products = products;
+      return {
+        ...copy,
+      };
+    case EDIT_PRODUCT:
+      if( typeof payload.payload === 'undefined'){
+        return {
+          ...copy,
+        }
+      }
+      let index = products.findIndex(x => x.id ===payload.payload.data.id);
+      products[index] = payload.payload.data;
       copy.admin_products = products;
       return {
         ...copy,
