@@ -27,6 +27,14 @@ const styles = () => ({
 });
 
 class SearchBox extends PureComponent {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "",
+    };
+  }
+
   render() {
     const {
       classes,
@@ -37,11 +45,12 @@ class SearchBox extends PureComponent {
       <div className={classes.root}>
         <Paper component="form" className={classes.rootPaper}>
           <InputBase
+            value={this.state.value} onChange={(event) => this.setState({value: event.target.value})}
             className={classes.input}
             placeholder="O que você procura?"
             inputProps={{ 'aria-label': 'O que você procura?' }}
           />
-          <IconButton type="submit" aria-label="search">
+          <IconButton onClick={()=>{history.push('/products?search=' + this.state.value)}} aria-label="search">
             <SearchIcon />
           </IconButton>
         </Paper>

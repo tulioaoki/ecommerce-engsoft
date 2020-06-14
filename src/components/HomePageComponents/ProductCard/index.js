@@ -73,7 +73,6 @@ class ProductCardComponent extends PureComponent {
                 )}*/}
             </>
           )}
-        />
 
         <CardMedia 
           className={classes.media}
@@ -85,7 +84,7 @@ class ProductCardComponent extends PureComponent {
           <IconButton aria-label="Adicionar aos favoritos">
             <FavoriteIcon />
           </IconButton>
-          <Button size="small"  className={classes.buyButton}>
+          <Button size="small" className={classes.buyButton}>
             Comprar
           </Button>
         </CardActions>
