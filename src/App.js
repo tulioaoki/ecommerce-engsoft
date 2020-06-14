@@ -11,6 +11,7 @@ import AboutPage from './pages/AboutPage';
 import CategoriesPage from './pages/CategoriesPage';
 import ContactPage from './pages/ContactPage';
 import CartPage from './pages/CartPage';
+import FavoritesPage from './pages/FavoritesPage';
 
 
 class App extends PureComponent {
@@ -32,6 +33,7 @@ class App extends PureComponent {
           <Route path="/categories" exact component={CategoriesPage} />
           <Route path="/contact" exact component={ContactPage} />
           <Route path="/my-cart" exact component={CartPage} />
+          <Route path="/my-favorites" exact component={FavoritesPage} />
         </>
       </div>
 
