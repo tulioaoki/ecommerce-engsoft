@@ -1,11 +1,12 @@
 import React from 'react'
 
 import { PureComponent } from 'react';
-import { Button, DialogActions, DialogContentText, FormControl, Grid, IconButton, Input, MenuItem, Select, TextField, Typography, withStyles } from '@material-ui/core';
+import { Button, DialogActions, DialogContentText, FormControl, Grid, IconButton, Input, MenuItem, Select, TextField, Typography, withStyles, Checkbox, FormControlLabel, Avatar } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -15,6 +16,7 @@ import { handleAdminProducts, handleAddProduct, handleGetAllCategories } from '.
 import { AZUL_ESCURO } from '../../../utils/colors';
 import AdminProductCard from '../../AdminProductCard';
 import SearchBox from '../../TopBarComponents/SearchBox';
+import generateUID from '../../../utils/extra';
 
 
 const styles = () => ({
@@ -53,10 +55,11 @@ export class ItemGridDisplay extends PureComponent {
           name:'',
           description:'',
           quantity:0,
-          imagesNumber:0,
           images:{},
           categorias:[],
           price:0,
+          offer:false,
+          offer_price:0,
         };
       }
 
@@ -101,7 +104,7 @@ export class ItemGridDisplay extends PureComponent {
         const handleSubmit = (e) => {
             e.preventDefault();
             const { dispatch } = this.props;
-            const {name, description, images, categorias, price, quantity} = this.state;
+            const {name, description, images, categorias, price, quantity, offer, offer_price} = this.state;
             let body = {
                 name,
                 description,
@@ -109,6 +112,8 @@ export class ItemGridDisplay extends PureComponent {
                 price,
                 quantity,
                 images:[],
+                offer,
+                offer_price,
             }
             for(let x of Object.entries(images)){
                 body.images.push({image_url:x[1]})
@@ -131,6 +136,12 @@ export class ItemGridDisplay extends PureComponent {
             });
         };
 
+        const switchBoolean = (value) => {
+            this.setState({
+                offer: value
+            });
+        };
+
         const handleChangeImages = e => {
             let clone = this.state;
             let images = this.state.images
@@ -142,30 +153,39 @@ export class ItemGridDisplay extends PureComponent {
         };
         
         const addImage = e => {
-            let newImages = this.state.images
-            let imagesN  = this.state.imagesNumber
-            let imageName = `image_${imagesN}`
+            let newImages = Object.assign({}, this.state.images);
+            let imageName = generateUID()
             newImages[imageName] = ""
-            this.setState(prevState => ({...prevState,imagesNumber: prevState.imagesNumber+1, images:newImages}))
+            this.setState(prevState => ({...prevState, images:newImages}))
+        };
+
+        const removeImage = (e,key) => {
+            let newImages = Object.assign({}, this.state.images);
+            delete newImages[key]
+            this.setState(prevState => ({...prevState, images:newImages}))
         };
         
         let rows = []; 
-        for (let i=0; i < state.imagesNumber; i++) {
-             let v =  this.state.images[`image_${i}`]
+        for (let key of Object.keys(state.images)) {
+             let v =  state.images[key]
              rows.push(
+                <div style={{display:'flex', width:'100%', alignItems: 'center', justifyContent:'center'}}>
+                <Avatar alt={key} src={v} className={classes.large} style={{marginRight:'5px'}}/>
                 <TextField
                     autoFocus
                     margin="dense"
-                    id={`image_${i}`}
+                    id={key}
                     label="Nova Imagem"
                     type="text"
-                    name={`image_${i}`}
+                    name={key}
                     fullWidth
                     placeholder='Url da Imagem'
                     className='formField'
                     onChange={handleChangeImages}
                     value={v}
                 />
+                <IconButton onClick={(e)=>removeImage(e,key)} style={{'border-radius':'100%'}}><DeleteIcon color="secondary" fontSize="medium"/></IconButton>
+                </div>
             );
         }
         return (
@@ -213,18 +233,17 @@ export class ItemGridDisplay extends PureComponent {
                     value={this.state.nome}
                     />
                     <TextField
-                    autoFocus
-                    margin="dense"
-                    id="descricao"
-                    label="Descrição"
-                    type="text"
-                    name="description"
-                    fullWidth
-                    placeholder='Descrição do Produto'
-                    className='formField'
-                    onChange={handleChange}
-                    value={this.state.descricao}
+                      id="descricao"
+                      fullWidth={true}
+                      multiline={true}
+                      rows={5}
+                      name="descricao"
+                      label="Descreva o produto"
+                      placeholder="Descrição do produto"
+                      onChange={handleChange}
+                      value={this.state.descricao}
                     />
+                    <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
                     <TextField
                     autoFocus
                     margin="dense"
@@ -239,6 +258,7 @@ export class ItemGridDisplay extends PureComponent {
                     value={this.state.price}
                     />
                     <TextField
+                    style={{marginLeft:'10px'}}
                     autoFocus
                     margin="dense"
                     id="quantity"
@@ -251,11 +271,36 @@ export class ItemGridDisplay extends PureComponent {
                     onChange={handleChange}
                     value={this.state.quantity}
                     />
+                    </div>
+                    <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
+                    <FormControlLabel
+                        style={{marginRight: '15px'}}
+                        labelPlacement='start' 
+                        control={
+                            <       Checkbox checked={this.state.offer} onChange={(event) => switchBoolean(event.target.checked)} />
+                        }
+                        label="Ativar oferta?"
+                    />
+                    <TextField
+                    autoFocus
+                    disabled={!this.state.offer}
+                    margin="dense"
+                    id="offer_price"
+                    label="Preço de Oferta"
+                    type="number"
+                    name="offer_price"
+                    fullWidth
+                    placeholder='Preço do Produto em Oferta'
+                    className='formField'
+                    onChange={handleChange}
+                    value={this.state.offer_price}
+                    />
+                    </div>
+                    {rows}
                     <Typography>
                         Adicionar Imagem <IconButton onClick={addImage} style={{'border-radius':'100%'}}><AddCircleIcon style={{color:AZUL_ESCURO}} fontSize="large"/></IconButton>
                     </Typography>
-                    {rows}
-                    <FormControl className={clsx(classes.formControl, classes.noLabel)}>
+                    <FormControl style={{minWidth: '90%'}} className={clsx(classes.formControl, classes.noLabel)}>
                         <Select
                         style={{marginTop:20, width:'90%'}}
                         multiple

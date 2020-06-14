@@ -1,5 +1,7 @@
-import { Select, TextField, withStyles } from '@material-ui/core';
+import { Select, TextField, withStyles, FormControlLabel, Checkbox, IconButton, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -18,6 +20,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { AZUL_ESCURO } from '../../utils/colors';
+import { withSnackbar } from 'notistack';
+import generateUID from '../../utils/extra';
 
 
 
@@ -39,10 +43,10 @@ const styles = (theme) => ({
     },
   },
   dialogPaper: {
-    minHeight: '60vh',
-    maxHeight: '60vh',
-    minWidth: '60vw',
-    maxWidth: '60vw',
+    minHeight: '80vh',
+    maxHeight: '80vh',
+    minWidth: '80vw',
+    maxWidth: '80vw',
   },
   formControl: {
     margin: theme.spacing(1),
@@ -91,6 +95,10 @@ class AdminProductCard extends PureComponent {
             categorias:['Selecione a Categoria'],
             categorie:'',
             todasCategorias:[],
+            offer:false,
+            offer_price:0,
+            images:{},
+            quantity:0,
         };
     }
   getCategoriesString() {
@@ -118,6 +126,10 @@ class AdminProductCard extends PureComponent {
       descricao:product.description,
       categorias:product.categories,
       price: product.price,
+      offer:product.offer,
+      offer_price:product.offer_price,
+      images:product.images,
+      quantity: product.quantity,
     }))
   }
 
@@ -126,7 +138,7 @@ class AdminProductCard extends PureComponent {
       product,
       classes,
       variant,
-      theme
+      categories,
     } = this.props;
 
 
@@ -149,8 +161,58 @@ class AdminProductCard extends PureComponent {
         });
     };
 
-    const changeSelect = name => event => {
-        this.setState({ [name]: Number(event.target.value) });
+    const switchBoolean = (value) => {
+      this.setState({
+          offer: value
+      });
+      };
+
+    const addImage = e => {
+        let newImages = Object.assign({}, this.state.images);
+        let imageName = generateUID()
+        newImages[imageName] = {"image_url":''}
+        this.setState(prevState => ({...prevState, images:newImages}))
+    };
+
+    const handleChangeImages = e => {
+      let clone = this.state;
+      let images = this.state.images
+      let obj = images[e.target.name]
+      obj['image_url'] = e.target.value
+      clone.images[e.target.name] = obj
+      this.setState({
+          clone,
+      })
+  };
+
+    const removeImage = (e,key) => {
+        let newImages = Object.assign({}, this.state.images);
+        delete newImages[key]
+        this.setState(prevState => ({...prevState, images:newImages}))
+    };
+
+    let rows = []; 
+    for (let key of Object.keys(this.state.images)) {
+        let v =  this.state.images[key]
+        rows.push(
+            <div style={{display:'flex', width:'100%', alignItems: 'center', justifyContent:'center'}}>
+            <Avatar alt={key} src={v.image_url} className={classes.large} style={{marginRight:'5px'}}/>
+            <TextField
+                autoFocus
+                margin="dense"
+                id={key}
+                label="Nova Imagem"
+                type="text"
+                name={key}
+                fullWidth
+                placeholder='Url da Imagem'
+                className='formField'
+                onChange={handleChangeImages}
+                value={v.image_url}
+            />
+            <IconButton onClick={(e)=>removeImage(e,key)} style={{'border-radius':'100%'}}><DeleteIcon color="secondary" fontSize="medium"/></IconButton>
+            </div>
+        );
     }
     
     return (
@@ -203,18 +265,17 @@ class AdminProductCard extends PureComponent {
                     value={this.state.nome}
                     />
                     <TextField
-                    autoFocus
-                    margin="dense"
-                    id="descricao"
-                    label="Descrição"
-                    type="text"
-                    name="descricao"
-                    fullWidth
-                    placeholder='Descrição do Produto'
-                    className='formField'
-                    onChange={handleChange}
-                    value={this.state.descricao}
+                      id="descricao"
+                      fullWidth={true}
+                      multiline={true}
+                      rows={5}
+                      name="descricao"
+                      label="Descreva o produto"
+                      placeholder="Descrição do produto"
+                      onChange={handleChange}
+                      value={this.state.descricao}
                     />
+                    <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
                     <TextField
                     autoFocus
                     margin="dense"
@@ -228,7 +289,50 @@ class AdminProductCard extends PureComponent {
                     onChange={handleChange}
                     value={this.state.price}
                     />
-                    <FormControl className={clsx(classes.formControl, classes.noLabel)}>
+                    <TextField
+                    style={{marginLeft:'10px'}}
+                    autoFocus
+                    margin="dense"
+                    id="quantity"
+                    label="Quantidade"
+                    type="number"
+                    name="quantity"
+                    fullWidth
+                    placeholder='Quantidade do Produto'
+                    className='formField'
+                    onChange={handleChange}
+                    value={this.state.quantity}
+                    />
+                    </div>
+                    <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
+                    <FormControlLabel
+                        style={{marginRight: '15px'}}
+                        labelPlacement='start' 
+                        control={
+                            <       Checkbox checked={this.state.offer} onChange={(event) => switchBoolean(event.target.checked)} />
+                        }
+                        label="Ativar oferta?"
+                    />
+                    <TextField
+                    autoFocus
+                    disabled={!this.state.offer}
+                    margin="dense"
+                    id="offer_price"
+                    label="Preço de Oferta"
+                    type="number"
+                    name="offer_price"
+                    fullWidth
+                    placeholder='Preço do Produto em Oferta'
+                    className='formField'
+                    onChange={handleChange}
+                    value={this.state.offer_price}
+                    />
+                    </div>
+                    {rows}
+                    <Typography>
+                        Adicionar Imagem <IconButton onClick={addImage} style={{'border-radius':'100%'}}><AddCircleIcon style={{color:AZUL_ESCURO}} fontSize="large"/></IconButton>
+                    </Typography>
+                    <FormControl style={{minWidth: '90%'}} className={clsx(classes.formControl, classes.noLabel)}>
                         <Select
                         multiple
                         displayEmpty
@@ -238,7 +342,7 @@ class AdminProductCard extends PureComponent {
                         input={<Input />}
                         renderValue={(selected) => {
                             if (selected.length === 0) {
-                                return <em>Placeholder</em>;
+                                return <em>Sem categorias</em>;
                             }
                             let list = [];
                             for(let c in selected){
@@ -250,9 +354,9 @@ class AdminProductCard extends PureComponent {
                         inputProps={{ 'aria-label': 'Without label' }}
                         >
                         <MenuItem disabled value="">
-                            <em>Placeholder</em>
+                            <em> - </em>
                         </MenuItem>
-                        {this.state.categorias.map((categorie) => (
+                        {categories.map((categorie) => (
                             <MenuItem key={categorie.id} value={categorie.id}>
                             {categorie.name}
                             </MenuItem>
@@ -289,4 +393,14 @@ AdminProductCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect()(withStyles(styles)(AdminProductCard)));
+AdminProductCard.propTypes = {
+  enqueueSnackbar: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = ({ REDUCER_CATEGORIES }, props) => ({
+  categories:REDUCER_CATEGORIES.categories,
+})
+
+
+const AdminProductCardComponentsWithSnack = withSnackbar(AdminProductCard);
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(AdminProductCardComponentsWithSnack)));

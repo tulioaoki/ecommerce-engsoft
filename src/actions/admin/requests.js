@@ -38,7 +38,7 @@ export function addProductRequest(payload) {
         'Accept': 'application/json',
         'Authorization': `Token ${localStorage.getItem('token')}`, //deve ser passa
     }
-    let url = 'http://localhost:8000/'+`products`;
+    let url = BASE_URL+`products`;
     return axios.post(url,payload ,{headers})
         .then(response => response)
         .catch((error) =>  error)
