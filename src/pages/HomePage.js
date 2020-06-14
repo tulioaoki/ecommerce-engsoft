@@ -23,6 +23,7 @@ const styles = () => ({
     // backgroundColor: '#e3e8eb',
     flexDirection: 'column',
   },
+  
 });
 
 
@@ -258,18 +259,19 @@ class HomePage extends PureComponent {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <>
         <div className="mainContentHome">
           <PresentationPage />
           <Carrossel />
           <Servicos />
-          <Novidades/>
-          <Promocao/>
-          <MaisVendidos qtdProdutos={4} images={listaDeProdutos} />
+          <div className='container'>
+            <Novidades/>
+            <Promocao/>
+            <MaisVendidos qtdProdutos={4} images={listaDeProdutos} />
+          </div>
         </div>
-        <Footer showSocialMedia> </Footer>
-        {/* Se o props passado for true, exiba as redes sociai */ }
-      </div>
+          <Footer showSocialMedia> </Footer>
+        </>
     );
   }
 }
