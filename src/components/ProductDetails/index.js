@@ -187,7 +187,7 @@ class ProductDetails extends PureComponent {
             </Paper>
 
             <Paper variant="outlined" style={{ paddingBottom:'25px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', textAlign: 'left' }}>
-              <Typography component="p" variant="p" className={classes.title_CEP}>
+              <Typography component="p"  className={classes.title_CEP}>
                 calcular frete e prazo
               </Typography>
 
