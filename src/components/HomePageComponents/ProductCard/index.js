@@ -73,7 +73,7 @@ class ProductCardComponent extends PureComponent {
                 )}*/}
             </>
           )}
-
+        />
         <CardMedia 
           className={classes.media}
           image={product.images[0].image_url}

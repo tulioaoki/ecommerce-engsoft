@@ -38,7 +38,7 @@ class HeaderIcons extends PureComponent {
         </IconButton>
         <IconButton color="inherit">
           <Badge color="secondary">
-            <FavoriteIcon fontSize="default" onClick={() => (history.push('/my-favorite'))}/>
+            <FavoriteIcon fontSize="default" onClick={() => (history.push('/my-favorites'))}/>
           </Badge>
         </IconButton>
         <IconButton color="inherit" onClick={() => (history.push('/my-cart'))}>
