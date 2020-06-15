@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import LoginForm from '../components/Forms/Login';
 import TopBar from '../components/HomePageComponents/TopBar';
 import NavBar from '../components/HomePageComponents/NavBar';
 import Footer from '../components/HomePageComponents/Footer';
+import FavoritesComponents from '../components/FavoritesComponents';
 
-class Login extends PureComponent {
+class FavoritesPage extends PureComponent {
   render() {
     return (
       <>
@@ -12,7 +12,7 @@ class Login extends PureComponent {
           <TopBar />
           <NavBar />
           <div className='container'>
-            <LoginForm />
+            <FavoritesComponents />
           </div>
         </div>
         <Footer />
@@ -21,4 +21,4 @@ class Login extends PureComponent {
   }
 }
 
-export default Login;
+export default FavoritesPage;

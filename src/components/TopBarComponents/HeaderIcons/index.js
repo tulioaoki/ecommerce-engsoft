@@ -27,8 +27,8 @@ class HeaderIcons extends PureComponent {
     const {
       classes,
       history,
+      cart,
     } = this.props;
-
     return (
       <div className={classes.icons} style={{ display: 'flex' }}>
         <IconButton color="inherit">
@@ -38,11 +38,11 @@ class HeaderIcons extends PureComponent {
         </IconButton>
         <IconButton color="inherit">
           <Badge color="secondary">
-            <FavoriteIcon fontSize="default" />
+            <FavoriteIcon fontSize="default" onClick={() => (history.push('/my-favorite'))}/>
           </Badge>
         </IconButton>
         <IconButton color="inherit" onClick={() => (history.push('/my-cart'))}>
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={typeof cart !== 'undefined' ? cart.length : 0} color="secondary">
             <ShoppingCartRoundedIcon fontSize="default" />
           </Badge>
         </IconButton>
@@ -56,4 +56,8 @@ HeaderIcons.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect()(withStyles(styles)(HeaderIcons)));
+const mapStateToProps = ({ REDUCER_CART }, props) => ({
+  cart:REDUCER_CART.cart_products,
+});
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(HeaderIcons)));
