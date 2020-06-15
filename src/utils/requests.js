@@ -1,29 +1,22 @@
+import Axios from "axios";
+
 export const BASE_URL = 'https://ecommerce-engsoft.herokuapp.com/';
 
 // Exemplo de login
 export default function authenticateUserRequest(login, password) {
   const body = {
-    login,
+    username:login,
     password,
   };
-  const hdrs = {
-    method: 'POST',
-    body,
-    headers: new Headers({
-      'content-type': 'application/json',
-      Accept: 'application/json',
-    }),
-  };
-  return Promise.all(
-    [
-      fetch(`${BASE_URL}login/`, hdrs).then((res) => res.json()).catch(() => ([])),
-    ],
-  )
-    .then(([data]) => ({
-      data,
-    }))
-    .catch((err) => {
-      console.error(err);
-      return null;
-    });
+  let headers = {
+    'content-type': 'application/json',
+    'Accept': 'application/json',
+}    
+return Axios.post(BASE_URL+'login' , body,{headers})
+    .then( response => {
+      localStorage.setItem("token", response.data.data.token); 
+      console.log("TOKE",localStorage.getItem("token"))
+      return response
+    })
+    .catch((error) => (error))
 }

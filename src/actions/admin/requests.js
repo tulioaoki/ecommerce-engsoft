@@ -2,7 +2,6 @@ import {BASE_URL} from '../../utils/requests';
 import axios from 'axios';
 // Exemplo de login
 export default function getAdminProductsRequest(page=1, page_size=10, search=null) {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -18,7 +17,6 @@ export default function getAdminProductsRequest(page=1, page_size=10, search=nul
 }
 
 export function getCategoriesRequest() {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -32,7 +30,6 @@ export function getCategoriesRequest() {
 
 
 export function addProductRequest(payload) {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -46,7 +43,6 @@ export function addProductRequest(payload) {
 
 
 export function addCategoriesRequest(payload) {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -59,7 +55,6 @@ export function addCategoriesRequest(payload) {
 }
 
 export function editCategoriesRequest(payload) {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -72,7 +67,6 @@ export function editCategoriesRequest(payload) {
 }
 
 export function deleteCategoriesRequest(payload) {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -86,7 +80,6 @@ export function deleteCategoriesRequest(payload) {
 
 
 export function editProductRequest(payload) {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar ! Isto deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',

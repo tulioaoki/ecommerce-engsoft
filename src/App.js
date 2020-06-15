@@ -19,6 +19,7 @@ import FavoritesPage from './pages/FavoritesPage';
 class App extends PureComponent {
   constructor(props) {
     super(props);
+    localStorage.setItem("token", 'null'); 
     this.state = {
     };
   }

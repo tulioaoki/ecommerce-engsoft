@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { AZUL_ESCURO } from '../../../utils/colors';
+import { handleLoginUser } from '../../../actions/User';
 
 const styles = () => ({
   btnStyle: {
@@ -28,40 +29,32 @@ class LoginForm extends PureComponent {
     super(props);
     this.state = {
       login: '',
-      pass: '',
+      password: '',
       newLogin: '',
       newPass: ''
     };
   }
 
   render() {
-    const { classes, /** history, cadastro**/ } = this.props;
-    /**const { pass, login,newLogin,newPass } = this.state;
+    const { classes, dispatch /** history, cadastro**/ } = this.props;
 
-
-    const handleChangeLogin = (event) => {
-      const { value } = event.target;
-      this.setState((prevState) => ({ ...prevState, login: value }));
-    };
-
-    const handleChangePass = (event) => {
-      const { value } = event.target;
-      this.setState((prevState) => ({ ...prevState, pass: value }));
-    };
-
-    const handleChangeNewLogin = (event) => {
-      const { value } = event.target;
-      this.setState((prevState) => ({ ...prevState, newlogin: value }));
-    };
-
-    const onClick = () => {
-      history.push('/home/');
-    }; **/
 
     const handleChangeNewPass = (event) => {
       const { value } = event.target;
       this.setState((prevState) => ({ ...prevState, newpass: value }));
     };
+
+    const handleChange = e => {
+      this.setState({
+          [e.target.name]: e.target.value
+      });
+  };
+
+    const handleLogin = () => {
+      console.log(this.state)
+      const {login, password} = this.state;
+      dispatch(handleLoginUser({login,password}))
+    }
 
     
     return (
@@ -74,18 +67,19 @@ class LoginForm extends PureComponent {
             <TextField
               variant="outlined"
               margin="normal"
+              onChange={handleChange}
               required
               fullWidth
               id="email"
               label="Email Address"
-              name="email"
+              name="login"
               autoComplete="email"
               autoFocus
-              onChange={handleChangeNewPass}
             />
             <TextField
               variant="outlined"
               margin="normal"
+              onChange={handleChange}
               required
               fullWidth
               name="password"
@@ -95,12 +89,12 @@ class LoginForm extends PureComponent {
               autoComplete="current-password"
             />
             <Button className={classes.btnStyle}
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
+              onClick={handleLogin}
             >
-              Entrar
+              Logar
             </Button>
           </form>
 
@@ -134,7 +128,6 @@ class LoginForm extends PureComponent {
               autoComplete="current-password"
             />
             <Button className={classes.btnStyle}
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
