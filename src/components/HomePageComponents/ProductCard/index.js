@@ -1,19 +1,18 @@
-import React, { PureComponent } from 'react';
+import { withStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import {
-  withStyles,
-} from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import CardMedia from '@material-ui/core/CardMedia';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { AZUL_ESCURO } from '../../../utils/colors';
+import { handleAddFavorites, handleDeleteFavorites } from '../../../actions/favorites';
 
 const styles = () => ({
   media: {
@@ -33,6 +32,12 @@ const styles = () => ({
 });
 
 class ProductCardComponent extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
   getCategoriesString() {
     const {
       product,
@@ -53,10 +58,24 @@ class ProductCardComponent extends PureComponent {
       product,
       classes,
       variant,
+      dispatch,
+      favorites,
     } = this.props;
 
+    let isFavorite = favorites.reduce((i,atual) => {
+      return (i || atual.id === product.id)
+    }, false)
+
+    const handleFavorite = () =>{
+      if(!isFavorite){
+        dispatch(handleAddFavorites(product))
+      }else{
+        dispatch(handleDeleteFavorites(product))
+      }
+    }
+    
     return (
-      <Card style={{ maxWidth: variant === 'small' ? 280 : 320}} variant="outlined" style={{height: '100%'}}> 
+      <Card style={{ maxWidth: variant === 'small' ? 280 : 320, height: '100%'}} variant="outlined"> 
         <div style={{minHeight: '100%'}}>
         <CardHeader 
           title={product.name}
@@ -73,7 +92,7 @@ class ProductCardComponent extends PureComponent {
                 )}*/}
             </>
           )}
-
+        />
         <CardMedia 
           className={classes.media}
           image={product.images[0].image_url}
@@ -81,8 +100,8 @@ class ProductCardComponent extends PureComponent {
         />
         </div>
         <CardActions disableSpacing style={{ justifyContent: 'center' }} style={{marginTop: '-55px', paddingBottom: '55px'}}>
-          <IconButton aria-label="Adicionar aos favoritos">
-            <FavoriteIcon />
+          <IconButton onClick={handleFavorite} aria-label="Adicionar aos favoritos">
+            <FavoriteIcon style={{color: isFavorite ? 'red' : 'gray'}} />
           </IconButton>
           <Button size="small" className={classes.buyButton}>
             Comprar
@@ -105,4 +124,10 @@ ProductCardComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect()(withStyles(styles)(ProductCardComponent)));
+
+const mapStateToProps = ({ REDUCER_CART, REDUCER_FAVORITES }, props) => ({
+  cart:REDUCER_CART.cart_products,
+  favorites:REDUCER_FAVORITES.favorites,
+});
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(ProductCardComponent)));

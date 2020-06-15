@@ -161,8 +161,6 @@ class ContactComponents extends PureComponent {
       anchorEl: null,
       selectedIndex: 0,
     };
-
-    console.log(this.state.nome)
   }
 
 

@@ -55,7 +55,7 @@ class FavoritesComponents extends PureComponent {
                     unidade: '4 unidades',
                     peso: '61g - peso do produto',
                     quantidade: 1,
-                    valor_unitario: 39.90,
+                    price: 39.90,
                 },
                 {
                     id: 1,
@@ -65,7 +65,7 @@ class FavoritesComponents extends PureComponent {
                     unidade: '1 unidades',
                     peso: '1g - peso do produto',
                     quantidade: 2,
-                    valor_unitario: 39.90,
+                    price: 39.90,
                 },
                 {
                     id: 2,
@@ -75,7 +75,7 @@ class FavoritesComponents extends PureComponent {
                     unidade: '5 unidades',
                     peso: '90g - peso do produto',
                     quantidade: 3,
-                    valor_unitario: 39.90,
+                    price: 39.90,
                 },
                 {
                     id: 3,
@@ -85,7 +85,7 @@ class FavoritesComponents extends PureComponent {
                     unidade: '10 unidades',
                     peso: '61g - peso do produto',
                     quantidade: 4,
-                    valor_unitario: 39.90,
+                    price: 39.90,
                 },
             ],
         };
@@ -103,6 +103,7 @@ class FavoritesComponents extends PureComponent {
         const {
             history,
             classes,
+            cart,
         } = this.props;
         const image = medicine;
 
@@ -126,14 +127,14 @@ class FavoritesComponents extends PureComponent {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                {this.state.cart.map((row) => (
+                                {typeof cart !== 'undefined' && cart.map((row) => (
                                     <TableRow key={row.id}>
                                         <TableCell onClick={()=>{history.push(`/produto/${row.id}`)}} component="th" scope="row">
-                                            <img src={row.image} alt="produto" style={{height: '100px'}}/>
+                                            <img src={typeof row.images !== 'undefined' ? row.images[0].image_url : ''} alt="produto" style={{height: '100px'}}/>
                                         </TableCell>
                                         <TableCell onClick={()=>{history.push(`/produto/${row.id}`)}}>
                                             <Typography style={{fontWeight: 900}}>
-                                                {row.item}
+                                                {row.name}
                                             </Typography>
                                             <Typography style={{color: '#c4c4c4', display: 'block'}}>
                                                 {row.marca}
@@ -146,7 +147,7 @@ class FavoritesComponents extends PureComponent {
                                             </Typography>
                                         </TableCell>
                                         
-                                        <TableCell align="right">R$ {(row.valor_unitario).toFixed(2)}</TableCell>
+                                        <TableCell align="right">R$ {(row.price).toFixed(2)}</TableCell>
                                         <TableCell align="right">
                                             <Button onClick={()=>{this.removeFromCart(row.id)}}>
                                                 <DeleteIcon />
@@ -172,6 +173,16 @@ class FavoritesComponents extends PureComponent {
 FavoritesComponents.propTypes = {
     classes: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+    cart: PropTypes.array.isRequired,
 };
 
-export default withRouter(connect()(withStyles(styles)(FavoritesComponents)));
+FavoritesComponents.defaultProps = {
+    cart:[],
+};
+
+const mapStateToProps = ({ info,REDUCER_FAVORITES }, props) => ({
+    info,
+    cart:REDUCER_FAVORITES.favorites,
+});
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(FavoritesComponents)));

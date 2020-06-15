@@ -10,6 +10,8 @@ import Badge from '@material-ui/core/Badge';
 import {
   withStyles,
 } from '@material-ui/core';
+import { handleGetCart } from '../../../actions/cart';
+import { handleGetFavorites } from '../../../actions/favorites';
 
 const styles = () => ({
   icons: {
@@ -23,11 +25,19 @@ const styles = () => ({
 });
 
 class HeaderIcons extends PureComponent {
+
+  componentDidMount(){
+    const { dispatch} = this.props
+    dispatch(handleGetCart())
+    dispatch(handleGetFavorites())
+  }
+
   render() {
     const {
       classes,
       history,
       cart,
+      favorites,
     } = this.props;
     return (
       <div className={classes.icons} style={{ display: 'flex' }}>
@@ -37,8 +47,8 @@ class HeaderIcons extends PureComponent {
           </Badge>
         </IconButton>
         <IconButton color="inherit">
-          <Badge color="secondary">
-            <FavoriteIcon fontSize="default" onClick={() => (history.push('/my-favorite'))}/>
+          <Badge badgeContent={typeof favorites !== 'undefined' ? favorites.length : 0} color="secondary">
+            <FavoriteIcon fontSize="default" onClick={() => (history.push('/my-favorites'))}/>
           </Badge>
         </IconButton>
         <IconButton color="inherit" onClick={() => (history.push('/my-cart'))}>
@@ -56,8 +66,9 @@ HeaderIcons.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ REDUCER_CART }, props) => ({
+const mapStateToProps = ({ REDUCER_CART, REDUCER_FAVORITES }, props) => ({
   cart:REDUCER_CART.cart_products,
+  favorites:REDUCER_FAVORITES.favorites,
 });
 
 export default withRouter(connect(mapStateToProps)(withStyles(styles)(HeaderIcons)));
