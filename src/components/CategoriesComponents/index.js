@@ -16,8 +16,6 @@ import { withRouter } from 'react-router-dom';
 import { TITLE } from '../../utils/colors';
 
 
-
-
 const styles = () => ({
     root: {
         flexGrow: 1,

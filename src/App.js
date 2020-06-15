@@ -31,6 +31,7 @@ class App extends PureComponent {
           <Route path="/" exact component={HomePage} />
           <Route path="/login" exact component={Login} />
           <Route path="/products" exact component={ListPage} />
+          <Route path="/produto" exact component={ProductDetailsPage} />
           <Route path="/my-profile" exact component={ProfilePage} />
           <Route path="/my-favorites" exact component={FavoritesPage} />
           <Route path="/produto"  component={ProductDetailsPage} />
@@ -38,9 +39,9 @@ class App extends PureComponent {
           <Route path="/categories" exact component={CategoriesPage} />
           <Route path="/contact" exact component={ContactPage} />
           <Route path="/my-cart" exact component={CartPage} />
-
           {/* Admin Pages */}
           <Route path="/admin" exact component={AdminMainPage} />
+          <Route path="/my-favorites" exact component={FavoritesPage} />
         </>
       </div>
 

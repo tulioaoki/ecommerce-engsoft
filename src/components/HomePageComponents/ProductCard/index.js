@@ -75,9 +75,11 @@ class ProductCardComponent extends PureComponent {
     }
     
     return (
+
       <Card style={{ maxWidth: variant === 'small' ? 280 : 320, height: '100%'}} variant="outlined"> 
         <div style={{minHeight: '100%'}}>
         <CardHeader 
+
           title={product.name}
           subheader={(
             <>

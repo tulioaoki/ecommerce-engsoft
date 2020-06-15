@@ -19,6 +19,7 @@ import { withRouter } from 'react-router-dom';
 import medicine from '../../static/images/remedio.png';
 import { AZUL_ESCURO, TITLE } from '../../utils/colors';
 
+
 const styles = () => ({
     root: {
         flexGrow: 1,
@@ -154,7 +155,7 @@ class CartComponents extends PureComponent {
         this.setState({
             cepInfo: 'loading'
         });
-        let cepInfo = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+        await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
         .then((response) => {
             this.setState({
                 cepInfo: response.data
@@ -292,7 +293,7 @@ class CartComponents extends PureComponent {
                             </Button>
 
                             {this.state.cepInfo?
-                            this.state.cepInfo !== 'invalid' ? 
+                                this.state.cepInfo !== 'invalid' ? 
                                 this.state.cepInfo === 'loading' ? (
                                     <CircularProgress style={{display: 'block'}}/>
                                 ):(
@@ -327,6 +328,7 @@ class CartComponents extends PureComponent {
                                 </strong>
                             </Typography>
                             <Typography component="p"  className={classes.title_CEP}>
+
                                 10x s/ juros de R$ {(this.state.cart.reduce((totalValue, product) => totalValue += (product.product_price * product.quantity),0).toFixed(2)/10).toFixed(2)}
                             </Typography>
                         </Paper>
