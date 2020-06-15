@@ -26,6 +26,7 @@ export function deleteFavoritesRequest(payload) {
 }
 
 export function addFavoritesRequest(payload) {
+    console.log(payload);
     localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar, deve ser setado no login
     let headers = {
         'content-type': 'application/json',

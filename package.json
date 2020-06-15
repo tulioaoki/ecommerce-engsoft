@@ -19,6 +19,7 @@
     "browser-image-compression": "^1.0.6",
     "classnames": "latest",
     "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
     "image-compressor.js": "^1.1.4",
     "material-ui-pickers": "^2.2.4",
     "notistack": "^0.9.0",

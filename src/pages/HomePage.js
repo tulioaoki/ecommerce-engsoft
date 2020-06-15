@@ -259,11 +259,7 @@ let listaDeProdutos = [
 
 class HomePage extends PureComponent {
 
-  componentDidMount(){
-    const { dispatch} = this.props
-    dispatch(handleGetCart())
-    dispatch(handleGetFavorites())
-  }
+  
 
   render() {
     const { classes, cart } = this.props;

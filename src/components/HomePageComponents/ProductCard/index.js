@@ -40,7 +40,7 @@ class ProductCardComponent extends PureComponent {
 
   getCategoriesString() {
     const {
-      product,
+      product
     } = this.props;
     let string = '';
     product.categories.forEach((eachProd) => {
@@ -56,10 +56,12 @@ class ProductCardComponent extends PureComponent {
   render() {
     const {
       product,
+      key,
       classes,
       variant,
       dispatch,
       favorites,
+      history
     } = this.props;
 
     let isFavorite = favorites.reduce((i,atual) => {
@@ -75,7 +77,7 @@ class ProductCardComponent extends PureComponent {
     }
     
     return (
-      <Card style={{ maxWidth: variant === 'small' ? 280 : 320, height: '100%'}} variant="outlined"> 
+      <Card onClick={() => (history.push(`/produto/${product.id}`))} style={{ maxWidth: variant === 'small' ? 280 : 320, height: '100%'}} variant="outlined"> 
         <div style={{minHeight: '100%'}}>
         <CardHeader 
           title={product.name}
