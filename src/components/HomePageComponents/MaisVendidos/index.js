@@ -9,8 +9,6 @@ import {
 import { AZUL_ESCURO } from '../../../utils/colors';
 import Slide from '../../Slide';
 
-
-
 const styles = () => ({
 
     text: {
@@ -34,7 +32,7 @@ const styles = () => ({
 });
 
 export class MaisVendidos extends PureComponent {
-
+    
     render() {
 
         const {
@@ -62,7 +60,7 @@ export class MaisVendidos extends PureComponent {
                 </Grid>
 
                 <div className={classes.root}>
-
+                    
                     <Slide productAmount={qtdProdutos} images={images} />
 
                 </div>
