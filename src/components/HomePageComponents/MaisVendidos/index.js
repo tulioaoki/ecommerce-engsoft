@@ -1,13 +1,11 @@
-import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Grid, Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {
-    withStyles, Typography, Grid
-} from '@material-ui/core';
-
-import { AZUL_ESCURO, TITLE } from '../../../utils/colors';
+import { withRouter } from 'react-router-dom';
+import { TITLE } from '../../../utils/colors';
 import Slide from '../../Slide';
+
 
 
 

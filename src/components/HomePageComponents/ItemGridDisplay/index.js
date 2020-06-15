@@ -17,6 +17,7 @@ import { AZUL_ESCURO } from '../../../utils/colors';
 import AdminProductCard from '../../AdminProductCard';
 import SearchBox from '../../TopBarComponents/SearchBox';
 import generateUID from '../../../utils/extra';
+import OneItemList from '../OneItemList';
 
 
 const styles = () => ({
@@ -54,7 +55,7 @@ const MenuProps = {
   };
 
 
-export class ItemGridDisplay extends PureComponent {
+class ItemGridDisplay extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -198,7 +199,7 @@ export class ItemGridDisplay extends PureComponent {
         return (
             <div className='container' style={{ marginBottom: '50px', marginTop: '50px', backgroundColor:'#f1f1f1', padding:'2rem'}}>
                 <SearchBox placeholder='Digite o nome do produto' action={searchHandler}/>
-                <Grid container spacing={5} >
+                <Grid container spacing={5} style={{margin:10}}>
                     <Grid item xs={12} sm={12} >
                         <div>
                             <Typography className={classes.text}>

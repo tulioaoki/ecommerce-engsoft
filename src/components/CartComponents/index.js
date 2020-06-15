@@ -154,15 +154,13 @@ class CartComponents extends PureComponent {
         this.setState({
             cepInfo: 'loading'
         });
-        await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+        let cepInfo = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
         .then((response) => {
-            console.log(response);
             this.setState({
                 cepInfo: response.data
             });
         })
         .catch((error) => {
-            console.log('error fetching cep');
             this.setState({
                 cepInfo: 'invalid'
             });
@@ -179,7 +177,7 @@ class CartComponents extends PureComponent {
         this.setState({
             cart: this.state.cart.map(product => {
                 let newQuantity = product.quantity;
-                if(product.id == id && qtd>=1){
+                if(product.id === id && qtd>=1){
                     newQuantity = qtd
                 }
                 return {
@@ -294,8 +292,7 @@ class CartComponents extends PureComponent {
                             </Button>
 
                             {this.state.cepInfo?
-                                
-                                this.state.cepInfo !== 'invalid' ? 
+                            this.state.cepInfo !== 'invalid' ? 
                                 this.state.cepInfo === 'loading' ? (
                                     <CircularProgress style={{display: 'block'}}/>
                                 ):(

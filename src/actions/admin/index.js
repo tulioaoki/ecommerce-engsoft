@@ -1,8 +1,10 @@
-import getAdminProductsRequest, { addProductRequest, getCategoriesRequest, editProductRequest } from './requests';
+import getAdminProductsRequest, { addProductRequest, getCategoriesRequest, editProductRequest, editCategoriesRequest ,addCategoriesRequest } from './requests';
 export const GET_ADMIN_PRODUCTS = 'GET_ADMIN_PRODUCTS';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const ADD_CATEGORIES = 'ADD_CATEGORIES';
+export const EDIT_CATEGORIES = 'EDIT_CATEGORIES';
 
 
 
@@ -20,6 +22,38 @@ export function handleGetAllCategories(){
       dispatch(getCategories({ 'payload': data }));
     });
 }
+
+function addCategories(payload) {
+  return {
+    type: ADD_CATEGORIES,
+    payload,
+  };
+}
+
+
+export function handleAddCategories(payload){
+  return (dispatch) => addCategoriesRequest(payload)
+    .then(({ data }) => {
+      dispatch(addCategories({ 'payload': data }));
+    });
+}
+
+function editCategories(payload) {
+  return {
+    type: EDIT_CATEGORIES,
+    payload,
+  };
+}
+
+
+export function handleEditCategories(payload){
+  return (dispatch) => editCategoriesRequest(payload)
+    .then(({ data }) => {
+      dispatch(editCategories({ 'payload': data }));
+    });
+}
+
+
 
 
 function addProduct(payload) {

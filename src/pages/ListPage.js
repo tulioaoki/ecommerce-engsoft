@@ -121,8 +121,8 @@ class ListPage extends PureComponent {
       categories, products, filterCategories, loading, itemCount,
     } = this.state;
 
-    const nextPage = () => {
-      this.setState((prevState) => ({ ...prevState, pageCount: prevState.pageCount + 1 }));
+    const nextPage = async () => {
+      await this.setState((prevState) => ({ ...prevState, pageCount: prevState.pageCount + 1 }));
       this.fetchProducts(false);
     };
 
@@ -176,9 +176,9 @@ class ListPage extends PureComponent {
                 <div style={{ textAlign: 'center', marginTop: '18px' }}>
                   {console.log(itemCount, products.length)}
                   {itemCount > products.length && (
-                  <Button style={styles().button} onClick={nextPage}>
-                    carregar mais
-                  </Button>
+                    <Button style={styles().button} onClick={nextPage}>
+                      carregar mais
+                    </Button>
                   )}
 
                 </div>

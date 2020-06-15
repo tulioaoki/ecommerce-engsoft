@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import ItemGridDisplay from '../components/HomePageComponents/ItemGridDisplay';
+import OneItemList from '../components/HomePageComponents/OneItemList';
 
 
 class AdminMainPage extends PureComponent {
@@ -18,6 +19,7 @@ class AdminMainPage extends PureComponent {
           <TopBar />
           <NavBar />
           <ItemGridDisplay displayName={'Produtos Cadastrados'}/>
+          <OneItemList/>
         </div>
         <Footer />
       </>
