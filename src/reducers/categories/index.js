@@ -1,4 +1,4 @@
-import { GET_CATEGORIES, EDIT_CATEGORIES, ADD_CATEGORIES } from '../../actions/admin';
+import { GET_CATEGORIES, EDIT_CATEGORIES, ADD_CATEGORIES, DELETE_CATEGORIES } from '../../actions/admin';
 
 export default function REDUCER_CATEGORIES(state = {categories:[]}, action) {
   const { payload } = action;
@@ -32,6 +32,14 @@ export default function REDUCER_CATEGORIES(state = {categories:[]}, action) {
       }
       let index = categories_copy.findIndex(x => x.id ===payload.payload.data.id);
       categories_copy[index] = payload.payload.data;
+      copy.categories = categories_copy;
+      return {
+        ...copy,
+      };
+    case DELETE_CATEGORIES:
+      categories_copy = categories_copy.filter(function(item) { 
+        return item.id !== action.payload.id; 
+      });
       copy.categories = categories_copy;
       return {
         ...copy,

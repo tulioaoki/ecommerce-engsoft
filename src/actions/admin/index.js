@@ -1,10 +1,11 @@
-import getAdminProductsRequest, { addProductRequest, getCategoriesRequest, editProductRequest, editCategoriesRequest ,addCategoriesRequest } from './requests';
+import getAdminProductsRequest, { addProductRequest, getCategoriesRequest, editProductRequest, editCategoriesRequest ,addCategoriesRequest, deleteCategoriesRequest } from './requests';
 export const GET_ADMIN_PRODUCTS = 'GET_ADMIN_PRODUCTS';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const ADD_CATEGORIES = 'ADD_CATEGORIES';
 export const EDIT_CATEGORIES = 'EDIT_CATEGORIES';
+export const DELETE_CATEGORIES = 'DELETE_CATEGORIES';
 
 
 
@@ -53,6 +54,21 @@ export function handleEditCategories(payload){
     });
 }
 
+
+function deleteCategories(payload) {
+  return {
+    type: DELETE_CATEGORIES,
+    payload,
+  };
+}
+
+
+export function handleDeleteCategories(payload){
+  return (dispatch) => deleteCategoriesRequest(payload)
+    .then(({ data }) => {
+      dispatch(deleteCategories(payload));
+    });
+}
 
 
 

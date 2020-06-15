@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { AZUL_ESCURO, PRIMARY_COLOR, SECONDARY_COLOR } from '../../../utils/colors';
 import EditIcon from '@material-ui/icons/Edit';
-import { handleAddCategories, handleEditCategories } from '../../../actions/admin';
+import { handleAddCategories, handleEditCategories, handleDeleteCategories } from '../../../actions/admin';
 
 const styles = () => ({
   root: {
@@ -69,9 +69,12 @@ export class OneItemList extends PureComponent {
             this.setState({open:true, edit:false})
         }
     }
+    const handleOpenDelete = (item) => {
+      this.setState({open:true, delete:true, name:item.name, categorie:item})
+    }
 
     const handleClose = () => {
-        this.setState({ open:false, name:'', edit:false })    
+        this.setState({ open:false, name:'', edit:false, delete:false })    
     }
 
     const handleChange = e => {
@@ -95,6 +98,14 @@ export class OneItemList extends PureComponent {
         handleClose();
     }
 
+    const handleSubmitDelete = (e) => {
+      e.preventDefault();
+      const { dispatch } = this.props;
+      const {name, categorie} = this.state;
+      dispatch(handleDeleteCategories({name, id:categorie.id}))
+      handleClose();
+  }
+
 
     return (
         <div style={{ marginBottom: '50px', marginTop: '50px', backgroundColor:'#f1f1f1', padding:'3rem', flexDirection:'column', marginLeft:'5rem', marginRight:'5rem'}}>
@@ -112,7 +123,7 @@ export class OneItemList extends PureComponent {
                   <IconButton onClick={() => handleClickOpen(item)} edge="end" aria-label="delete">
                       <EditIcon style={{color:PRIMARY_COLOR}}/>
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton onClick={() => handleOpenDelete(item)} edge="end" aria-label="delete">
                       <DeleteIcon style={{color:SECONDARY_COLOR}}/>
                     </IconButton>
                   </ListItemSecondaryAction>
@@ -120,34 +131,56 @@ export class OneItemList extends PureComponent {
               )}
             </List>
             <Dialog open={this.state.open} onClose={handleClose} aria-labelledby="form-dialog-title" classes={{ paper: classes.dialogPaper }} >
-                <DialogTitle id="form-dialog-title">Inserir Categoria</DialogTitle>
-                <DialogContent >
-                    <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    name="name"
-                    label="Nome"
-                    type="text"
-                    fullWidth
-                    placeholder='Nome da Categoria'
-                    className='formField'
-                    onChange={handleChange}
-                    value={this.state.name}
-                    />
-                </DialogContent>
-                
-                <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
-                    Cancelar
-                    </Button>
-                    <Button onClick={handleSubmit}  
-                    type='submit' 
-                    color="primary"
-                    >
-                    Concluir
-                    </Button>
-                </DialogActions>
+                {
+                !this.state.delete ? 
+                  (<>
+                  <DialogTitle id="form-dialog-title">Inserir Categoria</DialogTitle>
+                  <DialogContent >
+                      <TextField
+                      autoFocus
+                      margin="dense"
+                      id="name"
+                      name="name"
+                      label="Nome"
+                      type="text"
+                      fullWidth
+                      placeholder='Nome da Categoria'
+                      className='formField'
+                      onChange={handleChange}
+                      value={this.state.name}
+                      />
+                  </DialogContent>
+                  
+                  <DialogActions>
+                      <Button onClick={handleClose} color="secondary">
+                      Cancelar
+                      </Button>
+                      <Button onClick={handleSubmit}  
+                      type='submit' 
+                      color="primary"
+                      >
+                      Concluir
+                      </Button>
+                  </DialogActions>
+                  </>)
+                  :
+                  (<><DialogTitle id="form-dialog-title">Inserir Categoria</DialogTitle>
+                  <DialogContent >
+                      Isto irá apagar a categoria {this.state.name}. Continuar?
+                  </DialogContent>
+                  
+                  <DialogActions>
+                      <Button onClick={handleClose} color="secondary">
+                      Cancelar
+                      </Button>
+                      <Button onClick={handleSubmitDelete}  
+                      type='submit' 
+                      color="primary"
+                      >
+                      Concluir
+                      </Button>
+                  </DialogActions></>)
+              }
             </Dialog>
       
         </div>
