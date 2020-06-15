@@ -1,4 +1,5 @@
-const BASE_URL = 'http://localhost:8000/';
+export const BASE_URL = 'https://ecommerce-engsoft.herokuapp.com/';
+
 // Exemplo de login
 export default function authenticateUserRequest(login, password) {
   const body = {

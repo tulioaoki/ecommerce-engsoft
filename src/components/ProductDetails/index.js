@@ -113,7 +113,7 @@ class ProductDetails extends PureComponent {
   async componentDidMount() {
     console.log(this.props.history.location.pathname.replace('/produto/', ''))
     let productId = this.props.history.location.pathname.replace('/produto/', '')
-    let produto = await axios.get(`https://ecommerce-engsoft.herokuapp.com/products/${productId}`)
+    await axios.get(`https://ecommerce-engsoft.herokuapp.com/products/${productId}`)
       .then((response) => {
         console.log(response);
         this.setState((prevState) => ({ ...prevState, product: response.data.data }));
@@ -125,6 +125,21 @@ class ProductDetails extends PureComponent {
 
   }
 
+  changeCartQuantity(id, qtd){
+    this.setState({
+        cart: this.state.cart.map(product => {
+            let newQuantity = product.quantity;
+            if(product.id === id && qtd>=1){
+                newQuantity = qtd
+            }
+            return {
+                ...product,
+                quantity: newQuantity
+            }
+        })
+    });
+  }
+
   
 
   render() {
@@ -133,7 +148,7 @@ class ProductDetails extends PureComponent {
     } = this.props;
     const { product } = this.state;
     const image = medicine;
-
+    
     return (
       <div className={classes.root}>
         <Grid container spacing={6}>
@@ -149,32 +164,25 @@ class ProductDetails extends PureComponent {
             </Typography>
 
             <Typography className={classes.description_product}>
-              <p>Glifage é um medicamento antidiabético de uso oral, que associado a uma dieta apropriada,
-              é utilizado para o tratamento do diabetes tipo 2 em adultos, isoladamente ou em combinação com outros antiadiabéticos orais,
-              como por exemplo aqueles da classe das sulfonilureias. Pode ser utilizado também para o tratamento do diabetes tipo 1 em
-              complementação à insulinoterapia. Glifage também está indicado na Síndrome dos Ovários Policísticos, condição caracterizada
-            por ciclos menstruais irregulares e frequentemente excesso de pelos e obesidade.</p>
-            </Typography>
-
-            <Typography className={classes.product_risk}>
-              <p>GLIFAGE XR 500MG É UM MEDICAMENTO. SEU USO PODE TRAZER RISCOS. PROCURE UM MÉDICO OU UM FARMACÊUTICO. LEIA A BULA.</p>
+              <p>{this.state.product.description}</p>
             </Typography>
 
           </Grid>
 
           <Grid item xs={12} sm={6} xl={6}>
             <Typography component="h1" variant="h5" className={classes.title_product}>
-              Glifage Xr 500mg Com 30 Comprimidos
+            {this.state.product.name}
             </Typography>
 
             <Paper variant="outlined" style={{paddingBottom:'25px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', marginBottom: '5px' }}>
               
                 <Typography style={{display:'inline', marginRight:'80px'}}className={classes.title_price}>
-                  R$ 39,90
+                  {typeof this.state.product.price !== 'undefined' && this.state.product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </Typography>
               
                 <ValidationTextField size='small' id="outlined-number" label="Quantidade" type="number" variant="outlined" defaultValue='1'
                   style={{ width: '91px', height:'40px', marginTop: '3px'}}
+                  onChange={event=>this.changeCartQuantity(event.id, event.target.value)}
                   InputLabelProps={{
                     shrink: true,
                   }} 
@@ -187,7 +195,7 @@ class ProductDetails extends PureComponent {
             </Paper>
 
             <Paper variant="outlined" style={{ paddingBottom:'25px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', textAlign: 'left' }}>
-              <Typography component="p" variant="p" className={classes.title_CEP}>
+              <Typography component="p"  className={classes.title_CEP}>
                 calcular frete e prazo
               </Typography>
 

@@ -25,6 +25,7 @@ import medicine from '../../static/images/remedio.png';
 
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { handleGetCart } from '../../actions/cart';
 
 const styles = () => ({
     root: {
@@ -109,8 +110,8 @@ class CartComponents extends PureComponent {
                     marca: 'farma',
                     unidade: '4 unidades',
                     peso: '61g - peso do produto',
-                    quantidade: 1,
-                    valor_unitario: 39.90,
+                    quantity: 1,
+                    product_price: 39.90,
                 },
                 {
                     id: 1,
@@ -119,8 +120,8 @@ class CartComponents extends PureComponent {
                     marca: 'menos',
                     unidade: '1 unidades',
                     peso: '1g - peso do produto',
-                    quantidade: 2,
-                    valor_unitario: 39.90,
+                    quantity: 2,
+                    product_price: 39.90,
                 },
                 {
                     id: 2,
@@ -129,8 +130,8 @@ class CartComponents extends PureComponent {
                     marca: 'generico',
                     unidade: '5 unidades',
                     peso: '90g - peso do produto',
-                    quantidade: 3,
-                    valor_unitario: 39.90,
+                    quantity: 3,
+                    product_price: 39.90,
                 },
                 {
                     id: 3,
@@ -139,8 +140,8 @@ class CartComponents extends PureComponent {
                     marca: 'farmacia',
                     unidade: '10 unidades',
                     peso: '61g - peso do produto',
-                    quantidade: 4,
-                    valor_unitario: 39.90,
+                    quantity: 4,
+                    product_price: 39.90,
                 },
             ],
             cepInfo: null,
@@ -161,16 +162,13 @@ class CartComponents extends PureComponent {
         this.setState({
             cepInfo: 'loading'
         });
-        console.log('testando cep '+cep)
         let cepInfo = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
         .then((response) => {
-            console.log(response);
             this.setState({
                 cepInfo: response.data
             });
         })
         .catch((error) => {
-            console.log('error fetching cep');
             this.setState({
                 cepInfo: 'invalid'
             });
@@ -186,23 +184,41 @@ class CartComponents extends PureComponent {
     changeCartQuantity(id, qtd){
         this.setState({
             cart: this.state.cart.map(product => {
-                let newQuantity = product.quantidade;
-                if(product.id == id && qtd>=1){
+                let newQuantity = product.quantity;
+                if(product.id === id && qtd>=1){
                     newQuantity = qtd
                 }
                 return {
                     ...product,
-                    quantidade: newQuantity
+                    quantity: newQuantity
                 }
             })
         });
     }
+
+    componentDidMount(){
+        
+    }/**
+     * 
+
+
+
+
+
+        UTILIZAR VALOR TOTAL DO BACK
+
+
+
+
+
+     */
 
     render() {
 
         const {
             history,
             classes,
+            cart,
         } = this.props;
         const image = medicine;
 
@@ -220,34 +236,34 @@ class CartComponents extends PureComponent {
                                     <TableRow>
                                         <TableCell>Item</TableCell>
                                         <TableCell align="right"></TableCell>
-                                        <TableCell align="right">Quantidade</TableCell>
+                                        <TableCell align="right">quantity</TableCell>
                                         <TableCell align="right">Valor unitário</TableCell>
                                         <TableCell align="right">Valor total</TableCell>
                                         <TableCell align="right"></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                {this.state.cart.map((row) => (
+                                {typeof cart !== 'undefined' && cart.map((row) => (
                                     <TableRow key={row.id}>
                                         <TableCell onClick={()=>{history.push(`/produto/${row.id}`)}} component="th" scope="row">
-                                            <img src={row.image} alt="produto" style={{height: '100px'}}/>
+                                            <img src={typeof row.product.images !== 'undefined' ? row.product.images[0].image_url : ''} alt="produto" style={{height: '100px'}}/>
                                         </TableCell>
                                         <TableCell onClick={()=>{history.push(`/produto/${row.id}`)}}>
                                             <Typography style={{fontWeight: 900}}>
-                                                {row.item}
+                                                {row.product.name}
                                             </Typography>
                                             <Typography style={{color: '#c4c4c4', display: 'block'}}>
-                                                {row.marca}
+                                                {row.product.marca}
                                             </Typography>
                                             <Typography style={{display: 'block'}}>
-                                                {row.unidade}
+                                                {row.product.unidade}
                                             </Typography>
                                             <Typography style={{display: 'block'}}>
-                                                {row.peso}
+                                                {row.product.peso}
                                             </Typography>
                                         </TableCell>
                                         <TableCell align="right">
-                                            <QtdTextField className={classes.number} size='small' value = {row.quantidade} type="number" variant="outlined" 
+                                            <QtdTextField className={classes.number} size='small' value = {row.quantity} type="number" variant="outlined" 
                                                 onChange={event=>this.changeCartQuantity(row.id, event.target.value)}
                                                 style={{ width: '91px', height:'40px', marginTop: '3px'}}
                                                 InputLabelProps={{
@@ -255,8 +271,8 @@ class CartComponents extends PureComponent {
                                                 }} 
                                             />
                                         </TableCell>
-                                        <TableCell align="right">R$ {(row.valor_unitario).toFixed(2)}</TableCell>
-                                        <TableCell align="right">R$ {(row.valor_unitario * row.quantidade).toFixed(2)}</TableCell>
+                                        <TableCell align="right">R$ {(row.product_price).toFixed(2)}</TableCell>
+                                        <TableCell align="right">R$ {(row.product_price * row.quantity).toFixed(2)}</TableCell>
                                         <TableCell align="right">
                                             <Button onClick={()=>{this.removeFromCart(row.id)}}>
                                                 <DeleteIcon />
@@ -264,7 +280,7 @@ class CartComponents extends PureComponent {
                                             </Button>
                                         </TableCell>
                                     </TableRow>
-                                ))}
+                                ))} 
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -275,7 +291,7 @@ class CartComponents extends PureComponent {
                 <Grid container spacing={6}>
                     <Grid item xs={12} sm={6} xl={6}>
                         <Paper variant="outlined" style={{ paddingBottom:'40px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', textAlign: 'left' }}>
-                            <Typography component="p" variant="p" className={classes.title_CEP}>
+                            <Typography component="p"  className={classes.title_CEP}>
                                 calcular frete e prazo
                             </Typography>
 
@@ -288,7 +304,7 @@ class CartComponents extends PureComponent {
                             {this.state.cepInfo?
                                 
                                 this.state.cepInfo != 'invalid' ? 
-                                this.state.cepInfo == 'loading' ? (
+                                this.state.cepInfo === 'loading' ? (
                                     <CircularProgress style={{display: 'block'}}/>
                                 ):(
                                 <Typography>
@@ -309,20 +325,20 @@ class CartComponents extends PureComponent {
 
                     <Grid item xs={12} sm={6} xl={6}>
                         <Paper variant="outlined" style={{ paddingBottom:'25px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', textAlign: 'left' }}>
-                            <Typography component="p" variant="p" style={{color: '#424242', fontSize: '12px'}}>
+                            <Typography component="p"  style={{color: '#424242', fontSize: '12px'}}>
                                 Economize R$ 11,00
                             </Typography>
-                            <Typography component="p" variant="p" style={{ fontSize: '13px'}}>
+                            <Typography component="p"  style={{ fontSize: '13px'}}>
                                 <strong>Total</strong>
                             </Typography>
-                            <Typography component="p" variant="p" style={{ fontSize: '20px'}}>
+                            <Typography component="p"  style={{ fontSize: '20px'}}>
                                 <strong style={{fontSize: '14px'}}>R$</strong> 
                                 <strong style={{fontSize: '24px'}}>
-                                    {this.state.cart.reduce((totalValue, product) => totalValue += (product.valor_unitario * product.quantidade),0).toFixed(2)}
+                                    {this.state.cart.reduce((totalValue, product) => totalValue += (product.product_price * product.quantity),0).toFixed(2)}
                                 </strong>
                             </Typography>
-                            <Typography component="p" variant="p" className={classes.title_CEP}>
-                                10x s/ juros de R$ {(this.state.cart.reduce((totalValue, product) => totalValue += (product.valor_unitario * product.quantidade),0).toFixed(2)/10).toFixed(2)}
+                            <Typography component="p"  className={classes.title_CEP}>
+                                10x s/ juros de R$ {(this.state.cart.reduce((totalValue, product) => totalValue += (product.product_price * product.quantity),0).toFixed(2)/10).toFixed(2)}
                             </Typography>
                         </Paper>
                         <Button variant="contained" style={{ height: '40px', marginTop: '10px' }} className={classes.buttonCep} >
@@ -341,4 +357,9 @@ CartComponents.propTypes = {
     history: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect()(withStyles(styles)(CartComponents)));
+const mapStateToProps = ({ REDUCER_CART }, props) => ({
+    cart:REDUCER_CART.cart_products,
+  });
+  
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(CartComponents)));

@@ -11,6 +11,8 @@ import Servicos from '../components/HomePageComponents/Servicos';
 import MaisVendidos from '../components/HomePageComponents/MaisVendidos';
 import Novidades from '../components/HomePageComponents/Novidade';
 import Promocao from '../components/HomePageComponents/Promocao';
+import { handleGetCart } from '../actions/cart';
+import { handleGetFavorites } from '../actions/favorites';
 
 const styles = () => ({
   root: {
@@ -23,6 +25,7 @@ const styles = () => ({
     // backgroundColor: '#e3e8eb',
     flexDirection: 'column',
   },
+  
 });
 
 
@@ -255,27 +258,36 @@ let listaDeProdutos = [
 ]
 
 class HomePage extends PureComponent {
+
+  componentDidMount(){
+    const { dispatch} = this.props
+    dispatch(handleGetCart())
+    dispatch(handleGetFavorites())
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, cart } = this.props;
     return (
-      <div className={classes.root}>
+      <>
         <div className="mainContentHome">
           <PresentationPage />
           <Carrossel />
           <Servicos />
-          <Novidades/>
-          <Promocao/>
-          <MaisVendidos qtdProdutos={4} images={listaDeProdutos} />
+          <div className='container'>
+            <Novidades/>
+            <Promocao/>
+            <MaisVendidos qtdProdutos={4} images={listaDeProdutos} />
+          </div>
         </div>
-        <Footer showSocialMedia> </Footer>
-        {/* Se o props passado for true, exiba as redes sociai */ }
-      </div>
+          <Footer showSocialMedia> </Footer>
+        </>
     );
   }
 }
 
-const mapStateToProps = ({ info }) => ({
+const mapStateToProps = ({ info,REDUCER_CART }, props) => ({
   info,
+  cart:REDUCER_CART.cart_products,
 });
 
 HomePage.propTypes = {

@@ -6,7 +6,6 @@ import {
     withStyles,
 } from '@material-ui/core';
 import { TITLE } from '../../utils/colors';
-import { AZUL_ESCURO } from '../../utils/colors';
 import { Typography } from '@material-ui/core';
 
 import Grid from '@material-ui/core/Grid';
