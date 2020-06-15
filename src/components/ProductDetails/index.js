@@ -11,17 +11,19 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TextField from '@material-ui/core/TextField';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
-import medicine from '../../static/images/remedio.png';
 
 import { TITLE } from '../../utils/colors';
 import { AZUL_ESCURO } from '../../utils/colors';
 
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { handleAddToCart } from '../../actions/cart';
+import { handleAddFavorites, handleDeleteFavorites } from '../../actions/favorites';
 
 const styles = () => ({
   root: {
@@ -96,7 +98,7 @@ const ValidationTextField = withStyles({
       },
     },
   },
-  
+
 })(TextField);
 
 class ProductDetails extends PureComponent {
@@ -105,9 +107,14 @@ class ProductDetails extends PureComponent {
     this.state = {
       product: {
 
-      }
-     
+      },
+      quantity: 1,
+      cepInfo: null,
+      cep: ''
+
     };
+    this.changeCartQuantity = this.changeCartQuantity.bind(this);
+    this.fetchCep = this.fetchCep.bind(this);
   }
 
   async componentDidMount() {
@@ -115,7 +122,7 @@ class ProductDetails extends PureComponent {
     let productId = this.props.history.location.pathname.replace('/produto/', '')
     await axios.get(`https://ecommerce-engsoft.herokuapp.com/products/${productId}`)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
         this.setState((prevState) => ({ ...prevState, product: response.data.data }));
       })
       .catch((error) => {
@@ -125,39 +132,71 @@ class ProductDetails extends PureComponent {
 
   }
 
-  changeCartQuantity(id, qtd){
+  async fetchCep(cep) {
     this.setState({
-        cart: this.state.cart.map(product => {
-            let newQuantity = product.quantity;
-            if(product.id === id && qtd>=1){
-                newQuantity = qtd
-            }
-            return {
-                ...product,
-                quantity: newQuantity
-            }
-        })
+      cepInfo: 'loading'
+    });
+    let cepInfo = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((response) => {
+        this.setState({
+          cepInfo: response.data
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          cepInfo: 'invalid'
+        });
+      })
+  }
+
+  changeCep(cep) {
+    this.setState({
+      cep
+    })
+  }
+
+  changeCartQuantity(qtd) {
+    let newQuantity = this.state.quantity;
+    if (qtd >= 1) {
+      newQuantity = qtd
+    }
+    this.setState({
+      quantity: newQuantity
     });
   }
 
-  
+
 
   render() {
     const {
       classes,
+      dispatch,
+      favorites
     } = this.props;
     const { product } = this.state;
-    const image = medicine;
-    
+
+
+    let isFavorite = favorites.reduce((i, atual) => {
+      return (i || atual.id === product.id)
+    }, false)
+
+    const handleFavorite = () => {
+      if (!isFavorite) {
+        dispatch(handleAddFavorites(product))
+      } else {
+        dispatch(handleDeleteFavorites(product))
+      }
+    }
+
     return (
       <div className={classes.root}>
         <Grid container spacing={6}>
           <Grid item xs={12} sm={6} xl={6}>
-          
 
-            <img src={image} alt="produto"/>
-            <IconButton aria-label="Adicionar aos favoritos">
-              <FavoriteIcon />
+
+            <img src={typeof product.images !== 'undefined' ? product.images[0].image_url : ''} alt="produto" />
+            <IconButton onClick={() => { handleFavorite() }} aria-label="Adicionar aos favoritos">
+              <FavoriteIcon style={{ color: isFavorite ? 'red' : 'gray' }} />
             </IconButton>
             <Typography component="h2" variant="h5" className={classes.subtitle_product}>
               Detalhes do produto
@@ -171,39 +210,54 @@ class ProductDetails extends PureComponent {
 
           <Grid item xs={12} sm={6} xl={6}>
             <Typography component="h1" variant="h5" className={classes.title_product}>
-            {this.state.product.name}
+              {product.name}
             </Typography>
 
-            <Paper variant="outlined" style={{paddingBottom:'25px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', marginBottom: '5px' }}>
-              
-                <Typography style={{display:'inline', marginRight:'80px'}}className={classes.title_price}>
-                  {typeof this.state.product.price !== 'undefined' && this.state.product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                </Typography>
-              
-                <ValidationTextField size='small' id="outlined-number" label="Quantidade" type="number" variant="outlined" defaultValue='1'
-                  style={{ width: '91px', height:'40px', marginTop: '3px'}}
-                  onChange={event=>this.changeCartQuantity(event.id, event.target.value)}
-                  InputLabelProps={{
-                    shrink: true,
-                  }} 
-                />
+            <Paper variant="outlined" style={{ paddingBottom: '25px', paddingTop: '25px', paddingLeft: '70px', height: 'auto', backgroundColor: '#f2f2f2', marginBottom: '5px' }}>
 
-                <Button variant="contained" style={{display:'block', width: '200px', marginTop: '10px'}} className={classes.buttonCep}>
-                  Comprar
+              <Typography style={{ display: 'inline', marginRight: '80px' }} className={classes.title_price}>
+                {typeof this.state.product.price !== 'undefined' && this.state.product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+              </Typography>
+
+              <ValidationTextField size='small' id="outlined-number" label="Quantidade" type="number" variant="outlined" defaultValue='1'
+                style={{ width: '91px', height: '40px', marginTop: '3px' }}
+                onChange={event => this.changeCartQuantity(event.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+
+              <Button onClick={() => { dispatch(handleAddToCart(this.state.product.id, this.state.quantity)) }} variant="contained" style={{ display: 'block', width: '200px', marginTop: '10px' }} className={classes.buttonCep}>
+                Comprar
                 </Button>
-              
+
             </Paper>
 
-            <Paper variant="outlined" style={{ paddingBottom:'25px',paddingTop:'25px',paddingLeft:'70px', height: 'auto', backgroundColor: '#f2f2f2', textAlign: 'left' }}>
-              <Typography component="p"  className={classes.title_CEP}>
+            <Paper variant="outlined" style={{ paddingBottom: '25px', paddingTop: '25px', paddingLeft: '70px', height: 'auto', backgroundColor: '#f2f2f2', textAlign: 'left' }}>
+              <Typography component="p" className={classes.title_CEP}>
                 calcular frete e prazo
               </Typography>
 
-              <ValidationTextField style={{ height:'40px', marginTop: '10px'}} size='small' id="outlined-basic" label="CEP" variant="outlined" />
-              
-              <Button variant="contained" style={{ height: '40px', marginTop: '10px' }} className={classes.buttonCep} >
+              <ValidationTextField onChange = {(event)=>{this.changeCep(event.target.value)}} style={{ height: '40px', marginTop: '10px' }} size='small' id="outlined-basic" label="CEP" variant="outlined" />
+
+              <Button onClick={() => { this.fetchCep(this.state.cep) }} variant="contained" style={{ height: '40px', marginTop: '10px' }} className={classes.buttonCep} >
                 Calcular
               </Button>
+              {this.state.cepInfo ?
+
+                this.state.cepInfo != 'invalid' ?
+                  this.state.cepInfo === 'loading' ? (
+                    <CircularProgress style={{ display: 'block' }} />
+                  ) : (
+                      <Typography>
+                        {this.state.cepInfo.logradouro + ' , ' + this.state.cepInfo.localidade + ' , ' + this.state.cepInfo.uf}
+                      </Typography>
+                    ) : (
+                    <Typography style={{ color: 'red' }}>
+                      CEP inválido
+                    </Typography>)
+
+                : (<></>)}
             </Paper>
 
             <Typography component="h2" variant="h5" className={classes.subtitle_product} style={{ textAlign: 'center' }}>
@@ -240,7 +294,7 @@ class ProductDetails extends PureComponent {
                     <TableCell style={{ color: '#424242' }} component="th" scope="row">
                       <strong>Peso</strong>
                     </TableCell>
-                    <TableCell align="right">32kg</TableCell>
+                <TableCell align="right">{product.peso}g</TableCell>
                   </TableRow>
                   <TableRow >
                     <TableCell style={{ color: '#424242' }} component="th" scope="row">
@@ -276,4 +330,9 @@ ProductDetails.propTypes = {
 };
 
 
-export default withRouter(connect()(withStyles(styles)(ProductDetails)));
+const mapStateToProps = ({ REDUCER_CART, REDUCER_FAVORITES }, props) => ({
+  cart: REDUCER_CART.cart_products,
+  favorites: REDUCER_FAVORITES.favorites
+});
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(ProductDetails)));
