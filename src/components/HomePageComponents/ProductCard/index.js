@@ -70,7 +70,6 @@ class ProductCardComponent extends PureComponent {
       if(!isFavorite){
         dispatch(handleAddFavorites(product))
       }else{
-        console.log("BUGOU")
         dispatch(handleDeleteFavorites(product))
       }
     }

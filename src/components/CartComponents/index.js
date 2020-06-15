@@ -162,16 +162,13 @@ class CartComponents extends PureComponent {
         this.setState({
             cepInfo: 'loading'
         });
-        console.log('testando cep '+cep)
         let cepInfo = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
         .then((response) => {
-            console.log(response);
             this.setState({
                 cepInfo: response.data
             });
         })
         .catch((error) => {
-            console.log('error fetching cep');
             this.setState({
                 cepInfo: 'invalid'
             });

@@ -61,8 +61,7 @@ class Carrossel extends PureComponent {
 
     async componentDidMount() {
 
-        console.log(this.props.history.location.pathname.replace('/produto/', ''))
-
+        this.props.history.location.pathname.replace('/produto/', '')
         this.props.history.location.pathname.replace('/', '')
 
         await axios.get(`https://ecommerce-engsoft.herokuapp.com/carrosel/11`)
