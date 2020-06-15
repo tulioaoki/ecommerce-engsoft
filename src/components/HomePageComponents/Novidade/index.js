@@ -192,8 +192,7 @@ export class Novidade extends PureComponent {
                         
                     <Slider productAmount={4} images={this.state.listaProdutos}/>
                     
-                }
-                
+                }                
 
             </div>
         );

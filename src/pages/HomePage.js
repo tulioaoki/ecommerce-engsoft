@@ -13,6 +13,8 @@ import Novidades from '../components/HomePageComponents/Novidade';
 import Promocao from '../components/HomePageComponents/Promocao';
 import { handleGetCart } from '../actions/cart';
 import axios from 'axios';
+import { handleGetFavorites } from '../actions/favorites';
+
 
 const styles = () => ({
   root: {
@@ -24,6 +26,7 @@ const styles = () => ({
     margin: 0,
     flexDirection: 'column',
   },
+  
 });
 
 class HomePage extends PureComponent {
@@ -49,12 +52,19 @@ class HomePage extends PureComponent {
 
   }
 
+
+class HomePage extends PureComponent {
+
+  componentDidMount(){
+    const { dispatch} = this.props
+    dispatch(handleGetCart())
+    dispatch(handleGetFavorites())
+  }
+
   render() {
     const { classes, cart } = this.props;
-    console.log("O carrinho está assim :",cart)
-
     return (
-      <div className={classes.root}>
+      <>
         <div className="mainContentHome">
           <PresentationPage />
           <Carrossel />
@@ -69,6 +79,7 @@ class HomePage extends PureComponent {
         </div>
         <Footer showSocialMedia> </Footer>
       </div>
+
     );
   }
 }
