@@ -219,6 +219,7 @@ class CartComponents extends PureComponent {
             cart,
         } = this.props;
         const image = medicine;
+        console.log(cart);
 
         return (
             <div className={classes.root}>
@@ -270,7 +271,7 @@ class CartComponents extends PureComponent {
                                             />
                                         </TableCell>
                                         <TableCell align="right">R$ {(row.product_price).toFixed(2)}</TableCell>
-                                        <TableCell align="right">R$ {(row.product_price * row.quantity).toFixed(2)}</TableCell>
+                                        <TableCell align="right">R$ {(row.total_price).toFixed(2)}</TableCell>
                                         <TableCell align="right">
                                             <Button onClick={()=>{this.removeFromCart(row.id)}}>
                                                 <DeleteIcon />
@@ -332,11 +333,11 @@ class CartComponents extends PureComponent {
                             <Typography component="p"  style={{ fontSize: '20px'}}>
                                 <strong style={{fontSize: '14px'}}>R$</strong> 
                                 <strong style={{fontSize: '24px'}}>
-                                    {this.state.cart.reduce((totalValue, product) => totalValue += (product.product_price * product.quantity),0).toFixed(2)}
+                                    {cart.reduce((totalValue, product) => totalValue += (product.total_price),0).toFixed(2)}
                                 </strong>
                             </Typography>
                             <Typography component="p"  className={classes.title_CEP}>
-                                10x s/ juros de R$ {(this.state.cart.reduce((totalValue, product) => totalValue += (product.product_price * product.quantity),0).toFixed(2)/10).toFixed(2)}
+                                10x s/ juros de R$ {(cart.reduce((totalValue, product) => totalValue += (product.total_price),0).toFixed(2)/10).toFixed(2)}
                             </Typography>
                         </Paper>
                         <Button variant="contained" style={{ height: '40px', marginTop: '10px' }} className={classes.buttonCep} >
