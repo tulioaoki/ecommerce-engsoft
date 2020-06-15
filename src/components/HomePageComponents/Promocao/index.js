@@ -291,10 +291,10 @@ export class Promocao extends PureComponent {
                         { 
                             this.state.produtos.map((produto, index) => {
 
-                                return <Grid item xs={12} sm={3} >
+                                return <Grid key={index} item xs={12} sm={3} >
 
                                     <ProductCard
-                                        key={produto.id}
+                                        
                                         product={produto}
                                         variant='normal'
                                     />
