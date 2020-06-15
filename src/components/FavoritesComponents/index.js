@@ -24,6 +24,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import medicine from '../../static/images/remedio.png';
+import { handleDeleteFavorites } from '../../actions/favorites';
 
 
 const styles = () => ({
@@ -89,23 +90,32 @@ class FavoritesComponents extends PureComponent {
                 },
             ],
         };
-        this.removeFromCart = this.removeFromCart.bind(this);
+        
     }
 
-    removeFromCart(id) {
-        this.setState({
-            cart: this.state.cart.filter(product => product.id != id)
-        });
-    }
+    // removeFromCart(product) {
+    //     // this.setState({
+    //     //     cart: this.state.cart.filter(product => product.id != id)
+    //     // });
+    //     dispatch(handleDeleteFavorites(product))
+    // }
 
     render() {
 
         const {
             history,
             classes,
+            dispatch,
             cart,
         } = this.props;
         const image = medicine;
+
+        const removeFromCart = (product) => {
+            // this.setState({
+            //     cart: this.state.cart.filter(product => product.id != id)
+            // });
+            dispatch(handleDeleteFavorites(product))
+        }
 
         return (
             <div className={classes.root}>
@@ -149,7 +159,7 @@ class FavoritesComponents extends PureComponent {
                                         
                                         <TableCell align="right">R$ {(row.price).toFixed(2)}</TableCell>
                                         <TableCell align="right">
-                                            <Button onClick={()=>{this.removeFromCart(row.id)}}>
+                                            <Button onClick={()=>{removeFromCart(row)}}>
                                                 <DeleteIcon />
                                                 Excluir
                                             </Button>

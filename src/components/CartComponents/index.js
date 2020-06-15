@@ -182,8 +182,7 @@ class CartComponents extends PureComponent {
     }
 
     changeCartQuantity(id, qtd){
-        this.setState({
-            cart: this.state.cart.map(product => {
+        this.props.cart = this.state.cart.map(product => {
                 let newQuantity = product.quantity;
                 if(product.id === id && qtd>=1){
                     newQuantity = qtd
@@ -192,8 +191,7 @@ class CartComponents extends PureComponent {
                     ...product,
                     quantity: newQuantity
                 }
-            })
-        });
+            }); 
     }
 
     componentDidMount(){
