@@ -33,6 +33,13 @@ const styles = () => ({
   
     },
 
+    dialogPaper: {
+        minHeight: '80vh',
+        maxHeight: '80vh',
+        minWidth: '80vw',
+        maxWidth: '80vw',
+      },
+
 });
 
 const ITEM_HEIGHT = 48;
