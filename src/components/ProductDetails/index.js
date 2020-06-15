@@ -194,7 +194,7 @@ class ProductDetails extends PureComponent {
           <Grid item xs={12} sm={6} xl={6}>
 
 
-            <img src={typeof product.images !== 'undefined' ? product.images[0].image_url : ''} alt="produto" />
+            <img src={typeof product.images !== 'undefined' ? product.images[0].image_url : ''} alt="produto" style={{width: '438px', height: '438px'}}/>
             <IconButton onClick={() => { handleFavorite() }} aria-label="Adicionar aos favoritos">
               <FavoriteIcon style={{ color: isFavorite ? 'red' : 'gray' }} />
             </IconButton>
