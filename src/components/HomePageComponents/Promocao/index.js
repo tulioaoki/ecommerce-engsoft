@@ -4,8 +4,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { TITLE } from '../../../utils/colors';
-import { AZUL_ESCURO } from '../../../utils/colors';
 import ProductCard from '../ProductCard';
+
+
 
 
 
@@ -13,7 +14,7 @@ const styles = () => ({
 
     text: {
 
-        color: AZUL_ESCURO,
+        color: TITLE,
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '900',
@@ -51,12 +52,13 @@ export class Promocao extends PureComponent {
 
         const { classes ,history} = this.props;
         return (
+            //com ou sem container
             <div className='container' style={{ marginBottom: '50px', marginTop: '50px' }}>
                 <Grid container spacing={5} >
                     <Grid item xs={12} sm={12} >
                         <div>
                             <Typography className={classes.text}>
-                                Promoção
+                                Ofertas
                             </Typography>
                         </div>
                     </Grid>

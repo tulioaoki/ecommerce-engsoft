@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { handleGetCart } from '../actions/cart';
+import { handleGetFavorites } from '../actions/favorites';
 import Carrossel from '../components/HomePageComponents/Carrossel';
 import Footer from '../components/HomePageComponents/Footer';
 import MaisVendidos from '../components/HomePageComponents/MaisVendidos';
@@ -23,6 +25,7 @@ const styles = () => ({
     margin: 0,
     flexDirection: 'column',
   },
+  
 });
 
 class HomePage extends PureComponent {
@@ -48,13 +51,17 @@ class HomePage extends PureComponent {
 
   }
 
+  componentDidMount(){
+    const { dispatch} = this.props
+    dispatch(handleGetCart())
+    dispatch(handleGetFavorites())
+  }
+
   render() {
     
     const { classes, cart } = this.props;
-    console.log("O carrinho está assim :",cart)
-
     return (
-      <div className={classes.root}>
+      <>
         <div className="mainContentHome">
           <PresentationPage />
           <Carrossel />
@@ -65,10 +72,9 @@ class HomePage extends PureComponent {
             ( typeof this.state.listaDeProdutos !== 'undefined' && this.state.listaDeProdutos.length > 0 ) &&
                 <MaisVendidos qtdProdutos={4} images={this.state.listaDeProdutos} />
           } 
-          
-        </div>
         <Footer showSocialMedia> </Footer>
       </div>
+    </>
     );
   }
 }

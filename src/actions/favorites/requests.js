@@ -13,6 +13,7 @@ export default function getFavoritesRequest() {
 }
 
 export function deleteFavoritesRequest(payload) {
+
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',

@@ -11,7 +11,9 @@ class Login extends PureComponent {
         <div className='mainContent'>
           <TopBar />
           <NavBar />
-          <LoginForm />
+          <div className='container'>
+            <LoginForm />
+          </div>
         </div>
         <Footer />
       </>

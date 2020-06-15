@@ -90,15 +90,14 @@ class FavoritesComponents extends PureComponent {
                 },
             ],
         };
-        
+        this.removeFromCart = this.removeFromCart.bind(this);
     }
 
-    // removeFromCart(product) {
-    //     // this.setState({
-    //     //     cart: this.state.cart.filter(product => product.id !== id)
-    //     // });
-    //     dispatch(handleDeleteFavorites(product))
-    // }
+    removeFromCart(id) {
+        this.setState({
+            cart: this.state.cart.filter(product => product.id != id)
+        });
+    }
 
     render() {
 
@@ -160,6 +159,7 @@ class FavoritesComponents extends PureComponent {
                                         <TableCell align="right">R$ {(row.price).toFixed(2)}</TableCell>
                                         <TableCell align="right">
                                             <Button onClick={()=>{removeFromCart(row)}}>
+
                                                 <DeleteIcon />
                                                 Excluir
                                             </Button>

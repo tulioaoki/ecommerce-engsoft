@@ -104,8 +104,8 @@ class CartComponents extends PureComponent {
                     marca: 'farma',
                     unidade: '4 unidades',
                     peso: '61g - peso do produto',
-                    quantidade: 1,
-                    valor_unitario: 39.90,
+                    quantity: 1,
+                    product_price: 39.90,
                 },
                 {
                     id: 1,
@@ -114,8 +114,8 @@ class CartComponents extends PureComponent {
                     marca: 'menos',
                     unidade: '1 unidades',
                     peso: '1g - peso do produto',
-                    quantidade: 2,
-                    valor_unitario: 39.90,
+                    quantity: 2,
+                    product_price: 39.90,
                 },
                 {
                     id: 2,
@@ -124,8 +124,8 @@ class CartComponents extends PureComponent {
                     marca: 'generico',
                     unidade: '5 unidades',
                     peso: '90g - peso do produto',
-                    quantidade: 3,
-                    valor_unitario: 39.90,
+                    quantity: 3,
+                    product_price: 39.90,
                 },
                 {
                     id: 3,
@@ -134,8 +134,8 @@ class CartComponents extends PureComponent {
                     marca: 'farmacia',
                     unidade: '10 unidades',
                     peso: '61g - peso do produto',
-                    quantidade: 4,
-                    valor_unitario: 39.90,
+                    quantity: 4,
+                    product_price: 39.90,
                 },
             ],
             cepInfo: null,
@@ -157,14 +157,14 @@ class CartComponents extends PureComponent {
             cepInfo: 'loading'
         });
         await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+
+
         .then((response) => {
-            console.log(response);
             this.setState({
                 cepInfo: response.data
             });
         })
         .catch((error) => {
-            console.log('error fetching cep');
             this.setState({
                 cepInfo: 'invalid'
             });
@@ -187,6 +187,23 @@ class CartComponents extends PureComponent {
             dispatch(handleEditCart(product))
         }
     }
+
+    componentDidMount(){
+        
+    }/**
+     * 
+
+
+
+
+
+        UTILIZAR VALOR TOTAL DO BACK
+
+
+
+
+
+     */
 
     render() {
         const {
@@ -211,30 +228,30 @@ class CartComponents extends PureComponent {
                                     <TableRow>
                                         <TableCell>Item</TableCell>
                                         <TableCell align="right"></TableCell>
-                                        <TableCell align="right">Quantidade</TableCell>
+                                        <TableCell align="right">quantity</TableCell>
                                         <TableCell align="right">Valor unitário</TableCell>
                                         <TableCell align="right">Valor total</TableCell>
                                         <TableCell align="right"></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                {this.state.cart.map((row) => (
+                                {typeof cart !== 'undefined' && cart.map((row) => (
                                     <TableRow key={row.id}>
                                         <TableCell onClick={()=>{history.push(`/produto/${row.id}`)}} component="th" scope="row">
-                                            <img src={row.image} alt="produto" style={{height: '100px'}}/>
+                                            <img src={typeof row.product.images !== 'undefined' ? row.product.images[0].image_url : ''} alt="produto" style={{height: '100px'}}/>
                                         </TableCell>
                                         <TableCell onClick={()=>{history.push(`/produto/${row.id}`)}}>
                                             <Typography style={{fontWeight: 900}}>
-                                                {row.item}
+                                                {row.product.name}
                                             </Typography>
                                             <Typography style={{color: '#c4c4c4', display: 'block'}}>
-                                                {row.marca}
+                                                {row.product.marca}
                                             </Typography>
                                             <Typography style={{display: 'block'}}>
-                                                {row.unidade}
+                                                {row.product.unidade}
                                             </Typography>
                                             <Typography style={{display: 'block'}}>
-                                                {row.peso}
+                                                {row.product.peso}
                                             </Typography>
                                         </TableCell>
                                         <TableCell align="right">
@@ -255,7 +272,7 @@ class CartComponents extends PureComponent {
                                             </Button>
                                         </TableCell>
                                     </TableRow>
-                                ))}
+                                ))} 
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -331,4 +348,9 @@ CartComponents.propTypes = {
     history: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect()(withStyles(styles)(CartComponents)));
+const mapStateToProps = ({ REDUCER_CART }, props) => ({
+    cart:REDUCER_CART.cart_products,
+  });
+  
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(CartComponents)));

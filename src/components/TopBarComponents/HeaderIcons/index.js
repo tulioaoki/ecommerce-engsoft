@@ -15,7 +15,6 @@ import { handleGetCart } from '../../../actions/cart';
 import { handleGetFavorites } from '../../../actions/favorites';
 import { isLogged } from '../../../utils/extra';
 
-
 const styles = () => ({
   icons: {
     margin: '0',
@@ -30,10 +29,10 @@ const styles = () => ({
 class HeaderIcons extends PureComponent {
 
   componentDidMount(){
-    const { dispatch } = this.props
+    const { dispatch} = this.props
     if(isLogged()){
-      //dispatch(handleGetCart())
-      //dispatch(handleGetFavorites())
+      dispatch(handleGetCart())
+      dispatch(handleGetFavorites())
     }
   }
 
@@ -46,8 +45,9 @@ class HeaderIcons extends PureComponent {
     const {
       classes,
       history,
+      cart,
+      favorites,
     } = this.props;
-
     return (
       <div className={classes.icons} style={{ display: 'flex' }}>
         <IconButton color="inherit">
@@ -56,12 +56,12 @@ class HeaderIcons extends PureComponent {
           </Badge>
         </IconButton>
         <IconButton color="inherit">
-          <Badge color="secondary">
-            <FavoriteIcon fontSize="default" />
+          <Badge badgeContent={typeof favorites !== 'undefined' ? favorites.length : 0} color="secondary">
+            <FavoriteIcon fontSize="default" onClick={() => (history.push('/my-favorites'))}/>
           </Badge>
         </IconButton>
         <IconButton color="inherit" onClick={() => (history.push('/my-cart'))}>
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={typeof cart !== 'undefined' ? cart.length : 0} color="secondary">
             <ShoppingCartRoundedIcon fontSize="default" />
           </Badge>
         </IconButton>
@@ -80,4 +80,9 @@ HeaderIcons.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect()(withStyles(styles)(HeaderIcons)));
+const mapStateToProps = ({ REDUCER_CART, REDUCER_FAVORITES }, props) => ({
+  cart:REDUCER_CART.cart_products,
+  favorites:REDUCER_FAVORITES.favorites,
+});
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(HeaderIcons)));

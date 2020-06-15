@@ -1,19 +1,17 @@
-import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Grid, Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {
-    withStyles, Typography, Grid
-} from '@material-ui/core';
-
-import { AZUL_ESCURO } from '../../../utils/colors';
+import { withRouter } from 'react-router-dom';
+import { TITLE } from '../../../utils/colors';
 import Slide from '../../Slide';
+
 
 const styles = () => ({
 
     text: {
 
-        color: AZUL_ESCURO,
+        color: TITLE,
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '900',
@@ -47,7 +45,7 @@ export class MaisVendidos extends PureComponent {
 
             <div className='container' style={{ marginBottom: '50px', marginTop: '50px' }}>
 
-                <Grid container spacing={5} >
+                <Grid container  >
 
                     <Grid item xs={12} sm={12} >
                         <div>

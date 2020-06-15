@@ -22,7 +22,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-//import profile from '../../static/images/profile.png';
+import profile from '../../static/images/profile.png';
 import medicine from '../../static/images/remedio.png';
 
 const styles = () => ({
@@ -67,7 +67,7 @@ class ProfileComponents extends PureComponent {
             history,
             classes,
         } = this.props;
-        //const image = profile;
+        const image = profile;
         const image_produto = medicine;
 
         return (
@@ -237,5 +237,6 @@ ProfileComponents.propTypes = {
     classes: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
 };
+
 
 export default withRouter(connect()(withStyles(styles)(ProfileComponents)));
