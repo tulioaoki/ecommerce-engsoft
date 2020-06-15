@@ -1145,11 +1145,11 @@ export class Novidade extends PureComponent {
                 </Grid>
 
                 <div className={classes.root}>
-                        <TabsStyle centered 
+                        <TabsStyle 
                             style={{paddingLeft: '10px'}}
                             value={this.state.novidadesTab}
                             onChange={this.categories}
-                            indicatorColor="white"
+                            indicatorColor=''
                             variant="scrollable"
                             scrollButtons="auto"
                         >
