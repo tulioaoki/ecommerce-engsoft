@@ -79,15 +79,15 @@ class ProfileComponents extends PureComponent {
 
                 <Grid container spacing={0}>
                     <Grid item xs={12} sm={6} style={{ backgroundColor: '#f2f2f2' }} >
-                        <Button className={this.state.onView == 'meusdados' ? classes.btn_profile : classes.btn_profile_selected} onClick={() => { this.setState({ onView: 'meusdados' }) }} style={{ display: 'block', marginTop: '10px' }}>
+                        <Button className={this.state.onView === 'meusdados' ? classes.btn_profile : classes.btn_profile_selected} onClick={() => { this.setState({ onView: 'meusdados' }) }} style={{ display: 'block', marginTop: '10px' }}>
                             <AccountCircleIcon style={{ fontSize: '30px' }} />
                             Meus dados
                         </Button>
-                        <Button className={this.state.onView == 'minhalistadedesejos' ? classes.btn_profile : classes.btn_profile_selected} onClick={() => { this.setState({ onView: 'minhalistadedesejos' }) }} style={{ display: 'block', marginTop: '10px' }}>
+                        <Button className={this.state.onView === 'minhalistadedesejos' ? classes.btn_profile : classes.btn_profile_selected} onClick={() => { this.setState({ onView: 'minhalistadedesejos' }) }} style={{ display: 'block', marginTop: '10px' }}>
                             <FavoriteIcon style={{ fontSize: '30px' }} />
                             Minha lista de desejos
                         </Button>
-                        <Button className={this.state.onView == 'meuspedidos' ? classes.btn_profile : classes.btn_profile_selected} onClick={() => { this.setState({ onView: 'meuspedidos' }) }} style={{ display: 'block', marginTop: '10px' }}>
+                        <Button className={this.state.onView === 'meuspedidos' ? classes.btn_profile : classes.btn_profile_selected} onClick={() => { this.setState({ onView: 'meuspedidos' }) }} style={{ display: 'block', marginTop: '10px' }}>
                             <ShoppingCartIcon style={{ fontSize: '30px' }} />
                             Meus pedidos
                         </Button>

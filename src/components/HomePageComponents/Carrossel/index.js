@@ -1,17 +1,12 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
-
-import  image1 from '../../../static/images/foto1.jpeg'  ;
-import  tylenol from '../../../static/images/tylenol.jpeg'  ;
-import  frauda from '../../../static/images/fraudas.jpeg'  ;
-import  creme from '../../../static/images/creme.jpeg'  ;
-import  comprimido from '../../../static/images/comprimido.jpeg'  ;
-
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+
+
 
 const styles = {
 
@@ -68,9 +63,9 @@ class Carrossel extends PureComponent {
 
         console.log(this.props.history.location.pathname.replace('/produto/', ''))
 
-        let productId = this.props.history.location.pathname.replace('/', '')
+        this.props.history.location.pathname.replace('/', '')
 
-        let listaImagens = await axios.get(`https://ecommerce-engsoft.herokuapp.com/carrosel/11`)
+        await axios.get(`https://ecommerce-engsoft.herokuapp.com/carrosel/11`)
 
           .then((response) => {
             console.log(response);

@@ -188,7 +188,7 @@ class CartComponents extends PureComponent {
         this.setState({
             cart: this.state.cart.map(product => {
                 let newQuantity = product.quantity;
-                if(product.id == id && qtd>=1){
+                if(product.id === id && qtd>=1){
                     newQuantity = qtd
                 }
                 return {
@@ -307,7 +307,7 @@ class CartComponents extends PureComponent {
                             {this.state.cepInfo?
                                 
                                 this.state.cepInfo != 'invalid' ? 
-                                this.state.cepInfo == 'loading' ? (
+                                this.state.cepInfo === 'loading' ? (
                                     <CircularProgress style={{display: 'block'}}/>
                                 ):(
                                 <Typography>
