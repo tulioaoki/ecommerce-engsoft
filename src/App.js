@@ -41,8 +41,7 @@ class App extends PureComponent {
           <Route path="/my-cart" exact component={CartPage} />
           {/* Admin Pages */}
           <Route path="/admin" exact component={AdminMainPage} />
-          <Route path="/my-favorites" exact component={FavoritesPage} />
-          <Route path='*' exact={true} component={HomePage} />
+          
         </>
       </div>
 
