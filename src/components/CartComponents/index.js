@@ -1,27 +1,23 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import {
-    withStyles,
-} from '@material-ui/core';
-import { TITLE } from '../../utils/colors';
-import { AZUL_ESCURO } from '../../utils/colors';
-import { Typography } from '@material-ui/core';
+import { Typography, withStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import medicine from '../../static/images/remedio.png';
+import { AZUL_ESCURO, TITLE } from '../../utils/colors';
 
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -154,7 +150,7 @@ class CartComponents extends PureComponent {
 
     removeFromCart(id) {
         this.setState({
-            cart: this.state.cart.filter(product => product.id != id)
+            cart: this.state.cart.filter(product => product.id !== id)
         });
     }
 
@@ -162,7 +158,7 @@ class CartComponents extends PureComponent {
         this.setState({
             cepInfo: 'loading'
         });
-        let cepInfo = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+        await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
         .then((response) => {
             this.setState({
                 cepInfo: response.data
@@ -211,7 +207,6 @@ class CartComponents extends PureComponent {
      */
 
     render() {
-
         const {
             history,
             classes,
@@ -220,7 +215,6 @@ class CartComponents extends PureComponent {
         } = this.props;
         const image = medicine;
         console.log(cart);
-
         return (
             <div className={classes.root}>
                 <Typography component="h1" variant="h5" className={classes.title}>
@@ -301,8 +295,7 @@ class CartComponents extends PureComponent {
                             </Button>
 
                             {this.state.cepInfo?
-                                
-                                this.state.cepInfo != 'invalid' ? 
+                                this.state.cepInfo !== 'invalid' ? 
                                 this.state.cepInfo === 'loading' ? (
                                     <CircularProgress style={{display: 'block'}}/>
                                 ):(

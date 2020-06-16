@@ -39,18 +39,25 @@ class SearchBox extends PureComponent {
     const {
       classes,
       history,
+      placeholder,
+      inputProps,
+      action,
     } = this.props;
-
+    console.log(action)
+    const changeAction = typeof action === 'undefined' ? ()=>{history.push('/products?search=' + this.state.value)} : action
     return (
       <div className={classes.root}>
         <Paper component="form" className={classes.rootPaper}>
           <InputBase
-            value={this.state.value} onChange={(event) => this.setState({value: event.target.value})}
+            value={this.state.value} onChange={(e) => (changeAction(e), this.setState({value:e.target.value}))}
+
             className={classes.input}
-            placeholder="O que você procura?"
-            inputProps={{ 'aria-label': 'O que você procura?' }}
+            placeholder={placeholder}
+            inputProps={{ 'aria-label': inputProps }}
           />
-          <IconButton onClick={()=>{history.push('/products?search=' + this.state.value)}} aria-label="search">
+
+          <IconButton onClick={changeAction} aria-label="search">
+
             <SearchIcon />
           </IconButton>
         </Paper>
@@ -62,6 +69,14 @@ class SearchBox extends PureComponent {
 SearchBox.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  inputProps: PropTypes.string.isRequired,
+  action: PropTypes.func,
+};
+
+SearchBox.defaultProps = {
+  placeholder: "O que você procura?",
+  inputProps: 'O que você procura?',
 };
 
 export default withRouter(connect()(withStyles(styles)(SearchBox)));

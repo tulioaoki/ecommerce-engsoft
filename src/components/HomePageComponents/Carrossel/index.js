@@ -60,14 +60,9 @@ class Carrossel extends PureComponent {
     };
 
     async componentDidMount() {
-
-        this.props.history.location.pathname.replace('/produto/', '')
         this.props.history.location.pathname.replace('/', '')
-
         await axios.get(`https://ecommerce-engsoft.herokuapp.com/carrosel/11`)
-
           .then((response) => {
-            console.log(response);
             this.setState((prevState) => ({ ...prevState, slide: response.data.data.images, currentImageValue: response.data.data.images[0].url  }));
           })
           .catch((error) => {

@@ -132,8 +132,6 @@ export class Slider extends PureComponent {
         vetor = new Array(productAmount); // Criar um vetor de tamanho variado que terá a quantidade de produtos que serão exibidos
         vetor.fill(1); // Preencher todo o vetor com o valor 1, só para poder usar o maps depois
 
-        console.log('Tamanho do vetor de imagens: ' + images.length)
-
         return (
 
             <div className='container'>
@@ -157,10 +155,10 @@ export class Slider extends PureComponent {
 
                     </Grid>
 
-                    {
-
+                    {                        
                         vetor.map(() => {
 
+                          
                             i = i + 1;
 
                             if (this.state.forward) { // Useio o botao da direita
@@ -172,9 +170,8 @@ export class Slider extends PureComponent {
                                 index = ((this.state.produtoExibidoFinal + i) % images.length);
                             }
 
-
                             produto = images[index];
-
+                                                        
 
                                 if(i === vetor.length -1){
 

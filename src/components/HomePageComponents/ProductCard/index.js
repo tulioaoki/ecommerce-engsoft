@@ -80,6 +80,7 @@ class ProductCardComponent extends PureComponent {
       <Card onClick={() => (history.push(`/produto/${product.id}`))} style={{ maxWidth: variant === 'small' ? 280 : 320, height: '100%'}} variant="outlined"> 
         <div style={{minHeight: '100%'}}>
         <CardHeader 
+
           title={product.name}
           subheader={(
             <>

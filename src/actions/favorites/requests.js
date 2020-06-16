@@ -2,7 +2,6 @@ import {BASE_URL} from '../../utils/requests';
 import axios from 'axios';
 // Exemplo de login
 export default function getFavoritesRequest() {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar, deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -14,7 +13,6 @@ export default function getFavoritesRequest() {
 }
 
 export function deleteFavoritesRequest(payload) {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar, deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -26,8 +24,6 @@ export function deleteFavoritesRequest(payload) {
 }
 
 export function addFavoritesRequest(payload) {
-    console.log(payload);
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar, deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',

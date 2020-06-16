@@ -12,12 +12,13 @@ import {
 } from '@material-ui/core';
 import { handleGetCart } from '../../../actions/cart';
 import { handleGetFavorites } from '../../../actions/favorites';
+const token = localStorage.getItem("token"); 
 
 const styles = () => ({
   icons: {
     margin: '0',
     display: 'flex',
-    justifyContent: 'flex-end',
+    //justifyContent: 'flex-end',
     flexWrap: 'wrap',
     width: '150px',
     justifyContent: 'space-between',
@@ -27,9 +28,11 @@ const styles = () => ({
 class HeaderIcons extends PureComponent {
 
   componentDidMount(){
-    const { dispatch} = this.props
-    dispatch(handleGetCart())
-    dispatch(handleGetFavorites())
+    const { dispatch } = this.props
+    if(token !== 'null'){
+      dispatch(handleGetCart())
+      dispatch(handleGetFavorites())
+    }
   }
 
   render() {
