@@ -19,6 +19,9 @@ import { withRouter } from 'react-router-dom';
 import medicine from '../../static/images/remedio.png';
 import { AZUL_ESCURO, TITLE } from '../../utils/colors';
 
+import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { handleDeleteFromCart,handleEditCart} from '../../actions/cart';
 
 const styles = () => ({
     root: {
@@ -174,17 +177,16 @@ class CartComponents extends PureComponent {
         })
     }
 
-    changeCartQuantity(id, qtd){
-        this.props.cart = this.state.cart.map(product => {
-                let newQuantity = product.quantity;
-                if(product.id === id && qtd>=1){
-                    newQuantity = qtd
-                }
-                return {
-                    ...product,
-                    quantity: newQuantity
-                }
-            }); 
+    changeCartQuantity(product, qtd){
+        let {
+            dispatch
+        } = this.props
+        if(qtd>=0){
+            product.quantity = parseInt(qtd)
+            product.total_price = product.product_price*parseInt(qtd)
+            dispatch(handleEditCart(product))
+        }
+        
     }
 
     componentDidMount(){
@@ -209,6 +211,7 @@ class CartComponents extends PureComponent {
             history,
             classes,
             cart,
+            dispatch
         } = this.props;
         const image = medicine;
         console.log(cart);
@@ -254,7 +257,7 @@ class CartComponents extends PureComponent {
                                         </TableCell>
                                         <TableCell align="right">
                                             <QtdTextField className={classes.number} size='small' value = {row.quantity} type="number" variant="outlined" 
-                                                onChange={event=>this.changeCartQuantity(row.id, event.target.value)}
+                                                onChange={event=>this.changeCartQuantity(row, event.target.value)}
                                                 style={{ width: '91px', height:'40px', marginTop: '3px'}}
                                                 InputLabelProps={{
                                                     shrink: true,
@@ -264,7 +267,7 @@ class CartComponents extends PureComponent {
                                         <TableCell align="right">R$ {(row.product_price).toFixed(2)}</TableCell>
                                         <TableCell align="right">R$ {(row.total_price).toFixed(2)}</TableCell>
                                         <TableCell align="right">
-                                            <Button onClick={()=>{this.removeFromCart(row.id)}}>
+                                            <Button onClick={()=>{dispatch(handleDeleteFromCart(row))}}>
                                                 <DeleteIcon />
                                                 Excluir
                                             </Button>

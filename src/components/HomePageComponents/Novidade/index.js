@@ -135,6 +135,22 @@ export class Novidade extends PureComponent {
                         Novidades
                     </Typography>
 
+                <div className={classes.root}>
+                        <TabsStyle 
+                            style={{paddingLeft: '10px'}}
+                            value={this.state.novidadesTab}
+                            onChange={this.categories}
+                            indicatorColor=''
+                            variant="scrollable"
+                            scrollButtons="auto"
+                        >
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab === 0 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Medicamentos e Saúde" />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab === 1 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Cuidados Pessoais e Beleza"  />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab === 2 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Dermocosméticos"  />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab === 3 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Mamães e bebês"  />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab === 4 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Conveniência"  />
+                            <Tab className={classes.novidades_categoria} style={this.state.novidadesTab === 5 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Fitness e Nutrição"  />
+                        </TabsStyle>
                 </div>
                 
 

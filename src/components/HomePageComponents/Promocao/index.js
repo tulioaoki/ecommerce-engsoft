@@ -73,7 +73,6 @@ export class Promocao extends PureComponent {
                                         />
                                     </Grid>
                                 })
-                            
                         }
                     </Grid>
                 </Grid>
