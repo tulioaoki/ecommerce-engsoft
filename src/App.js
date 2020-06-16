@@ -28,6 +28,7 @@ class App extends PureComponent {
     return (
       <div style={{ width: '100%', height: '100%', minHeight: '100%' }}>
         <>
+          
           <Route path="/" exact component={HomePage} />
           <Route path="/login" exact component={Login} />
           <Route path="/products" exact component={ListPage} />
