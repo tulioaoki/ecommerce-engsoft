@@ -6,13 +6,15 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import IconButton from '@material-ui/core/IconButton';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Badge from '@material-ui/core/Badge';
 import {
   withStyles,
 } from '@material-ui/core';
 import { handleGetCart } from '../../../actions/cart';
 import { handleGetFavorites } from '../../../actions/favorites';
-const token = localStorage.getItem("token"); 
+import { isLogged } from '../../../utils/extra';
+
 
 const styles = () => ({
   icons: {
@@ -20,7 +22,7 @@ const styles = () => ({
     display: 'flex',
     //justifyContent: 'flex-end',
     flexWrap: 'wrap',
-    width: '150px',
+    width: '200px',
     justifyContent: 'space-between',
   },
 });
@@ -29,13 +31,18 @@ class HeaderIcons extends PureComponent {
 
   componentDidMount(){
     const { dispatch } = this.props
-    if(token !== 'null'){
+    if(isLogged()){
       dispatch(handleGetCart())
       dispatch(handleGetFavorites())
     }
   }
 
   render() {
+    const handleLogout = () =>{
+      localStorage.setItem("token", 'undefined')
+      history.push('/login')
+    }
+
     const {
       classes,
       history,
@@ -57,6 +64,11 @@ class HeaderIcons extends PureComponent {
         <IconButton color="inherit" onClick={() => (history.push('/my-cart'))}>
           <Badge badgeContent={typeof cart !== 'undefined' ? cart.length : 0} color="secondary">
             <ShoppingCartRoundedIcon fontSize="default" />
+          </Badge>
+        </IconButton>
+        <IconButton color="inherit" onClick={handleLogout}>
+          <Badge badgeContent={'Sair'} color="secondary">
+            <ExitToAppIcon fontSize="default" />
           </Badge>
         </IconButton>
       </div>

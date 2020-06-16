@@ -51,6 +51,7 @@ class HomePage extends PureComponent {
   }
 
   render() {
+    
     const { classes, cart } = this.props;
     return (
       <div>

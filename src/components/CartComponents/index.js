@@ -16,12 +16,10 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { handleDeleteFromCart, handleEditCart } from '../../actions/cart';
 import medicine from '../../static/images/remedio.png';
 import { AZUL_ESCURO, TITLE } from '../../utils/colors';
 
-import axios from 'axios';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { handleDeleteFromCart,handleEditCart} from '../../actions/cart';
 
 const styles = () => ({
     root: {

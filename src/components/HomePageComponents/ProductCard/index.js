@@ -77,7 +77,7 @@ class ProductCardComponent extends PureComponent {
     }
     
     return (
-      <Card onClick={() => (history.push(`/produto/${product.id}`))} style={{ maxWidth: variant === 'small' ? 280 : 320, height: '100%'}} variant="outlined"> 
+      <Card style={{ maxWidth: variant === 'small' ? 280 : 320, height: '100%'}} variant="outlined"> 
         <div style={{minHeight: '100%'}}>
         <CardHeader 
 
@@ -100,6 +100,7 @@ class ProductCardComponent extends PureComponent {
           className={classes.media}
           image={product.images[0].image_url}
           title="Imagem do produto"
+          onClick={() => (history.push(`/produto/${product.id}`))}
         />
         </div>
         <CardActions disableSpacing style={{ justifyContent: 'center' }} style={{marginTop: '-55px', paddingBottom: '55px'}}>

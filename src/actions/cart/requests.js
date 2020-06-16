@@ -30,9 +30,6 @@ export function addToCartRequest(id,qtd) {
 
 
 export function deleteFromCartRequest(payload) {
-    console.log('deleting');
-    console.log(payload)
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar, deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',
@@ -44,7 +41,6 @@ export function deleteFromCartRequest(payload) {
 }
 
 export function updateCartRequest(payload) {
-    localStorage.setItem("token", '2d35fc6f3726696a55b2e11bc68ec253e829e84d'); // para testar, deve ser setado no login
     let headers = {
         'content-type': 'application/json',
         'Accept': 'application/json',

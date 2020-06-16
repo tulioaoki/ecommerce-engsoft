@@ -19,7 +19,6 @@ import FavoritesPage from './pages/FavoritesPage';
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    localStorage.setItem("token", 'null'); 
     this.state = {
     };
   }
@@ -43,6 +42,7 @@ class App extends PureComponent {
           {/* Admin Pages */}
           <Route path="/admin" exact component={AdminMainPage} />
           <Route path="/my-favorites" exact component={FavoritesPage} />
+          <Route path='*' exact={true} component={HomePage} />
         </>
       </div>
 

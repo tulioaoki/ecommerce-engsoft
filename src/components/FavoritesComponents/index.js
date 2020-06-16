@@ -95,7 +95,7 @@ class FavoritesComponents extends PureComponent {
 
     // removeFromCart(product) {
     //     // this.setState({
-    //     //     cart: this.state.cart.filter(product => product.id != id)
+    //     //     cart: this.state.cart.filter(product => product.id !== id)
     //     // });
     //     dispatch(handleDeleteFavorites(product))
     // }
@@ -112,7 +112,7 @@ class FavoritesComponents extends PureComponent {
 
         const removeFromCart = (product) => {
             // this.setState({
-            //     cart: this.state.cart.filter(product => product.id != id)
+            //     cart: this.state.cart.filter(product => product.id !== id)
             // });
             dispatch(handleDeleteFavorites(product))
         }

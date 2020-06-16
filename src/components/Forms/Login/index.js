@@ -8,6 +8,11 @@ import TextField from '@material-ui/core/TextField';
 
 import { AZUL_ESCURO } from '../../../utils/colors';
 import { handleLoginUser } from '../../../actions/User';
+import { Redirect } from "react-router-dom";
+import { isLogged } from '../../../utils/extra';
+import { handleGetCart } from '../../../actions/cart';
+import { handleGetFavorites } from '../../../actions/favorites';
+
 
 const styles = () => ({
   btnStyle: {
@@ -36,7 +41,7 @@ class LoginForm extends PureComponent {
   }
 
   render() {
-    const { classes, dispatch /** history, cadastro**/ } = this.props;
+    const { classes, dispatch, history /** history, cadastro**/ } = this.props;
 
 
     const handleChangeNewPass = (event) => {
@@ -50,10 +55,16 @@ class LoginForm extends PureComponent {
       });
   };
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
       console.log(this.state)
       const {login, password} = this.state;
-      dispatch(handleLoginUser({login,password}))
+      const { history } = this.props;
+      await dispatch(handleLoginUser({login,password}))
+      if(isLogged()){
+        await dispatch(handleGetCart())
+        await dispatch(handleGetFavorites())
+        history.push('/')
+      }
     }
 
     

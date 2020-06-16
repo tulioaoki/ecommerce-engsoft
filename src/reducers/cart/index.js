@@ -41,7 +41,7 @@ export default function REDUCER_CART(state = { cart_products: [] }, action) {
         }
       }
       copy.cart_products = cartproducts_copy.map(value=>{
-        if(value.id == action.payload.id){
+        if(value.id === action.payload.id){
           return action.payload
         }else{
           return value

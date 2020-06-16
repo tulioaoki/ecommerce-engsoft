@@ -15,7 +15,6 @@ export default function authenticateUserRequest(login, password) {
 return Axios.post(BASE_URL+'login' , body,{headers})
     .then( response => {
       localStorage.setItem("token", response.data.data.token); 
-      console.log("TOKE",localStorage.getItem("token"))
       return response
     })
     .catch((error) => (error))

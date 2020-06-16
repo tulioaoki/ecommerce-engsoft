@@ -245,7 +245,7 @@ class ProductDetails extends PureComponent {
               </Button>
               {this.state.cepInfo ?
 
-                this.state.cepInfo != 'invalid' ?
+                this.state.cepInfo !== 'invalid' ?
                   this.state.cepInfo === 'loading' ? (
                     <CircularProgress style={{ display: 'block' }} />
                   ) : (

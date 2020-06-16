@@ -9,10 +9,15 @@ import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import ItemGridDisplay from '../components/HomePageComponents/ItemGridDisplay';
 import OneItemList from '../components/HomePageComponents/OneItemList';
+import { isLogged } from '../utils/extra';
 
 
 class AdminMainPage extends PureComponent {
   render() {
+    if(!isLogged()){
+      const { history } = this.props;
+      history.push('/login')
+    }
     return (
       <>
         <div className='mainContent'>
