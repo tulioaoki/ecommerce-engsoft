@@ -133,62 +133,34 @@ export class Novidade extends PureComponent {
         } = this.props;
 
         return (
-
-            <div className='container' style={{ marginBottom: '50px', marginTop: '50px' }}>
-
-                <div>
-
+            <div className={classes.root}>
+            <Grid container style={{ marginBottom: '50px', marginTop: '50px' }}>
+                
+                <Grid xs={12} sm={12}>
                     <Typography className={classes.text}>
                         Novidades
                     </Typography>
+                </Grid>
 
-                    <div className={classes.root}>
-                        <BottomNavigation
-                            value={this.state.value}
+                
+                        <TabsStyle centered 
+                            style={{paddingLeft: '10px'}}
+                            value={this.state.novidadesTab}
                             onChange={this.categories}
-                            showLabels
-                            className={classes.root}
+                            indicatorColor="white"
+                            variant="scrollable"
+                            scrollButtons="auto"
                         >
-                            
-                            {   this.state.categorias.map( (categoria,index) => {
+                        {   this.state.categorias.map( (categoria,index) => {
+                            return(<Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 5 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Fitness e Nutrição"  />)
+                        })
+                        }
+                            </TabsStyle>
+                
+                {this.slide(this.state.value)}
+            </Grid>
 
-                                    if(index === 0){
-                                        return <BottomNavigationAction label= {categoria.name}
-
-                                            classes={{
-                                            root: classes.categoria,
-                                            selected: classes.selected,
-                                            }}
-                                            style={{ borderRadius: '15px 0px 0px 15px' }}
-                                        />
-                                    }else if(index === this.state.categorias.length -1 ){
-
-                                        return  <BottomNavigationAction label= {categoria.name}
-                                                    classes={{
-                                                        root: classes.categoria,
-                                                        selected: classes.selected,
-                                                    }}
                     
-                                                    style={{ borderRadius: '0px 15px 15px 0px' }}
-                    
-                                                />
-
-                                    }else{
-
-                                        return <BottomNavigationAction label={categoria.name}
-
-                                                classes={{
-                                                    root: classes.categoria,
-                                                    selected: classes.selected,
-                                                }}
-                                            />
-
-                                    }
-                                })                             
-                            }
-
-                        </BottomNavigation>
-                    </div>
                                    
                 
                 {
@@ -196,10 +168,10 @@ export class Novidade extends PureComponent {
                         
                     <Slider productAmount={4} images={this.state.listaProdutos}/>
 
-                }                
-                </div>
-            </div>
-        );
+                }   
+                </div> 
+        );            
+    
     }
 }
 
