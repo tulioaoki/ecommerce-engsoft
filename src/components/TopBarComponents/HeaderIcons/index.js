@@ -31,16 +31,15 @@ class HeaderIcons extends PureComponent {
   componentDidMount(){
     const { dispatch} = this.props
     if(isLogged()){
-      console.log("OXE", isLogged())
       dispatch(handleGetCart())
       dispatch(handleGetFavorites())
     }
   }
 
   render() {
-    const handleLogout = () =>{
+    const handleLogout = async () =>{
       localStorage.setItem("token", 'undefined')
-      history.push('/login')
+      window.location.reload();
     }
 
     const {
