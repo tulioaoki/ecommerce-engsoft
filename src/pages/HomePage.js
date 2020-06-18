@@ -37,7 +37,10 @@ class HomePage extends PureComponent {
   
   async componentDidMount(){
        
-    
+    const { dispatch} = this.props
+    dispatch(handleGetCart())
+    dispatch(handleGetFavorites())
+
     await axios.get(`https://ecommerce-engsoft.herokuapp.com/products/best_sellers`)
       .then((response) => {
 
@@ -51,11 +54,6 @@ class HomePage extends PureComponent {
 
   }
 
-  componentDidMount(){
-    const { dispatch} = this.props
-    dispatch(handleGetCart())
-    dispatch(handleGetFavorites())
-  }
 
   render() {
     

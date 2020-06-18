@@ -31,6 +31,7 @@ class HeaderIcons extends PureComponent {
   componentDidMount(){
     const { dispatch} = this.props
     if(isLogged()){
+      console.log("OXE", isLogged())
       dispatch(handleGetCart())
       dispatch(handleGetFavorites())
     }
