@@ -15,5 +15,6 @@ export function handleLoginUser(payload) {
   return (dispatch) => authenticateUserRequest(payload.login, payload.password)
     .then(({ data }) => {
       dispatch(loginUser({ payload: data }));
-    });
+      return data
+    }).catch(undefined);
 }
