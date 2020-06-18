@@ -57,11 +57,9 @@ class LoginForm extends PureComponent {
   };
 
     const handleLogin = async () => {
-      console.log(this.state)
       const {login, password} = this.state;
       const { history } = this.props;
       await dispatch(handleLoginUser({login,password})).then(r => {
-        console.log('anfiansfa', r)
           if(typeof r !== 'undefined'){
             this.props.enqueueSnackbar('Bem vindo(a) a loja!',
             { variant: 'success', autoHideDuration: 3000, })
