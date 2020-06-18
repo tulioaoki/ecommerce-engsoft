@@ -41,12 +41,13 @@ const styles = () => ({
     button: {
 
         padding: '0px',
-        backgroundColor: '#1F509C',
+        backgroundColor: '#2C719C',
         transition: 'opacity 0.4s',
         '&:hover': {
-            //opacity: 0.8,
-            backgroundColor: '#1a237e',
+            opacity: 0.8,
+            backgroundColor: '#2C719C',
         },
+        
     },
     
     icon: {

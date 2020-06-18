@@ -1,16 +1,18 @@
-import { withStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import {
+  withStyles,
+} from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
+import IconButton from '@material-ui/core/IconButton';
+import CardMedia from '@material-ui/core/CardMedia';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { AZUL_ESCURO } from '../../../utils/colors';
 import { handleAddFavorites, handleDeleteFavorites } from '../../../actions/favorites';
 
@@ -32,12 +34,6 @@ const styles = () => ({
 });
 
 class ProductCardComponent extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
   getCategoriesString() {
     const {
       product
@@ -75,30 +71,29 @@ class ProductCardComponent extends PureComponent {
         dispatch(handleDeleteFavorites(product))
       }
     }
-    
+
     return (
       <Card style={{ maxWidth: variant === 'small' ? 280 : 320, height: '100%'}} variant="outlined"> 
         <div style={{minHeight: '100%'}}>
         <CardHeader 
-
           title={product.name}
           subheader={(
             <>
               <Typography color="primary" className={classes.price} display="inline">
                 {product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </Typography>
-              {/*{variant === 'normal'
+              {variant === 'normal'
                 && (
                 <Typography display="inline" style={{ marginLeft: 8 }}>
                   { this.getCategoriesString() }
                 </Typography>
-                )}*/}
+                )}
             </>
           )}
         />
         <CardMedia 
           className={classes.media}
-          image={product.images[0].image_url}
+          image={typeof product.images[0] !== 'undefined' ? product.images[0].image_url : ''}
           title="Imagem do produto"
           onClick={() => (history.push(`/produto/${product.id}`))}
         />

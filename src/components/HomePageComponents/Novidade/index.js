@@ -195,8 +195,7 @@ export class Novidade extends PureComponent {
                     (typeof this.state.listaProdutos !== 'undefined' && this.state.listaProdutos.length > 0 && this.state.value !== null) &&
                         
                     <Slider productAmount={4} images={this.state.listaProdutos}/>
-                    
-                }                
+                                    }                
                 </div>
             </div>
         );

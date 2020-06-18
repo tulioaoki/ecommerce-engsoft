@@ -56,10 +56,8 @@ class ListPage extends PureComponent {
     this.fetchProducts();
   }
 
-
   componentDidUpdate(prevProps) {
-    const {location} = this.props;
-
+    const { location } = this.props;
     if (prevProps.location.search.replace('?search=', '') !== location.search.replace('?search=', '')) {
       this.fetchProducts();
     }
@@ -110,8 +108,9 @@ class ListPage extends PureComponent {
       .catch(async (error) => {
         console.log(error);
         if (error.response.status === 404) {
-
-          await this.setState({ products: [], loading: false });
+          await this.setState({
+            products: [], loading: false, itemCount: 0, pageCount: 0,
+          });
         }
       });
   }
@@ -122,10 +121,8 @@ class ListPage extends PureComponent {
       categories, products, filterCategories, loading, itemCount,
     } = this.state;
 
-
-    const nextPage = async () => {
-      await this.setState((prevState) => ({ ...prevState, pageCount: prevState.pageCount + 1 }));
-
+    const nextPage = () => {
+      this.setState((prevState) => ({ ...prevState, pageCount: prevState.pageCount + 1 }));
       this.fetchProducts(false);
     };
 
@@ -179,10 +176,9 @@ class ListPage extends PureComponent {
                 <div style={{ textAlign: 'center', marginTop: '18px' }}>
                   {console.log(itemCount, products.length)}
                   {itemCount > products.length && (
-
-                    <Button style={styles().button} onClick={nextPage}>
-                      carregar mais
-                    </Button>
+                  <Button style={styles().button} onClick={nextPage}>
+                    carregar mais
+                  </Button>
                   )}
 
                 </div>

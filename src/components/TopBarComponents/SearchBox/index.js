@@ -50,14 +50,11 @@ class SearchBox extends PureComponent {
         <Paper component="form" className={classes.rootPaper}>
           <InputBase
             value={this.state.value} onChange={(e) => (changeAction(e), this.setState({value:e.target.value}))}
-
             className={classes.input}
             placeholder={placeholder}
             inputProps={{ 'aria-label': inputProps }}
           />
-
           <IconButton onClick={changeAction} aria-label="search">
-
             <SearchIcon />
           </IconButton>
         </Paper>

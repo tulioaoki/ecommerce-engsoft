@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { AZUL_BEBE, AZUL_CLARO } from '../../utils/colors';
+import { AZUL_BEBE, AZUL_CLARO, AZUL_ESCURO } from '../../utils/colors';
 import PerfilDev from './PerfilDev';
 
 const styles = () => ({
@@ -25,21 +25,21 @@ const styles = () => ({
   },
 
   text: {
-    color: '#424242',
-    //fontWeight: '600',
-    fontSize: '18px',
+    color: AZUL_ESCURO,
+    fontWeight: '600',
+    fontSize: '20px',
     marginTop: '30px',
     marginBottom: '10px',
   },
 
   title: {
-    color: AZUL_CLARO,
+    color: AZUL_ESCURO,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '900',
     fontSize: '24px',
     lineHeight: '86px',
-    //textTransform: 'uppercase',
+    textTransform: 'uppercase',
 
   },
 
@@ -158,6 +158,8 @@ class ContactComponents extends PureComponent {
       anchorEl: null,
       selectedIndex: 0,
     };
+
+    console.log(this.state.nome)
   }
 
 
@@ -251,29 +253,33 @@ class ContactComponents extends PureComponent {
 
           <Grid item xs={12} sm={6} lg={6} >
 
-            <Typography component="h4" variant="h6" className={classes.title}>
+            <Typography component="h2" variant="h3" className={classes.title}>
               Funcionamento
             </Typography>
 
-            <Typography component="h4" variant="h6" className={classes.text}>
-              <strong>Dias e horários:</strong> segunda à sexta-feira - das 7h às 17h
-            </Typography>
+            <Typography component="h2" variant="h3" className={classes.text}>
+              DIAS: Segunda à sexta
+              </Typography>
 
-            <Typography component="h4" variant="h6" className={classes.text}>
-            <strong>Telefones:</strong> +55 (81) 9999-9999 | 9 9999-9999
-            </Typography>
+            <Typography component="h2" variant="h3" className={classes.text}>
+              HORÁRIO: 7h - 17h
+              </Typography>
 
-            <Typography component="h4" variant="h6" className={classes.text}>
-            <strong>E-mail:</strong> eletiva.react@gmail.com
-            </Typography>
+            <Typography component="h2" variant="h3" className={classes.text}>
+              TELEFONE: (81) 998385597
+              </Typography>
 
-            <Typography component="h4" variant="h6" className={classes.text}>
-            <strong>Endereço:</strong> Rua Senador Pompeu, 1520, Centro, Recife - PE
-            </Typography>
+            <Typography component="h2" variant="h3" className={classes.text}>
+              E-MAIL: eletiva.react@gmail.com
+              </Typography>
 
-            <Typography component="h4" variant="h6" className={classes.text}>
-            <strong>CEP:</strong> 00000-000
-            </Typography>
+            <Typography component="h2" variant="h3" className={classes.text}>
+              ENDEREÇO: Rua Senador Pompeu, 1520, Centro, Fortaleza-Ce
+              </Typography>
+
+            <Typography component="h2" variant="h3" className={classes.text}>
+              CEP: 60.025-001
+              </Typography>
           </Grid>
 
 
@@ -380,7 +386,7 @@ class ContactComponents extends PureComponent {
 
         </Grid>
 
-        <Grid container spacing={1} style={{marginTop:'10px', paddingBottom:'10px', backgroundColor: '#f2f2f2'}}>
+        <Grid container spacing={1} >
 
           <Grid item xs={12} sm={12} >
 
@@ -396,23 +402,23 @@ class ContactComponents extends PureComponent {
 
           </Grid>
 
-          <Grid item xs={12} sm={2} >
+          <Grid item xs={12} sm={2} style={{ }}>
 
             <PerfilDev developer={devs[0]}/>
 
           </Grid>
 
-          <Grid item xs={12} sm={2} >
+          <Grid item xs={12} sm={2} style={{ }}>
 
-            <PerfilDev developer={devs[3]} />
+            <PerfilDev developer={devs[3]} cor={'pink'}/>
           </Grid>
 
-          <Grid item xs={12} sm={2} >
+          <Grid item xs={12} sm={2} style={{ }}>
 
             <PerfilDev developer={devs[4]}/>
           </Grid>
 
-          <Grid item xs={12} sm={2}  >
+          <Grid item xs={12} sm={2} style={{ }} >
 
             <PerfilDev developer={devs[2]}/>
           </Grid>

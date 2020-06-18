@@ -13,7 +13,6 @@ import PresentationPage from '../components/HomePageComponents/PresentationPage'
 import Promocao from '../components/HomePageComponents/Promocao';
 import Servicos from '../components/HomePageComponents/Servicos';
 
-
 const styles = () => ({
   root: {
     justifyContent: 'center',
@@ -24,7 +23,6 @@ const styles = () => ({
     margin: 0,
     flexDirection: 'column',
   },
-  
 });
 
 class HomePage extends PureComponent {
@@ -53,8 +51,10 @@ class HomePage extends PureComponent {
   render() {
     
     const { classes, cart } = this.props;
+    console.log("O carrinho está assim :",cart)
+
     return (
-      <div>
+      <div className={classes.root}>
         <div className="mainContentHome">
           <PresentationPage />
           <Carrossel />
@@ -69,7 +69,6 @@ class HomePage extends PureComponent {
         </div>
         <Footer showSocialMedia> </Footer>
       </div>
-
     );
   }
 }

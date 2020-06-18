@@ -22,7 +22,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-import profile from '../../static/images/profile.png';
+//import profile from '../../static/images/profile.png';
 import medicine from '../../static/images/remedio.png';
 
 const styles = () => ({
@@ -67,7 +67,7 @@ class ProfileComponents extends PureComponent {
             history,
             classes,
         } = this.props;
-        const image = profile;
+        //const image = profile;
         const image_produto = medicine;
 
         return (
@@ -108,7 +108,7 @@ class ProfileComponents extends PureComponent {
 
                                         <Grid container spacing={0}>
                                             <Grid item xs={12} sm={6}>
-                                                <img src={image}
+                                                <img src={''}
                                                     style={{
                                                         width: '125px',
                                                         borderRadius: '100%',

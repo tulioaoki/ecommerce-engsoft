@@ -120,7 +120,7 @@ class ProductDetails extends PureComponent {
   async componentDidMount() {
     console.log(this.props.history.location.pathname.replace('/produto/', ''))
     let productId = this.props.history.location.pathname.replace('/produto/', '')
-    await axios.get(`https://ecommerce-engsoft.herokuapp.com/products/${productId}`)
+    let produto = await axios.get(`https://ecommerce-engsoft.herokuapp.com/products/${productId}`)
       .then((response) => {
         console.log(response.data.data);
         this.setState((prevState) => ({ ...prevState, product: response.data.data }));
@@ -166,7 +166,6 @@ class ProductDetails extends PureComponent {
   }
 
 
-
   render() {
     const {
       classes,
@@ -174,7 +173,6 @@ class ProductDetails extends PureComponent {
       favorites
     } = this.props;
     const { product } = this.state;
-
 
     let isFavorite = favorites.reduce((i, atual) => {
       return (i || atual.id === product.id)
@@ -203,7 +201,15 @@ class ProductDetails extends PureComponent {
             </Typography>
 
             <Typography className={classes.description_product}>
-              <p>{this.state.product.description}</p>
+              <p>Glifage é um medicamento antidiabético de uso oral, que associado a uma dieta apropriada,
+              é utilizado para o tratamento do diabetes tipo 2 em adultos, isoladamente ou em combinação com outros antiadiabéticos orais,
+              como por exemplo aqueles da classe das sulfonilureias. Pode ser utilizado também para o tratamento do diabetes tipo 1 em
+              complementação à insulinoterapia. Glifage também está indicado na Síndrome dos Ovários Policísticos, condição caracterizada
+            por ciclos menstruais irregulares e frequentemente excesso de pelos e obesidade.</p>
+            </Typography>
+
+            <Typography className={classes.product_risk}>
+              <p>GLIFAGE XR 500MG É UM MEDICAMENTO. SEU USO PODE TRAZER RISCOS. PROCURE UM MÉDICO OU UM FARMACÊUTICO. LEIA A BULA.</p>
             </Typography>
 
           </Grid>
