@@ -14,6 +14,7 @@ import Novidades from '../components/HomePageComponents/Novidade';
 import PresentationPage from '../components/HomePageComponents/PresentationPage';
 import Promocao from '../components/HomePageComponents/Promocao';
 import Servicos from '../components/HomePageComponents/Servicos';
+import { isLogged } from '../utils/extra';
 
 const styles = () => ({
   root: {
@@ -38,8 +39,10 @@ class HomePage extends PureComponent {
   async componentDidMount(){
        
     const { dispatch} = this.props
-    dispatch(handleGetCart())
-    dispatch(handleGetFavorites())
+    if(isLogged()){
+      dispatch(handleGetCart())
+      dispatch(handleGetFavorites())
+    }
 
     await axios.get(`https://ecommerce-engsoft.herokuapp.com/products/best_sellers`)
       .then((response) => {
