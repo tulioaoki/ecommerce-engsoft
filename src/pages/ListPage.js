@@ -53,12 +53,18 @@ class ListPage extends PureComponent {
         console.error(error);
       });
 
+    const queryString = require('query-string');
+    const { location } = this.props;
+    const parsed = queryString.parse(location.search);
+    if (parsed.initCategories) {
+      await this.setState({ filterCategories: JSON.parse(parsed.initCategories) });
+    }
     this.fetchProducts();
   }
 
 
   componentDidUpdate(prevProps) {
-    const {location} = this.props;
+    const { location } = this.props;
 
     if (prevProps.location.search.replace('?search=', '') !== location.search.replace('?search=', '')) {
       this.fetchProducts();
@@ -78,8 +84,11 @@ class ListPage extends PureComponent {
   }
 
   async fetchProducts(clear = true) {
-    const { filterCategories, products, pageCount } = this.state;
+    const queryString = require('query-string');
     const { location } = this.props;
+    const parsed = queryString.parse(location.search);
+
+    const { filterCategories, products, pageCount } = this.state;
 
     await this.setState({ loading: true });
 
@@ -87,9 +96,9 @@ class ListPage extends PureComponent {
     if (filterCategories.length > 0) {
       endpoint += `&categories=${JSON.stringify(filterCategories)}`;
     }
-    const searchQuery = location.search.replace('?search=', '');
-    if (searchQuery) {
-      endpoint += `&search=${searchQuery}`;
+    const params = new URLSearchParams(location);
+    if (parsed.search) {
+      endpoint += `&search=${parsed.search}`;
     }
     await axios.get(endpoint)
       .then(async (response) => {
@@ -110,7 +119,6 @@ class ListPage extends PureComponent {
       .catch(async (error) => {
         console.log(error);
         if (error.response.status === 404) {
-
           await this.setState({ products: [], loading: false });
         }
       });

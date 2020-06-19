@@ -62,7 +62,7 @@ class CategoriesComponents extends PureComponent {
                 <Grid container spacing={5}>
                     <Grid item xs={12} sm={4}>
                         <Card variant="outlined" className={classes.root} style={{height: '400px', border: '2px solid #fb8c00', borderRadius: '10px'}}>
-                            <CardActionArea onClick={()=>{history.push('/')}} style={{height: '100%'}}>
+                            <CardActionArea onClick={()=>{history.push('/products?initCategories=[9]')}} style={{height: '100%'}}>
                                 
                                 <CardContent style={{textAlign: 'center', paddingTop: '20px'}}>
                                     <LocalHospitalIcon style={{fontSize: '100px', color:'#fb8c00'}}/>
@@ -77,7 +77,7 @@ class CategoriesComponents extends PureComponent {
 
                     <Grid item xs={12} sm={4}>
                         <Card variant="outlined" className={classes.root} style={{height: '400px', border: '2px solid #ec407a', borderRadius: '10px'}}>
-                            <CardActionArea onClick={()=>{history.push('/')}} style={{height: '100%'}}>
+                            <CardActionArea onClick={()=>{history.push('/products?initCategories=[6]')}} style={{height: '100%'}}>
                                 
                                 <CardContent style={{textAlign: 'center', paddingTop: '20px'}}>
                                     <FaceIcon style={{fontSize: '100px', color:'#ec407a'}}/>
@@ -92,7 +92,7 @@ class CategoriesComponents extends PureComponent {
 
                     <Grid item xs={12} sm={4}>
                         <Card variant="outlined" className={classes.root} style={{height: '400px', border: '2px solid #cddc39', borderRadius: '10px'}}>
-                            <CardActionArea onClick={()=>{history.push('/')}} style={{height: '100%'}}>
+                            <CardActionArea onClick={()=>{history.push('/products?initCategories=[4]')}} style={{height: '100%'}}>
                                 
                                 <CardContent style={{textAlign: 'center', paddingTop: '20px'}}>
                                     <InvertColorsIcon style={{fontSize: '100px', color:'#cddc39'}}/>
@@ -107,7 +107,7 @@ class CategoriesComponents extends PureComponent {
 
                     <Grid item xs={12} sm={4}>
                         <Card variant="outlined" className={classes.root} style={{height: '400px', border: '2px solid #512da8', borderRadius: '10px'}}>
-                            <CardActionArea onClick={()=>{history.push('/')}} style={{height: '100%'}}>
+                            <CardActionArea onClick={()=>{history.push('/products?initCategories=[3]')}} style={{height: '100%'}}>
                                 
                                 <CardContent style={{textAlign: 'center', paddingTop: '20px'}}>
                                     <ChildFriendlyIcon style={{fontSize: '100px', color:'#512da8'}}/>
@@ -121,7 +121,7 @@ class CategoriesComponents extends PureComponent {
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <Card variant="outlined" className={classes.root} style={{height: '400px', border: '2px solid #4caf50', borderRadius: '10px'}}>
-                            <CardActionArea onClick={()=>{history.push('/')}} style={{height: '100%'}}>
+                            <CardActionArea onClick={()=>{history.push('/products?initCategories=[2]')}} style={{height: '100%'}}>
                                 
                                 <CardContent style={{textAlign: 'center', paddingTop: '20px'}}>
                                     <LocalMallIcon style={{fontSize: '100px', color: '#4caf50'}}/>
@@ -135,7 +135,7 @@ class CategoriesComponents extends PureComponent {
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <Card variant="outlined" className={classes.root} style={{height: '400px', border: '2px solid #03a9f4', borderRadius: '10px'}}>
-                            <CardActionArea onClick={()=>{history.push('/')}} style={{height: '100%'}}>
+                            <CardActionArea onClick={()=>{history.push('/products?initCategories=[1]')}} style={{height: '100%'}}>
                                 
                                 <CardContent style={{textAlign: 'center', paddingTop: '20px'}}>
                                     <FitnessCenterIcon style={{fontSize: '100px', color: '#03a9f4'}}/>
