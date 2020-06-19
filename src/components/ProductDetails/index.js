@@ -216,7 +216,7 @@ class ProductDetails extends PureComponent {
                 {typeof this.state.product.price !== 'undefined' && this.state.product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </Typography>
 
-              <ValidationTextField size='small' id="outlined-number" label="Quantidade" type="number" variant="outlined" defaultValue='1'
+              <ValidationTextField size='small' value={this.state.quantity} id="outlined-number" label="Quantidade" type="number" variant="outlined" defaultValue='1'
                 style={{ width: '91px', height: '40px', marginTop: '3px' }}
                 onChange={event => this.changeCartQuantity(event.target.value)}
                 InputLabelProps={{

@@ -1,4 +1,4 @@
-import { Typography, withStyles, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { Typography, withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -134,18 +134,19 @@ export class Novidade extends PureComponent {
                     
                     <TabsStyle centered 
                         style={{paddingLeft: '10px'}}
-                        value={this.state.novidadesTab}
+                        value={this.state.value}
                         onChange={this.categories}
                         indicatorColor="white"
                         variant="scrollable"
                         scrollButtons="auto"
                     >
-                        {   this.state.categorias.map( (categoria) => {
-                            return(<Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 5 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label={categoria.name}  />)
+                        {   this.state.categorias.map( (categoria, index) => {
+                            return(<Tab className={classes.novidades_categoria} style={this.state.value == index ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label={categoria.name}  />)
                             })
                         }
                     </TabsStyle>
-                    
+                    <br></br>
+                    <br></br>
                         {
                             (typeof this.state.listaProdutos !== 'undefined' && this.state.listaProdutos.length > 0 && this.state.value !== null) &&
                                 

@@ -20,6 +20,8 @@ import { handleDeleteFromCart, handleEditCart } from '../../actions/cart';
 import medicine from '../../static/images/remedio.png';
 import { AZUL_ESCURO, TITLE } from '../../utils/colors';
 
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
+
 
 const styles = () => ({
     root: {
@@ -181,7 +183,7 @@ class CartComponents extends PureComponent {
         let {
             dispatch
         } = this.props
-        if(qtd>=0){
+        if(qtd>=1){
             product.quantity = parseInt(qtd)
             product.total_price = product.product_price*parseInt(qtd)
             dispatch(handleEditCart(product))
@@ -217,6 +219,7 @@ class CartComponents extends PureComponent {
             <div className={classes.root}>
                 <Typography component="h1" variant="h5" className={classes.title}>
                     Meu Carrinho
+                    <ShoppingCartRoundedIcon style={{color: '#424242', paddingLeft: '10px'}}/>
                 </Typography>
                 <br></br>
                 <Grid container spacing={0}>
