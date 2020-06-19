@@ -10,7 +10,7 @@ class TopBar extends PureComponent {
     return (
       <div style={{ justifyContent: 'space-around', marginTop: '10px', marginBottom: '10px' }} className="container">
         <Logo />
-        <SearchBox />
+        <SearchBox action={undefined} />
         <HeaderIcons />
       </div>
     );
