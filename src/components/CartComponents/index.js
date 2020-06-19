@@ -197,8 +197,7 @@ class CartComponents extends PureComponent {
 
 
 
-        UTILIZAR VALOR TOTAL DO BACK
-
+        
 
 
 
@@ -228,7 +227,7 @@ class CartComponents extends PureComponent {
                                     <TableRow>
                                         <TableCell>Item</TableCell>
                                         <TableCell align="right"></TableCell>
-                                        <TableCell align="right">quantity</TableCell>
+                                        <TableCell align="right">Quantidade</TableCell>
                                         <TableCell align="right">Valor unitário</TableCell>
                                         <TableCell align="right">Valor total</TableCell>
                                         <TableCell align="right"></TableCell>
@@ -248,10 +247,10 @@ class CartComponents extends PureComponent {
                                                 {row.product.marca}
                                             </Typography>
                                             <Typography style={{display: 'block'}}>
-                                                {row.product.unidade}
+                                                {row.product.unidade} unidade(s)
                                             </Typography>
                                             <Typography style={{display: 'block'}}>
-                                                {row.product.peso}
+                                                {row.product.peso} gramas
                                             </Typography>
                                         </TableCell>
                                         <TableCell align="right">
