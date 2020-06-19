@@ -67,12 +67,14 @@ class HomePage extends PureComponent {
           <PresentationPage />
           <Carrossel />
           <Servicos />
-          <Novidades/>
-          <Promocao/>
-          {
-            ( typeof this.state.listaDeProdutos !== 'undefined' && this.state.listaDeProdutos.length > 0 ) &&
-                <MaisVendidos qtdProdutos={4} images={this.state.listaDeProdutos} />
-          } 
+          <div className='container'>
+            <Novidades/>
+            <Promocao/>
+            {
+              ( typeof this.state.listaDeProdutos !== 'undefined' && this.state.listaDeProdutos.length > 0 ) &&
+                  <MaisVendidos qtdProdutos={4} images={this.state.listaDeProdutos} />
+            } 
+          </div>
         <Footer showSocialMedia> </Footer>
       </div>
     </>

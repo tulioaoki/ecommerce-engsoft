@@ -1,4 +1,4 @@
-import { Typography, withStyles, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { Typography, withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -13,7 +13,7 @@ const styles = () => ({
 
     text: {
 
-        color: AZUL_ESCURO,
+        color: TITLE,
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '900',
@@ -30,21 +30,10 @@ const styles = () => ({
         alignItems: 'center',
         padding: '0 0 10px 0',
     },
-
-    categoria: {
-        color: 'black',
-        fontFamily: 'Arial',
-        fontStyle: 'normal',
-        fontSize: '24px',
-        backgroundColor: '#eeeeee',
-        transition: 'opacity 0.4s',
-        padding: '6px 0px 8px 0px',
-        '&$selected': {
-            color: 'white',
-            padding: '6px 6px 8px 6px',
-            backgroundColor: AZUL_ESCURO,
-        },
         
+    novidades_categoria: {
+        color: '#424242',
+        fontSize: '12px',
     },
 
     selected: {
@@ -142,22 +131,22 @@ export class Novidade extends PureComponent {
                             Novidades
                         </Typography>
                     </Grid>
-
                     
-                            <TabsStyle centered 
-                                style={{paddingLeft: '10px'}}
-                                value={this.state.novidadesTab}
-                                onChange={this.categories}
-                                indicatorColor="white"
-                                variant="scrollable"
-                                scrollButtons="auto"
-                            >
-                                {   this.state.categorias.map( (categoria) => {
-                                    return(<Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 5 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label={categoria.name}  />)
-                                })
-                                }
-                            </TabsStyle>
-                    
+                    <TabsStyle centered 
+                        style={{paddingLeft: '10px'}}
+                        value={this.state.value}
+                        onChange={this.categories}
+                        indicatorColor="white"
+                        variant="scrollable"
+                        scrollButtons="auto"
+                    >
+                        {   this.state.categorias.map( (categoria, index) => {
+                            return(<Tab className={classes.novidades_categoria} style={this.state.value == index ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label={categoria.name}  />)
+                            })
+                        }
+                    </TabsStyle>
+                    <br></br>
+                    <br></br>
                         {
                             (typeof this.state.listaProdutos !== 'undefined' && this.state.listaProdutos.length > 0 && this.state.value !== null) &&
                                 

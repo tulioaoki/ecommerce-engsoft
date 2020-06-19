@@ -138,8 +138,8 @@ class ListPage extends PureComponent {
     };
 
     const getProducts = () => products.map((eachProduct) => (
-      <Grid key={eachProduct.id} item xs={12} md={6} lg={4} xl={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <ProductCardComponent
+      <Grid key={eachProduct.id} item xs={12} md={6} lg={4} xl={3} style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <ProductCardComponent style={{width:'100%'}}
           key={eachProduct.id}
           product={eachProduct}
           variant="normal"
@@ -166,7 +166,7 @@ class ListPage extends PureComponent {
           <NavBar />
           <div className="container">
             <Grid container spacing={4} style={styles().rootPadding}>
-              <Grid item xs={3}>
+              <Grid item xs={3} >
                 <Paper elevation={3}>
                   <List component="nav" aria-label="secondary mailbox folders">
                     {getCategories()}
