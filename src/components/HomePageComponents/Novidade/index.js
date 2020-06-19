@@ -104,13 +104,13 @@ export class Novidade extends PureComponent {
     }  
 
     categories = ((event, newValue) => {
-      
+        
+        console.log(`Index que to recebendo: ${newValue}`)
         
         this.setState({             // Mudar a imagem 
 
             value: newValue
         });
-
           
         this.slide(this.state.value)            
 
@@ -134,42 +134,40 @@ export class Novidade extends PureComponent {
 
         return (
             <div className={classes.root}>
-            <Grid container style={{ marginBottom: '50px', marginTop: '50px' }}>
                 
-                <Grid xs={12} sm={12}>
-                    <Typography className={classes.text}>
-                        Novidades
-                    </Typography>
-                </Grid>
-
-                
-                        <TabsStyle centered 
-                            style={{paddingLeft: '10px'}}
-                            value={this.state.novidadesTab}
-                            onChange={this.categories}
-                            indicatorColor="white"
-                            variant="scrollable"
-                            scrollButtons="auto"
-                        >
-                        {   this.state.categorias.map( (categoria,index) => {
-                            return(<Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 5 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label="Fitness e Nutrição"  />)
-                        })
-                        }
-                            </TabsStyle>
-                
-                {this.slide(this.state.value)}
-            </Grid>
+                <Grid container style={{ marginBottom: '50px', marginTop: '50px' }}>
+                    
+                    <Grid xs={12} sm={12}>
+                        <Typography className={classes.text}>
+                            Novidades
+                        </Typography>
+                    </Grid>
 
                     
-                                   
-                
-                {
-                    (typeof this.state.listaProdutos !== 'undefined' && this.state.listaProdutos.length > 0 && this.state.value !== null) &&
-                        
-                    <Slider productAmount={4} images={this.state.listaProdutos}/>
+                            <TabsStyle centered 
+                                style={{paddingLeft: '10px'}}
+                                value={this.state.novidadesTab}
+                                onChange={this.categories}
+                                indicatorColor="white"
+                                variant="scrollable"
+                                scrollButtons="auto"
+                            >
+                                {   this.state.categorias.map( (categoria) => {
+                                    return(<Tab className={classes.novidades_categoria} style={this.state.novidadesTab == 5 ? {color: AZUL_ESCURO, fontWeight: 900} : {}} label={categoria.name}  />)
+                                })
+                                }
+                            </TabsStyle>
+                    
+                        {
+                            (typeof this.state.listaProdutos !== 'undefined' && this.state.listaProdutos.length > 0 && this.state.value !== null) &&
+                                
+                            <Slider productAmount={4} images={this.state.listaProdutos}/>
 
-                }   
-                </div> 
+                        }   
+                </Grid>                
+                    
+                
+            </div> 
         );            
     
     }
