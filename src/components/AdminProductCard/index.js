@@ -100,6 +100,9 @@ class AdminProductCard extends PureComponent {
             offer_price:0,
             images:{},
             quantity:0,
+            unidade:0,
+            peso:0,
+            marca: "",
         };
     }
   getCategoriesString() {
@@ -136,6 +139,9 @@ class AdminProductCard extends PureComponent {
       offer_price:product.offer_price,
       images:product.images,
       quantity: product.quantity,
+      unidade: product.unidade,
+      peso:product.peso,
+      marca: product.marca,
     }))
   }
 
@@ -155,7 +161,7 @@ class AdminProductCard extends PureComponent {
     const handleSubmit = (e) => {
       e.preventDefault();
       const { dispatch } = this.props;
-      const {id,nome, descricao, images, categorias, price, quantity, offer, offer_price} = this.state;
+      const {id,nome, descricao, images, categorias, price, quantity, offer, offer_price,unidade,peso,marca} = this.state;
       let body = {
           id,
           name:nome,
@@ -166,6 +172,9 @@ class AdminProductCard extends PureComponent {
           images:[],
           offer,
           offer_price,
+          unidade,
+          peso,
+          marca
       }
       for(let x of Object.entries(images)){
           body.images.push(x[1])
@@ -306,6 +315,53 @@ class AdminProductCard extends PureComponent {
                       onChange={handleChange}
                       value={this.state.descricao}
                     />
+
+                    <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
+
+                      <TextField
+                      autoFocus
+                      margin="dense"
+                      id="unidade"
+                      label="Unidade"
+                      type="number"
+                      name="unidade"
+                      fullWidth
+                      placeholder='Unidades que o produto'
+                      className='formField'
+                      onChange={handleChange}
+                      value={this.state.unidade}
+                      />
+
+                      <TextField
+                      style={{marginLeft:'10px'}}
+                      autoFocus
+                      margin="dense"
+                      id="peso"
+                      label="Peso (gramas)"
+                      type="number"
+                      name="peso"
+                      fullWidth
+                      placeholder='Peso do produto'
+                      className='formField'
+                      onChange={handleChange}
+                      value={this.state.peso}
+                      />    
+                    </div>
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="marca"
+                        label="Marca"
+                        type="text"
+                        name="marca"
+                        fullWidth
+                        placeholder='Marca do Produto'
+                        className='formField'
+                        onChange={handleChange}
+                        value={this.state.marca}
+                    />
+
                     <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
                     <TextField
                     autoFocus
