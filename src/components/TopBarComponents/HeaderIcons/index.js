@@ -15,6 +15,8 @@ import { handleGetCart } from '../../../actions/cart';
 import { handleGetFavorites } from '../../../actions/favorites';
 import { isLogged } from '../../../utils/extra';
 
+import { Typography } from '@material-ui/core';
+
 const styles = () => ({
   icons: {
     margin: '0',
@@ -50,11 +52,11 @@ class HeaderIcons extends PureComponent {
     } = this.props;
     return (
       <div className={classes.icons} style={{ display: 'flex' }}>
-        <IconButton color="inherit">
-          <Badge color="secondary">
-            <AccountCircleIcon fontSize="default" onClick={() => (history.push('/login'))} />
-          </Badge>
-        </IconButton>
+          <IconButton color="inherit">
+            <Badge color="secondary">
+              <AccountCircleIcon fontSize="default" onClick={() => (history.push('/login'))} />
+            </Badge>
+          </IconButton>
         <IconButton color="inherit">
           <Badge badgeContent={typeof favorites !== 'undefined' ? favorites.length : 0} color="secondary">
             <FavoriteIcon fontSize="default" onClick={() => (history.push('/my-favorites'))}/>

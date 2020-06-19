@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import {
   withStyles,
 } from '@material-ui/core';
-import logoImage from '../../../static/images/logo.png';
+import logoImage from '../../../static/images/logo.jpeg';
 
 const styles = () => ({
   imgLogo: {
