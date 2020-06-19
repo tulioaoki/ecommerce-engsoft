@@ -297,13 +297,13 @@ class ProductDetails extends PureComponent {
                     <TableCell style={{ color: '#424242' }} component="th" scope="row">
                       <strong>Quantidade</strong>
                     </TableCell>
-                    <TableCell align="right">4 unidades</TableCell>
+                    <TableCell align="right">{product.unidade} unidades</TableCell>
                   </TableRow>
                   <TableRow >
                     <TableCell style={{ color: '#424242' }} component="th" scope="row">
                       <strong>Marca</strong>
                     </TableCell>
-                    <TableCell align="right">Danone</TableCell>
+                    <TableCell align="right">{product.marca}</TableCell>
                   </TableRow>
                   <TableRow >
                     <TableCell style={{ color: '#424242' }} component="th" scope="row">
