@@ -1,18 +1,18 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Typography, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import { withSnackbar } from 'notistack';
 import { AZUL_ESCURO } from '../../../utils/colors';
-import { handleLoginUser } from '../../../actions/User';
-import { Redirect } from "react-router-dom";
+import { handleLoginUser, handleRegisterUser } from '../../../actions/User';
+
 import { isLogged } from '../../../utils/extra';
 import { handleGetCart } from '../../../actions/cart';
 import { handleGetFavorites } from '../../../actions/favorites';
-import { withSnackbar } from 'notistack';
 
 
 const styles = () => ({
@@ -26,8 +26,8 @@ const styles = () => ({
     paddingTop: '50px',
   },
   input: {
-    maxWidth: '500px'
-  }
+    maxWidth: '500px',
+  },
 });
 
 class LoginForm extends PureComponent {
@@ -37,12 +37,12 @@ class LoginForm extends PureComponent {
       login: '',
       password: '',
       newLogin: '',
-      newPass: ''
+      newPass: '',
     };
   }
 
   render() {
-    const { classes, dispatch, history /** history, cadastro**/ } = this.props;
+    const { classes, dispatch, history /** history, cadastro* */ } = this.props;
 
 
     const handleChangeNewPass = (event) => {
@@ -50,38 +50,56 @@ class LoginForm extends PureComponent {
       this.setState((prevState) => ({ ...prevState, newpass: value }));
     };
 
-    const handleChange = e => {
+    const handleChange = (e) => {
       this.setState({
-          [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
       });
-  };
+    };
 
     const handleLogin = async () => {
-      const {login, password} = this.state;
+      const { login, password } = this.state;
       const { history } = this.props;
-      await dispatch(handleLoginUser({login,password})).then(r => {
-          if(typeof r !== 'undefined'){
-            this.props.enqueueSnackbar('Bem vindo(a) a loja!',
-            { variant: 'success', autoHideDuration: 3000, })
-          }else{
-            this.props.enqueueSnackbar('Credenciais incorretas!',
-          { variant: 'error', autoHideDuration: 3000, })
-          }
-      })
-      if(isLogged()){
-        await dispatch(handleGetCart())
-        await dispatch(handleGetFavorites())
-        history.push('/')
+      await dispatch(handleLoginUser({ login, password })).then((r) => {
+        if (typeof r !== 'undefined') {
+          this.props.enqueueSnackbar('Bem vindo(a) a loja!',
+            { variant: 'success', autoHideDuration: 3000 });
+        } else {
+          this.props.enqueueSnackbar('Credenciais incorretas!',
+            { variant: 'error', autoHideDuration: 3000 });
+        }
+      });
+      if (isLogged()) {
+        await dispatch(handleGetCart());
+        await dispatch(handleGetFavorites());
+        history.push('/');
       }
-    }
+    };
 
-    
+    const handleRegister = async () => {
+      const { newLogin, newPassword } = this.state;
+      const { history } = this.props;
+      await dispatch(handleRegisterUser({ newLogin, newPassword })).then((r) => {
+        if (typeof r !== 'undefined') {
+          this.props.enqueueSnackbar('Seu cadastro foi efetuado!',
+            { variant: 'success', autoHideDuration: 3000 });
+        } else {
+          this.props.enqueueSnackbar('Verifique os dados e tente novamente!',
+            { variant: 'error', autoHideDuration: 3000 });
+        }
+      });
+      if (isLogged()) {
+        await dispatch(handleGetCart());
+        await dispatch(handleGetFavorites());
+        history.push('/');
+      }
+    };
+
     return (
-      <div className='container'>
+      <div className="container">
         <div className={classes.formBox}>
           <Typography component="h1" variant="h5">
             Já sou cliente
-              </Typography>
+          </Typography>
           <form className={classes.input} noValidate>
             <TextField
               variant="outlined"
@@ -107,7 +125,8 @@ class LoginForm extends PureComponent {
               id="password"
               autoComplete="current-password"
             />
-            <Button className={classes.btnStyle}
+            <Button
+              className={classes.btnStyle}
               fullWidth
               variant="contained"
               color="primary"
@@ -131,25 +150,29 @@ class LoginForm extends PureComponent {
               fullWidth
               id="email"
               label="Email Address"
-              name="email"
+              name="newLogin"
               autoComplete="email"
+              onChange={handleChange}
               autoFocus
             />
             <TextField
               variant="outlined"
               margin="normal"
+              onChange={handleChange}
               required
               fullWidth
-              name="password"
+              name="newPassword"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
             />
-            <Button className={classes.btnStyle}
+            <Button
+              className={classes.btnStyle}
               fullWidth
               variant="contained"
               color="primary"
+              onClick={handleRegister}
             >
               Cadastrar
             </Button>
@@ -165,7 +188,6 @@ LoginForm.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   enqueueSnackbar: PropTypes.func.isRequired,
-
 };
 
 const mapStateToProps = ({}, props) => ({
