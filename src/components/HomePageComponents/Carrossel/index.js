@@ -48,6 +48,13 @@ const styles = {
 };
 
 let tempo = null;
+let link = [   
+              "/4",  
+              "/116",
+              "/61",
+              "/3",
+              "/117"  
+        ]
 
 class Carrossel extends PureComponent {
 
@@ -67,6 +74,7 @@ class Carrossel extends PureComponent {
         await axios.get(`https://ecommerce-engsoft.herokuapp.com/carrosel/11`)
 
           .then((response) => {
+
             this.setState((prevState) => ({ ...prevState, slide: response.data.data.images, currentImageValue: response.data.data.images[0].url  }));
           })
           .catch((error) => {
@@ -159,7 +167,11 @@ class Carrossel extends PureComponent {
 
                 <Link
                     className={classes.imagem}
-                    to={ this.state.slide[this.state.imagemAtual] ? this.state.slide[this.state.imagemAtual].link : ''}  
+
+                    
+                    to={      (this.state.slide[this.state.imagemAtual] ) ? `${this.state.slide[this.state.imagemAtual].link}${link[this.state.imagemAtual]} ` : ''
+
+                        }  
                 >                                                                   
                     <img
                         className={classes.imagem}
