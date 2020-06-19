@@ -68,6 +68,9 @@ class ItemGridDisplay extends PureComponent {
           price:0,
           offer:false,
           offer_price:0,
+          unidade: 0,
+          peso: 0,
+          marca: "",
         };
       }
 
@@ -112,7 +115,7 @@ class ItemGridDisplay extends PureComponent {
         const handleSubmit = (e) => {
             e.preventDefault();
             const { dispatch } = this.props;
-            const {name, description, images, categorias, price, quantity, offer, offer_price} = this.state;
+            const {name, description, images, categorias, price, quantity, offer, offer_price,unidade,peso,marca} = this.state;
             let body = {
                 name,
                 description,
@@ -122,6 +125,9 @@ class ItemGridDisplay extends PureComponent {
                 images:[],
                 offer,
                 offer_price,
+                unidade,
+                peso,
+                marca,
             }
             for(let x of Object.entries(images)){
                 body.images.push({image_url:x[1]})
@@ -223,6 +229,7 @@ class ItemGridDisplay extends PureComponent {
                 </Grid>
                 <Dialog open={this.state.open} onClose={handleClose} aria-labelledby="form-dialog-title" classes={{ paper: classes.dialogPaper }} >
                 <DialogTitle id="form-dialog-title">Inserir Produto</DialogTitle>
+                
                 <DialogContent >
                     <DialogContentText>
                     Inserir Produto
@@ -252,33 +259,80 @@ class ItemGridDisplay extends PureComponent {
                       value={this.state.descricao}
                     />
                     <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
+
+                        <TextField
+                        autoFocus
+                        margin="dense"
+                        id="unidade"
+                        label="Unidade"
+                        type="number"
+                        name="unidade"
+                        fullWidth
+                        placeholder='Unidades que o produto'
+                        className='formField'
+                        onChange={handleChange}
+                        value={this.state.unidade}
+                        />
+
+                        <TextField
+                        style={{marginLeft:'10px'}}
+                        autoFocus
+                        margin="dense"
+                        id="peso"
+                        label="Peso (gramas)"
+                        type="number"
+                        name="peso"
+                        fullWidth
+                        placeholder='Peso do produto'
+                        className='formField'
+                        onChange={handleChange}
+                        value={this.state.peso}
+                        />    
+                    </div>
+
                     <TextField
-                    autoFocus
-                    margin="dense"
-                    id="price"
-                    label="Preço"
-                    type="number"
-                    name="price"
-                    fullWidth
-                    placeholder='Preço do Produto'
-                    className='formField'
-                    onChange={handleChange}
-                    value={this.state.price}
+                        autoFocus
+                        margin="dense"
+                        id="marca"
+                        label="Marca"
+                        type="text"
+                        name="marca"
+                        fullWidth
+                        placeholder='Marca do Produto'
+                        className='formField'
+                        onChange={handleChange}
+                        value={this.state.marca}
                     />
-                    <TextField
-                    style={{marginLeft:'10px'}}
-                    autoFocus
-                    margin="dense"
-                    id="quantity"
-                    label="Quantidade"
-                    type="number"
-                    name="quantity"
-                    fullWidth
-                    placeholder='Quantidade do Produto'
-                    className='formField'
-                    onChange={handleChange}
-                    value={this.state.quantity}
-                    />
+                   
+                    <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
+                    
+                        <TextField
+                        autoFocus
+                        margin="dense"
+                        id="price"
+                        label="Preço"
+                        type="number"
+                        name="price"
+                        fullWidth
+                        placeholder='Preço do Produto'
+                        className='formField'
+                        onChange={handleChange}
+                        value={this.state.price}
+                        />
+                        <TextField
+                        style={{marginLeft:'10px'}}
+                        autoFocus
+                        margin="dense"
+                        id="quantity"
+                        label="Quantidade"
+                        type="number"
+                        name="quantity"
+                        fullWidth
+                        placeholder='Quantidade do Produto'
+                        className='formField'
+                        onChange={handleChange}
+                        value={this.state.quantity}
+                        />
                     </div>
                     <div style={{display:'flex', width:'95%', alignItems: 'center', justifyContent:'center'}}>
                     <FormControlLabel
@@ -304,6 +358,8 @@ class ItemGridDisplay extends PureComponent {
                     value={this.state.offer_price}
                     />
                     </div>
+
+
                     {rows}
                     <Typography>
                         Adicionar Imagem <IconButton onClick={addImage} style={{'border-radius':'100%'}}><AddCircleIcon style={{color:AZUL_ESCURO}} fontSize="large"/></IconButton>
