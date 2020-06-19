@@ -12,6 +12,7 @@ import { Redirect } from "react-router-dom";
 import { isLogged } from '../../../utils/extra';
 import { handleGetCart } from '../../../actions/cart';
 import { handleGetFavorites } from '../../../actions/favorites';
+import { withSnackbar } from 'notistack';
 
 
 const styles = () => ({
@@ -56,10 +57,17 @@ class LoginForm extends PureComponent {
   };
 
     const handleLogin = async () => {
-      console.log(this.state)
       const {login, password} = this.state;
       const { history } = this.props;
-      await dispatch(handleLoginUser({login,password}))
+      await dispatch(handleLoginUser({login,password})).then(r => {
+          if(typeof r !== 'undefined'){
+            this.props.enqueueSnackbar('Bem vindo(a) a loja!',
+            { variant: 'success', autoHideDuration: 3000, })
+          }else{
+            this.props.enqueueSnackbar('Credenciais incorretas!',
+          { variant: 'error', autoHideDuration: 3000, })
+          }
+      })
       if(isLogged()){
         await dispatch(handleGetCart())
         await dispatch(handleGetFavorites())
@@ -156,6 +164,13 @@ class LoginForm extends PureComponent {
 LoginForm.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  enqueueSnackbar: PropTypes.func.isRequired,
+
 };
 
-export default withRouter(connect()(withStyles(styles)(LoginForm)));
+const mapStateToProps = ({}, props) => ({
+})
+
+
+const LoginFormComponentsWithSnack = withSnackbar(LoginForm);
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(LoginFormComponentsWithSnack)));
