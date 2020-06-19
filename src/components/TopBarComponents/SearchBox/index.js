@@ -43,20 +43,18 @@ class SearchBox extends PureComponent {
       inputProps,
       action,
     } = this.props;
-    console.log(action)
-    const changeAction = typeof action === 'undefined' ? ()=>{history.push('/products?search=' + this.state.value)} : action
+    const changeAction = typeof action === 'undefined' ? (x) => (x) : action
     return (
       <div className={classes.root}>
         <Paper component="form" className={classes.rootPaper}>
           <InputBase
             value={this.state.value} onChange={(e) => (changeAction(e), this.setState({value:e.target.value}))}
-
             className={classes.input}
             placeholder={placeholder}
             inputProps={{ 'aria-label': inputProps }}
           />
 
-          <IconButton onClick={changeAction} aria-label="search">
+          <IconButton onClick={()=>{history.push('/products?search=' + this.state.value)}} aria-label="search">
 
             <SearchIcon />
           </IconButton>
