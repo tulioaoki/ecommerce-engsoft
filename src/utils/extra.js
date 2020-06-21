@@ -10,14 +10,17 @@ export const isLogged = () => (
 )
 
 export async function isAdmin(){
+  let isAdmin = false;
   let headers = {
     'content-type': 'application/json',
     'Accept': 'application/json',
     'Authorization': `Token ${localStorage.getItem('token')}`,
   }    
-  return await Axios.get(BASE_URL+'check-auth' ,{headers})
+  await Axios.get(BASE_URL+'check-auth' ,{headers})
     .then( response => {
-      return response.data.data.is_admin
+      console.log(response.data.data.is_admin, "OXAONFOA")
+      isAdmin = response.data.data.is_admin
     })
     .catch((error) => (error))
+  return isAdmin
 }

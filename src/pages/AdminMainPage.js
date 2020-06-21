@@ -10,11 +10,13 @@ import PropTypes from 'prop-types';
 import ItemGridDisplay from '../components/HomePageComponents/ItemGridDisplay';
 import OneItemList from '../components/HomePageComponents/OneItemList';
 import { isLogged, isAdmin } from '../utils/extra';
+import { BASE_URL } from '../utils/requests';
+import Axios from 'axios';
 
 
 class AdminMainPage extends PureComponent {
   render() {
-    if(!isLogged() || !isAdmin()){
+    if(!isLogged() || localStorage.getItem("isAdmin") !== 'true'){
       const { history } = this.props;
       history.push('/login')
     }
@@ -32,8 +34,8 @@ class AdminMainPage extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ info }, props) => ({
-
+const mapStateToProps = ({ info, USER_REDUCER }, props) => ({
+    userData: USER_REDUCER.user_data
   });
   
   AdminMainPage.propTypes = {

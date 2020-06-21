@@ -8,9 +8,10 @@ export default function USER_REDUCER (state = {}, action) {
                 user_data:action.payload,
             }
         case LOGIN_USER :
+            localStorage.setItem("isAdmin", action.payload.payload.data.is_admin)
             return {
                 ...state,
-                user_data:action.payload,
+                user_data:action.payload.payload.data,
         }
         default:
             return state
