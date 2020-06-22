@@ -5,13 +5,16 @@ export default function REDUCER_CART(state = { cart_products: [] }, action) {
   let cartproducts_copy = state.cart_products.slice(0);
   switch (action.type) {
     case GET_CART:
+      if (typeof action.payload.payload === 'undefined') {
+        return {
+          ...copy
+        }
+      }
       return {
         ...state,
         cart_products: action.payload.payload.data,
       };
     case ADD_TO_CART:
-      console.log('aquiii')
-      console.log(action.payload.payload)
       if (typeof action.payload.payload === 'undefined') {
         return {
           ...copy

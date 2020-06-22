@@ -6,6 +6,11 @@ export default function REDUCER_FAVORITES(state = {favorites:[]}, action) {
   let favorites_copy = state.favorites.slice(0);
   switch (action.type) {
     case GET_FAVORITES:
+      if (typeof action.payload.payload === 'undefined') {
+        return {
+          ...copy
+        }
+      }
       return {
         ...state,
         favorites: action.payload.payload.data,
